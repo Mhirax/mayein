@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playing Game - Nexus Gaming</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 10 L85 30 L85 70 L50 90 L15 70 L15 30 Z' fill='%231a1a2e' stroke='%2300d4ff' stroke-width='5'/><path d='M40 35 L40 65 L50 55 L60 65 L60 35 L50 45 Z' fill='%23ff0055'/></svg>">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="player-body">
+    <header class="player-header">
+        <div class="header-left">
+            <a href="games2.html" class="back-button">← Back to Games</a>
+            <h1 id="gameTitle">Loading Game...</h1>
+        </div>
+        <div class="header-right">
+            <a href="#" id="newTabBtn" target="_blank" class="new-tab-btn">Play in New Tab ↗</a>
+            <button id="fullscreenBtn" class="fs-btn">⛶ Fullscreen</button>
+        </div>
+    </header>
+
+    <main class="player-container">
+        <iframe id="gameFrame" src="" allowfullscreen
+            allow="autoplay; fullscreen; microphone; camera; gamepad"></iframe>
+
+        <!-- Message for embeddable games -->
+        <div class="status-message success" id="successMsg" style="display:none;">
+            <p>✅ <strong>Game is playing directly on Nexus Gaming!</strong></p>
+            <p>Click "Fullscreen" for the best experience.</p>
+        </div>
+
+        <!-- Message for blocked games -->
+        <div class="status-message warning" id="blockerMsg" style="display:none;">
+            <p>⚠️ <strong>This game is hosted externally.</strong></p>
+            <p>The developer has restricted embedding. Click <strong>"Play in New Tab"</strong> above to play!</p>
+        </div>
+    </main>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const gameName = params.get('name') || "Unknown Game";
+        const gameUrl = params.get('url') || "#";
+        const isEmbeddable = params.get('embed') === 'true';
+
+        document.title = `Playing ${gameName} - Nexus Gaming`;
+        document.getElementById('gameTitle').innerText = gameName;
+
+        const frame = document.getElementById('gameFrame');
+        frame.src = gameUrl;
+        document.getElementById('newTabBtn').href = gameUrl;
+
+        // Show appropriate message based on whether game is embeddable
+        if (isEmbeddable) {
+            document.getElementById('successMsg').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('successMsg').style.opacity = '0';
+                setTimeout(() => document.getElementById('successMsg').style.display = 'none', 500);
+            }, 4000);
+        } else {
+            document.getElementById('blockerMsg').style.display = 'block';
+        }
+
+        document.getElementById('fullscreenBtn').addEventListener('click', () => {
+            if (frame.requestFullscreen) frame.requestFullscreen();
+            else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen();
+            else if (frame.msRequestFullscreen) frame.msRequestFullscreen();
+        });
+    </script>
+</body>
+
+</html>

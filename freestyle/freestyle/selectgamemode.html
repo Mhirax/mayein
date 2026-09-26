@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VANGUARD | Premium Battle Royale Reviews</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        void: '#0a0a0c',
+                        charcoal: '#131316',
+                        neonPurple: '#a855f7',
+                        neonBlue: '#06b6d4',
+                        neonRed: '#f43f5e',
+                        neonGreen: '#10b981',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Orbitron', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0a0a0c;
+            color: #e2e8f0;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-strong {
+            background: rgba(19, 19, 22, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .neon-text-blue { text-shadow: 0 0 10px rgba(6, 182, 212, 0.6); }
+        .neon-text-purple { text-shadow: 0 0 10px rgba(168, 85, 247, 0.6); }
+        
+        .rating-badge-excellent { background: linear-gradient(135deg, #10b981, #059669); }
+        .rating-badge-great { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+        .rating-badge-good { background: linear-gradient(135deg, #f59e0b, #d97706); }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0c; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
+
+        .view-section { display: none; animation: fadeIn 0.4s ease-out; }
+        .view-section.active { display: block; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .comparison-table-container {
+            overflow-x: auto;
+        }
+        .comparison-table-container::-webkit-scrollbar { height: 6px; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-strong transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex items-center gap-3 cursor-pointer" onclick="switchView('home')">
+                    <div class="w-10 h-10 bg-gradient-to-br from-neonBlue to-neonPurple rounded-lg flex items-center justify-center shadow-[0_0_15px_rgba(6,182,212,0.4)]">
+                        <i class="fa-solid fa-crosshairs text-white text-xl"></i>
+                    </div>
+                    <span class="font-display font-black text-2xl tracking-wider text-white">VANGUARD</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex items-center space-x-8">
+                    <button onclick="switchView('home')" class="text-gray-300 hover:text-neonBlue transition-colors font-semibold tracking-wide text-sm uppercase">Home</button>
+                    <button onclick="switchView('home')" class="text-gray-300 hover:text-neonBlue transition-colors font-semibold tracking-wide text-sm uppercase">Reviews</button>
+                    <button onclick="switchView('rankings')" class="text-gray-300 hover:text-neonBlue transition-colors font-semibold tracking-wide text-sm uppercase">Rankings</button>
+                    <button onclick="switchView('compare')" class="text-gray-300 hover:text-neonBlue transition-colors font-semibold tracking-wide text-sm uppercase">Compare</button>
+                    <button onclick="switchView('home')" class="text-gray-300 hover:text-neonBlue transition-colors font-semibold tracking-wide text-sm uppercase">News</button>
+                    <button onclick="switchView('home')" class="text-gray-300 hover:text-neonBlue transition-colors font-semibold tracking-wide text-sm uppercase">Guides</button>
+                    <button onclick="switchView('home')" class="text-gray-300 hover:text-neonBlue transition-colors font-semibold tracking-wide text-sm uppercase">Community</button>
+                </div>
+
+                <!-- Right Actions -->
+                <div class="hidden lg:flex items-center gap-4">
+                    <button onclick="toggleSearch()" class="text-gray-300 hover:text-white transition-colors">
+                        <i class="fa-solid fa-magnifying-glass text-lg"></i>
+                    </button>
+                    <button class="text-gray-300 hover:text-white font-semibold transition-colors text-sm">SIGN IN</button>
+                    <button onclick="switchView('home')" class="bg-neonBlue text-void font-display font-bold px-5 py-2.5 rounded-lg hover:bg-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.5)] transition-all transform hover:scale-105 text-sm">
+                        EXPLORE GAMES
+                    </button a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden">
+                    <button onclick="toggleMobileMenu()" class="text-gray-300 hover:text-white p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden glass-strong border-t border-white/10">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <button onclick="switchView('home'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium hover:bg-white/10">Home</button>
+                <button onclick="switchView('rankings'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium hover:bg-white/10">Rankings</button>
+                <button onclick="switchView('compare'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium hover:bg-white/10">Compare</button>
+                <button onclick="toggleSearch(); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium hover:bg-white/10">Search</button>
+                <button class="w-full mt-4 bg-neonBlue text-void font-bold py-3 rounded-lg">EXPLORE GAMES</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Global Search Modal -->
+    <div id="search-modal" class="fixed inset-0 z-[60] bg-void/90 backdrop-blur-sm hidden flex items-start justify-center pt-32 px-4">
+        <div class="w-full max-w-2xl glass rounded-2xl border border-white/10 shadow-2xl overflow-hidden">
+            <div class="p-4 border-b border-white/10 flex items-center gap-3">
+                <i class="fa-solid fa-magnifying-glass text-neonBlue"></i>
+                <input type="text" placeholder="Search games, reviews, guides..." class="w-full bg-transparent border-none outline-none text-white text-lg placeholder-gray-500" autofocus>
+                <button onclick="toggleSearch()" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <div class="p-4">
+                <p class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Trending Searches</p>
+                <div class="space-y-2">
+                    <div class="flex items-center gap-4 p-3 rounded-lg hover:bg-white/5 cursor-pointer transition-colors group">
+                        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=100&h=100&fit=crop" class="w-12 h-12 rounded object-cover" alt="Game">
+                        <div class="flex-1">
+                            <h4 class="font-bold text-white group-hover:text-neonBlue transition-colors">Nexus Royale</h4>
+                            <p class="text-xs text-gray-400">Battle Royale • PC, Console • 9.2/10</p>
+                        </div>
+                        <span class="text-neonGreen font-bold">9.2</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-3 rounded-lg hover:bg-white/5 cursor-pointer transition-colors group">
+                        <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b2b0a?w=100&h=100&fit=crop" class="w-12 h-12 rounded object-cover" alt="Game">
+                        <div class="flex-1">
+                            <h4 class="font-bold text-white group-hover:text-neonBlue transition-colors">Apex Legends</h4>
+                            <p class="text-xs text-gray-400">Hero Shooter BR • PC, Console • 9.4/10</p>
+                        </div>
+                        <span class="text-neonGreen font-bold">9.4</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= VIEW: HOME ================= -->
+    <main id="view-home" class="view-section active pt-20">
+        <!-- Hero Section -->
+        <section class="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
+            <div class="absolute inset-0">
+                <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=1920&q=80" class="w-full h-full object-cover opacity-40" alt="Battle Royale Hero">
+                <div class="absolute inset-0 bg-gradient-to-t from-void via-void/80 to-transparent"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-void via-transparent to-void"></div>
+            </div>
+            
+            <div class="relative z-10 max-w-5xl mx-auto px-4 text-center">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-neonBlue/30 mb-6 animate-pulse">
+                    <span class="w-2 h-2 rounded-full bg-neonGreen"></span>
+                    <span class="text-sm font-semibold tracking-wider text-neonBlue">SEASON 5 REVIEWS LIVE</span>
+                </div>
+                <h1 class="font-display font-black text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 text-white">
+                    FIND YOUR NEXT <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-neonBlue to-neonPurple neon-text-blue">BATTLE ROYALE.</span>
+                </h1>
+                <p class="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+                    Expert reviews, in-depth comparisons, and community-driven ratings for the world's most competitive battle royale games.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="document.getElementById('featured').scrollIntoView({behavior: 'smooth'})" class="px-8 py-4 bg-neonBlue text-void font-display font-black text-lg rounded-lg hover:bg-cyan-400 hover:shadow-[0_0_30px_rgba(6,182,212,0.5)] transition-all transform hover:scale-105">
+                        EXPLORE REVIEWS
+                    </button>
+                    <button onclick="switchView('compare')" class="px-8 py-4 glass border border-white/20 text-white font-display font-bold text-lg rounded-lg hover:bg-white/10 hover:border-neonPurple/50 transition-all">
+                        COMPARE GAMES
+                    </button>
+                </div>
+
+                <!-- Stats -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 max-w-4xl mx-auto">
+                    <div class="glass p-4 rounded-xl text-center">
+                        <div class="text-3xl font-display font-bold text-neonBlue">8.7</div>
+                        <div class="text-xs text-gray-400 uppercase tracking-widest mt-1">Avg Rating</div>
+                    </div>
+                    <div class="glass p-4 rounded-xl text-center">
+                        <div class="text-3xl font-display font-bold text-neonPurple">142</div>
+                        <div class="text-xs text-gray-400 uppercase tracking-widest mt-1">Games Reviewed</div>
+                    </div>
+                    <div class="glass p-4 rounded-xl text-center">
+                        <div class="text-3xl font-display font-bold text-neonGreen">85K+</div>
+                        <div class="text-xs text-gray-400 uppercase tracking-widest mt-1">Community Members</div>
+                    </div>
+                    <div class="glass p-4 rounded-xl text-center">
+                        <div class="text-3xl font-display font-bold text-neonRed">#1</div>
+                        <div class="text-xs text-gray-400 uppercase tracking-widest mt-1">Trusted Source</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Filter -->
+        <section class="py-8 border-y border-white/5 bg-charcoal/50 sticky top-20 z-40 backdrop-blur-md">
+            <div class="max-w-7xl mx-auto px-4 overflow-x-auto no-scrollbar">
+                <div class="flex gap-3 min-w-max">
+                    <button class="px-5 py-2 rounded-full bg-neonBlue text-void font-bold text-sm hover:shadow-[0_0_15px_rgba(6,182,212,0.4)] transition-all">🔥 Trending</button>
+                    <button class="px-5 py-2 rounded-full glass text-gray-300 font-semibold text-sm hover:bg-white/10 hover:text-white transition-all">⭐ Top Rated</button>
+                    <button class="px-5 py-2 rounded-full glass text-gray-300 font-semibold text-sm hover:bg-white/10 hover:text-white transition-all">🆕 New Releases</button>
+                    <button class="px-5 py-2 rounded-full glass text-gray-300 font-semibold text-sm hover:bg-white/10 hover:text-white transition-all">🎯 Competitive</button>
+                    <button class="px-5 py-2 rounded-full glass text-gray-300 font-semibold text-sm hover:bg-white/10 hover:text-white transition-all">🆓 Free to Play</button>
+                    <button class="px-5 py-2 rounded-full glass text-gray-300 font-semibold text-sm hover:bg-white/10 hover:text-white transition-all">👥 Best for Squads</button>
+                    <button class="px-5 py-2 rounded-full glass text-gray-300 font-semibold text-sm hover:bg-white/10 hover:text-white transition-all">💻 Browser Games</button>
+                    <button class="px-5 py-2 rounded-full glass text-gray-300 font-semibold text-sm hover:bg-white/10 hover:text-white transition-all">📱 Mobile</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Reviews -->
+        <section id="featured" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <h2 class="font-display font-bold text-4xl mb-2">FEATURED <span class="text-neonPurple">REVIEWS</span></h2>
+                    <p class="text-gray-400">In-depth analysis of the most popular battle royales.</p>
+                </div>
+                <button class="hidden md:flex items-center gap-2 text-neonBlue hover:text-white transition-colors font-semibold">View All <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Review Card 1 -->
+                <article class="glass rounded-2xl overflow-hidden group hover:border-neonBlue/50 transition-all duration-300 hover:-translate-y-2 cursor-pointer" onclick="switchView('review')">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Game">
+                        <div class="absolute top-4 right-4 rating-badge-excellent text-white font-black text-lg px-3 py-1 rounded-lg shadow-lg">9.2</div>
+                        <div class="absolute bottom-4 left-4 flex gap-2">
+                            <span class="bg-black/70 backdrop-blur text-xs font-bold px-2 py-1 rounded text-white border border-white/20">PC</span>
+                            <span class="bg-black/70 backdrop-blur text-xs font-bold px-2 py-1 rounded text-white border border-white/20">PS5</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-display font-bold text-2xl text-white group-hover:text-neonBlue transition-colors">Nexus Royale</h3>
+                            <span class="text-xs text-gray-500 font-mono">2023</span>
+                        </div>
+                        <p class="text-sm text-neonPurple font-semibold mb-3">Developer: Vanguard Studios</p>
+                        <p class="text-gray-400 text-sm mb-6 line-clamp-3">A masterclass in movement mechanics and map design. Nexus Royale sets a new gold standard for the genre with its innovative gravity-manipulation abilities.</p>
+                        <button class="w-full py-3 rounded-lg border border-neonBlue/30 text-neonBlue font-bold hover:bg-neonBlue hover:text-void transition-all">READ REVIEW</button>
+                    </div>
+                </article>
+
+                <!-- Review Card 2 -->
+                <article class="glass rounded-2xl overflow-hidden group hover:border-neonPurple/50 transition-all duration-300 hover:-translate-y-2 cursor-pointer">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b2b0a?w=800&q=80" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Game">
+                        <div class="absolute top-4 right-4 rating-badge-excellent text-white font-black text-lg px-3 py-1 rounded-lg shadow-lg">9.4</div>
+                        <div class="absolute bottom-4 left-4 flex gap-2">
+                            <span class="bg-black/70 backdrop-blur text-xs font-bold px-2 py-1 rounded text-white border border-white/20">PC</span>
+                            <span class="bg-black/70 backdrop-blur text-xs font-bold px-2 py-1 rounded text-white border border-white/20">XBOX</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-display font-bold text-2xl text-white group-hover:text-neonPurple transition-colors">Apex Legends</h3>
+                            <span class="text-xs text-gray-500 font-mono">2019</span>
+                        </div>
+                        <p class="text-sm text-neonPurple font-semibold mb-3">Developer: Respawn Entertainment</p>
+                        <p class="text-gray-400 text-sm mb-6 line-clamp-3">The pinnacle of hero-shooter battle royales. Unmatched gunplay, legendary character abilities, and a constantly evolving meta keep it at the top.</p>
+                        <button class="w-full py-3 rounded-lg border border-neonPurple/30 text-neonPurple font-bold hover:bg-neonPurple hover:text-white transition-all">READ REVIEW</button>
+                    </div>
+                </article>
+
+                <!-- Review Card 3 -->
+                <article class="glass rounded-2xl overflow-hidden group hover:border-neonGreen/50 transition-all duration-300 hover:-translate-y-2 cursor-pointer">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=800&q=80" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Game">
+                        <div class="absolute top-4 right-4 rating-badge-great text-white font-black text-lg px-3 py-1 rounded-lg shadow-lg">8.9</div>
+                        <div class="absolute bottom-4 left-4 flex gap-2">
+                            <span class="bg-black/70 backdrop-blur text-xs font-bold px-2 py-1 rounded text-white border border-white/20">PC</span>
+                            <span class="bg-black/70 backdrop-blur text-xs font-bold px-2 py-1 rounded text-white border border-white/20">MOBILE</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-display font-bold text-2xl text-white group-hover:text-neonGreen transition-colors">PUBG: Battlegrounds</h3>
+                            <span class="text-xs text-gray-500 font-mono">2017</span>
+                        </div>
+                        <p class="text-sm text-neonPurple font-semibold mb-3">Developer: Krafton</p>
+                        <p class="text-gray-400 text-sm mb-6 line-clamp-3">The grandfather of the genre remains incredibly tense and rewarding. The shift to free-to-play has revitalized the player base significantly.</p>
+                        <button class="w-full py-3 rounded-lg border border-neonGreen/30 text-neonGreen font-bold hover:bg-neonGreen hover:text-void transition-all">READ REVIEW</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Latest News & Guides -->
+        <section class="py-20 bg-charcoal/30 border-y border-white/5">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                    <!-- News -->
+                    <div class="lg:col-span-2">
+                        <h2 class="font-display font-bold text-3xl mb-8 flex items-center gap-3">
+                            <i class="fa-regular fa-newspaper text-neonRed"></i> LATEST INTEL
+                        </h2>
+                        <div class="space-y-6">
+                            <div class="glass p-4 rounded-xl flex gap-4 hover:bg-white/5 transition-colors cursor-pointer group">
+                                <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=200&h=200&fit=crop" class="w-32 h-24 object-cover rounded-lg" alt="News">
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span class="text-xs font-bold text-neonRed bg-neonRed/10 px-2 py-0.5 rounded">UPDATE</span>
+                                        <span class="text-xs text-gray-500">2 hours ago • 4 min read</span>
+                                    </div>
+                                    <h3 class="font-bold text-lg text-white group-hover:text-neonBlue transition-colors mb-1">Season 5 Map Overhaul: What You Need to Know</h3>
+                                    <p class="text-sm text-gray-400 line-clamp-2">The downtown district has been completely reworked with new verticality, zip-lines, and underground bunkers.</p>
+                                </div>
+                            </div>
+                            <div class="glass p-4 rounded-xl flex gap-4 hover:bg-white/5 transition-colors cursor-pointer group">
+                                <img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?w=200&h=200&fit=crop" class="w-32 h-24 object-cover rounded-lg" alt="News">
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span class="text-xs font-bold text-neonPurple bg-neonPurple/10 px-2 py-0.5 rounded">ESPORTS</span>
+                                        <span class="text-xs text-gray-500">1 day ago • 6 min read</span>
+                                    </div>
+                                    <h3 class="font-bold text-lg text-white group-hover:text-neonBlue transition-colors mb-1">Vanguard Championship Finals: Team Liquid Takes the Crown</h3>
+                                    <p class="text-sm text-gray-400 line-clamp-2">A stunning final circle play secures the $500,000 prize pool for the reigning champions.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Best Of Guides -->
+                    <div>
+                        <h2 class="font-display font-bold text-3xl mb-8 flex items-center gap-3">
+                            <i class="fa-solid fa-book-open text-neonGreen"></i> BEST OF GUIDES
+                        </h2>
+                        <div class="space-y-4">
+                            <a href="#" class="block glass p-4 rounded-xl hover:border-neonGreen/50 transition-all group">
+                                <h4 class="font-bold text-white group-hover:text-neonGreen transition-colors mb-1">🏆 Top 10 Battle Royales for Beginners</h4>
+                                <p class="text-xs text-gray-400">New to the genre? Start here.</p>
+                            </a>
+                            <a href="#" class="block glass p-4 rounded-xl hover:border-neonGreen/50 transition-all group">
+                                <h4 class="font-bold text-white group-hover:text-neonGreen transition-colors mb-1">💻 Best BR Games for Low-End PCs</h4>
+                                <p class="text-xs text-gray-400">High FPS on a budget.</p>
+                            </a>
+                            <a href="#" class="block glass p-4 rounded-xl hover:border-neonGreen/50 transition-all group">
+                                <h4 class="font-bold text-white group-hover:text-neonGreen transition-colors mb-1">📱 Top 5 Mobile Battle Royales in 2024</h4>
+                                <p class="text-xs text-gray-400">Console quality on your phone.</p>
+                            </a>
+                            <a href="#" class="block glass p-4 rounded-xl hover:border-neonGreen/50 transition-all group">
+                                <h4 class="font-bold text-white group-hover:text-neonGreen transition-colors mb-1">👥 Best Squad-Based BR Experiences</h4>
+                                <p class="text-xs text-gray-400">Games that reward teamwork.</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= VIEW: INDIVIDUAL REVIEW ================= -->
+    <main id="view-review" class="view-section pt-20">
+        <!-- Review Hero -->
+        <div class="relative h-[60vh] min-h-[500px] flex items-end">
+            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1920&q=80" class="absolute inset-0 w-full h-full object-cover" alt="Review Hero">
+            <div class="absolute inset-0 bg-gradient-to-t from-void via-void/60 to-transparent"></div>
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pb-12">
+                <div class="flex flex-col md:flex-row md:items-end gap-6">
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=300&h=400&fit=crop" class="w-48 h-64 object-cover rounded-xl border-2 border-white/20 shadow-2xl hidden md:block" alt="Cover">
+                    <div class="flex-1">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="bg-neonBlue text-void text-xs font-black px-3 py-1 rounded">PC / CONSOLE</span>
+                            <span class="text-gray-300 text-sm">Released: Oct 2023</span>
+                        </div>
+                        <h1 class="font-display font-black text-5xl md:text-6xl text-white mb-4">NEXUS ROYALE</h1>
+                        <div class="flex items-center gap-6">
+                            <div class="text-center">
+                                <div class="text-5xl font-display font-black text-neonGreen neon-text-blue">9.2</div>
+                                <div class="text-sm font-bold text-gray-400 uppercase tracking-wider">Editorial Score</div>
+                            </div>
+                            <div class="h-12 w-px bg-white/20"></div>
+                            <div class="text-center">
+                                <div class="text-5xl font-display font-black text-neonBlue">8.9</div>
+                                <div class="text-sm font-bold text-gray-400 uppercase tracking-wider">Community</div>
+                            </div>
+                            <div class="h-12 w-px bg-white/20"></div>
+                            <div class="flex items-center gap-2 text-gray-300">
+                                <i class="fa-solid fa-user-pen text-neonPurple"></i>
+                                <span>Reviewed by <strong class="text-white">Alex "Striker" Vance</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Review Content -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <!-- Main Article -->
+                <div class="lg:col-span-2 space-y-10">
+                    <!-- Verdict -->
+                    <div class="glass p-8 rounded-2xl border-l-4 border-neonGreen">
+                        <h3 class="font-display font-bold text-2xl mb-4 text-white">The Verdict</h3>
+                        <p class="text-gray-300 text-lg leading-relaxed">
+                            Nexus Royale is a masterclass in movement mechanics and map design. By introducing gravity-manipulation abilities without sacrificing the core tension of the battle royale formula, Vanguard Studios has created a genre-defining experience. While the learning curve is steep and matchmaking can occasionally falter, the sheer satisfaction of outplaying opponents in the final circle makes it an essential play for competitive fans.
+                        </p>
+                    </div>
+
+                    <!-- Scores Breakdown -->
+                    <div>
+                        <h3 class="font-display font-bold text-2xl mb-6 text-white">Score Breakdown</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <span class="w-32 text-sm font-semibold text-gray-400">Gameplay</span>
+                                <div class="flex-1 h-3 bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-neonGreen w-[95%]"></div></div>
+                                <span class="w-8 text-right font-bold text-neonGreen">9.5</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <span class="w-32 text-sm font-semibold text-gray-400">Graphics</span>
+                                <div class="flex-1 h-3 bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-neonBlue w-[90%]"></div></div>
+                                <span class="w-8 text-right font-bold text-neonBlue">9.0</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <span class="w-32 text-sm font-semibold text-gray-400">Performance</span>
+                                <div class="flex-1 h-3 bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-neonBlue w-[93%]"></div></div>
+                                <span class="w-8 text-right font-bold text-neonBlue">9.3</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <span class="w-32 text-sm font-semibold text-gray-400">Sound Design</span>
+                                <div class="flex-1 h-3 bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-neonPurple w-[85%]"></div></div>
+                                <span class="w-8 text-right font-bold text-neonPurple">8.5</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <span class="w-32 text-sm font-semibold text-gray-400">Multiplayer</span>
+                                <div class="flex-1 h-3 bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-neonGreen w-[95%]"></div></div>
+                                <span class="w-8 text-right font-bold text-neonGreen">9.5</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pros & Cons -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="glass p-6 rounded-2xl border border-neonGreen/30">
+                            <h4 class="font-display font-bold text-xl text-neonGreen mb-4 flex items-center gap-2"><i class="fa-solid fa-thumbs-up"></i> PROS</h4>
+                            <ul class="space-y-3 text-gray-300">
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-check text-neonGreen mt-1"></i> Fast and incredibly satisfying movement combat</li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-check text-neonGreen mt-1"></i> Excellent, highly vertical map design</li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-check text-neonGreen mt-1"></i> Strong, balanced weapon variety</li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-check text-neonGreen mt-1"></i> Best-in-class team revival mechanics</li>
+                            </ul>
+                        </div>
+                        <div class="glass p-6 rounded-2xl border border-neonRed/30">
+                            <h4 class="font-display font-bold text-xl text-neonRed mb-4 flex items-center gap-2"><i class="fa-solid fa-thumbs-down"></i> CONS</h4>
+                            <ul class="space-y-3 text-gray-300">
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-xmark text-neonRed mt-1"></i> Occasional SBMM (matchmaking) frustration</li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-xmark text-neonRed mt-1"></i> Steep learning curve for newcomers</li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-xmark text-neonRed mt-1"></i> Battle pass progression feels repetitive</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Deep Dive Sections -->
+                    <div class="space-y-8 text-gray-300 leading-relaxed">
+                        <div>
+                            <h3 class="font-display font-bold text-2xl text-white mb-4">Gameplay & Combat</h3>
+                            <p class="mb-4">The core loop of Nexus Royale revolves around its "Grapple-Shift" mechanic. Unlike traditional BRs where positioning is purely about cover, Nexus rewards aggressive, vertical plays. The time-to-kill (TTK) is forgiving enough to allow for counter-play, but demands precise aim.</p>
+                            <blockquote class="border-l-4 border-neonPurple pl-4 italic text-xl text-white my-6">"It feels less like a shooter and more like a high-speed chess match where every piece has a jetpack."</blockquote>
+                        </div>
+                        <div>
+                            <h3 class="font-display font-bold text-2xl text-white mb-4">Maps & Environment</h3>
+                            <p>The launch map, "Aethelgard," is a masterpiece of environmental storytelling. From the neon-drenched downtown core to the treacherous, fog-laden swamp borders, every biome offers distinct tactical advantages and loot pools.</p>
+                        </div>
+                    </div>
+
+                    <!-- Community Ratings -->
+                    <div class="glass p-8 rounded-2xl mt-12">
+                        <h3 class="font-display font-bold text-2xl text-white mb-6">Community Ratings</h3>
+                        <div class="flex flex-col md:flex-row gap-8">
+                            <div class="text-center md:text-left">
+                                <div class="text-6xl font-display font-black text-neonBlue mb-2">8.9</div>
+                                <div class="text-sm text-gray-400 mb-4">Based on 12,405 votes</div>
+                                <button class="px-6 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-white font-semibold transition-colors">+ Add Your Rating</button>
+                            </div>
+                            <div class="flex-1 space-y-2">
+                                <div class="flex items-center gap-3 text-sm">
+                                    <span class="w-8 text-right text-gray-400">5 ★</span>
+                                    <div class="flex-1 h-2 bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-neonBlue w-[65%]"></div></div>
+                                    <span class="w-8 text-gray-400">65%</span>
+                                </div>
+                                <div class="flex items-center gap-3 text-sm">
+                                    <span class="w-8 text-right text-gray-400">4 ★</span>
+                                    <div class="flex-1 h-2 bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-neonBlue w-[20%]"></div></div>
+                                    <span class="w-8 text-gray-400">20%</span>
+                                </div>
+                                <div class="flex items-center gap-3 text-sm">
+                                    <span class="w-8 text-right text-gray-400">3 ★</span>
+                                    <div class="flex-1 h-2 bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-neonBlue w-[10%]"></div></div>
+                                    <span class="w-8 text-gray-400">10%</span>
+                                </div>
+                                <div class="flex items-center gap-3 text-sm">
+                                    <span class="w-8 text-right text-gray-400">2 ★</span>
+                                    <div class="flex-1 h-2 bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-neonBlue w-[3%]"></div></div>
+                                    <span class="w-8 text-gray-400">3%</span>
+                                </div>
+                                <div class="flex items-center gap-3 text-sm">
+                                    <span class="w-8 text-right text-gray-400">1 ★</span>
+                                    <div class="flex-1 h-2 bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-neonBlue w-[2%]"></div></div>
+                                    <span class="w-8 text-gray-400">2%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="space-y-8">
+                    <!-- Reviewer Profile -->
+                    <div class="glass p-6 rounded-2xl text-center">
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&fit=crop" class="w-20 h-20 rounded-full mx-auto mb-4 border-2 border-neonPurple" alt="Reviewer">
+                        <h4 class="font-display font-bold text-xl text-white">Alex "Striker" Vance</h4>
+                        <p class="text-neonPurple text-sm font-semibold mb-4">Senior FPS Editor</p>
+                        <div class="grid grid-cols-3 gap-2 text-center mb-4">
+                            <div class="bg-white/5 rounded p-2">
+                                <div class="font-bold text-white">142</div>
+                                <div class="text-[10px] text-gray-400 uppercase">Reviews</div>
+                            </div>
+                            <div class="bg-white/5 rounded p-2">
+                                <div class="font-bold text-white">Lvl 8</div>
+                                <div class="text-[10px] text-gray-400 uppercase">Critic</div>
+                            </div>
+                            <div class="bg-white/5 rounded p-2">
+                                <div class="font-bold text-white">8.4</div>
+                                <div class="text-[10px] text-gray-400 uppercase">Avg Score</div>
+                            </div>
+                        </div>
+                        <button class="w-full py-2 rounded-lg border border-white/20 text-sm font-semibold hover:bg-white/10 transition-colors">View Profile</button>
+                    </div>
+
+                    <!-- Game Info -->
+                    <div class="glass p-6 rounded-2xl">
+                        <h4 class="font-display font-bold text-lg text-white mb-4">Game Information</h4>
+                        <ul class="space-y-3 text-sm">
+                            <li class="flex justify-between"><span class="text-gray-400">Developer</span> <span class="text-white font-semibold">Vanguard Studios</span></li>
+                            <li class="flex justify-between"><span class="text-gray-400">Publisher</span> <span class="text-white font-semibold">Global Interactive</span></li>
+                            <li class="flex justify-between"><span class="text-gray-400">Release Date</span> <span class="text-white font-semibold">Oct 24, 2023</span></li>
+                            <li class="flex justify-between"><span class="text-gray-400">Genre</span> <span class="text-white font-semibold">Hero Shooter BR</span></li>
+                            <li class="flex justify-between"><span class="text-gray-400">Platforms</span> <span class="text-white font-semibold">PC, PS5, XSX</span></li>
+                            <li class="flex justify-between"><span class="text-gray-400">Price</span> <span class="text-neonGreen font-semibold">Free to Play</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Community Discussion Preview -->
+                    <div class="glass p-6 rounded-2xl">
+                        <h4 class="font-display font-bold text-lg text-white mb-4">Community Discussion</h4>
+                        <div class="space-y-4">
+                            <div class="flex gap-3">
+                                <div class="w-8 h-8 rounded-full bg-neonBlue/20 flex items-center justify-center text-neonBlue text-xs font-bold">JD</div>
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-sm font-bold text-white">JohnDoe_99</span>
+                                        <span class="text-[10px] text-gray-500">2h ago</span>
+                                    </div>
+                                    <p class="text-sm text-gray-300 mt-1">Totally agree on the movement mechanics. Best BR since Apex Season 1.</p>
+                                    <div class="flex gap-3 mt-2 text-xs text-gray-500">
+                                        <button class="hover:text-neonBlue"><i class="fa-solid fa-thumbs-up"></i> 24</button>
+                                        <button class="hover:text-white">Reply</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="w-full mt-4 py-2 text-sm text-neonBlue font-semibold hover:text-white transition-colors">View All 142 Comments</button>
+                    </div>
+                </div>
+           
+            </div>
+        </div>
+    </main>
+
+    <!-- ================= VIEW: COMPARE ================= -->
+    <main id="view-compare" class="view-section pt-28 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h1 class="font-display font-black text-4xl md:text-5xl mb-4">GAME <span class="text-neonPurple">COMPARISON</span></h1>
+            <p class="text-gray-400 max-w-2xl mx-auto">Select up to three battle royale games to compare their features, scores, and mechanics side-by-side.</p>
+        </div>
+
+        <!-- Game Selectors -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <div class="glass p-4 rounded-xl border border-neonBlue/50 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=100&h=100&fit=crop" class="w-12 h-12 rounded object-cover">
+                    <div>
+                        <div class="font-bold text-white">Nexus Royale</div>
+                        <div class="text-xs text-neonGreen">9.2 / 10</div>
+                    </div>
+                </div>
+                <button class="text-gray-400 hover:text-neonRed"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="glass p-4 rounded-xl border border-white/10 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b2b0a?w=100&h=100&fit=crop" class="w-12 h-12 rounded object-cover">
+                    <div>
+                        <div class="font-bold text-white">Apex Legends</div>
+                        <div class="text-xs text-neonGreen">9.4 / 10</div>
+                    </div>
+                </div>
+                <button class="text-gray-400 hover:text-neonRed"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="glass p-4 rounded-xl border border-white/10 border-dashed flex items-center justify-center cursor-pointer hover:bg-white/5 transition-colors">
+                <div class="text-center text-gray-400">
+                    <i class="fa-solid fa-plus text-2xl mb-2"></i>
+                    <div class="text-sm font-semibold">Add Game</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="comparison-table-container glass rounded-2xl border border-white/10 overflow-hidden">
+            <table class="w-full min-w-[800px] text-left">
+                <thead class="bg-white/5 border-b border-white/10">
+                    <tr>
+                        <th class="p-4 text-gray-400 font-semibold w-1/4">Feature</th>
+                        <th class="p-4 text-white font-bold w-1/4">Nexus Royale</th>
+                        <th class="p-4 text-white font-bold w-1/4">Apex Legends</th>
+                        <th class="p-4 text-white font-bold w-1/4">PUBG: Battlegrounds</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-white/5">
+                    <tr class="hover:bg-white/5 transition-colors">
+                        <td class="p-4 text-gray-300 font-medium">Overall Score</td>
+                        <td class="p-4 text-neonGreen font-bold text-lg">9.2</td>
+                        <td class="p-4 text-neonGreen font-bold text-lg">9.4</td>
+                        <td class="p-4 text-neonBlue font-bold text-lg">8.9</td>
+                    </tr>
+                    <tr class="hover:bg-white/5 transition-colors">
+                        <td class="p-4 text-gray-300 font-medium">Gameplay</td>
+                        <td class="p-4 text-white">9.5</td>
+                        <td class="p-4 text-white">9.5</td>
+                        <td class="p-4 text-white">8.5</td>
+                    </tr>
+                    <tr class="hover:bg-white/5 transition-colors">
+                        <td class="p-4 text-gray-300 font-medium">Graphics</td>
+                        <td class="p-4 text-white">9.0</td>
+                        <td class="p-4 text-white">9.1</td>
+                        <td class="p-4 text-white">8.5</td>
+                    </tr>
+                    <tr class="hover:bg-white/5 transition-colors">
+                        <td class="p-4 text-gray-300 font-medium">Performance</td>
+                        <td class="p-4 text-white">9.3</td>
+                        <td class="p-4 text-white">8.4</td>
+                        <td class="p-4 text-white">8.7</td>
+                    </tr>
+                    <tr class="hover:bg-white/5 transition-colors">
+                        <td class="p-4 text-gray-300 font-medium">Multiplayer</td>
+                        <td class="p-4 text-white">9.5</td>
+                        <td class="p-4 text-white">9.5</td>
+                        <td class="p-4 text-white">8.6</td>
+                    </tr>
+                    <tr class="hover:bg-white/5 transition-colors">
+                        <td class="p-4 text-gray-300 font-medium">Free to Play</td>
+                        <td class="p-4 text-neonGreen"><i class="fa-solid fa-check"></i> Yes</td>
+                        <td class="p-4 text-neonGreen"><i class="fa-solid fa-check"></i> Yes</td>
+                        <td class="p-4 text-neonGreen"><i class="fa-solid fa-check"></i> Yes</td>
+                    </tr>
+                    <tr class="hover:bg-white/5 transition-colors">
+                        <td class="p-4 text-gray-300 font-medium">Max Squad Size</td>
+                        <td class="p-4 text-white">4</td>
+                        <td class="p-4 text-white">3</td>
+                        <td class="p-4 text-white">4</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-center mt-8">
+            <button class="px-8 py-4 bg-neonPurple text-white font-display font-bold text-lg rounded-lg hover:bg-purple-600 hover:shadow-[0_0_30px_rgba(168,85,247,0.5)] transition-all transform hover:scale-105">
+                COMPARE NOW
+            </button>
+        </div>
+    </main>
+
+    <!-- ================= VIEW: RANKINGS ================= -->
+    <main id="view-rankings" class="view-section pt-28 pb-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h1 class="font-display font-black text-4xl md:text-5xl mb-4">TOP BATTLE ROYALE <span class="text-neonGreen">RANKINGS</span></h1>
+            <p class="text-gray-400">The definitive leaderboard, updated weekly based on editorial reviews and community consensus.</p>
+        </div>
+
+        <!-- Filters -->
+        <div class="flex flex-wrap justify-center gap-3 mb-10">
+            <button class="px-4 py-2 rounded-full bg-neonGreen text-void font-bold text-sm">All Platforms</button>
+            <button class="px-4 py-2 rounded-full glass text-gray-300 font-semibold text-sm hover:bg-white/10">PC</button>
+            <button class="px-4 py-2 rounded-full glass text-gray-300 font-semibold text-sm hover:bg-white/10">PlayStation</button>
+            <button class="px-4 py-2 rounded-full glass text-gray-300 font-semibold text-sm hover:bg-white/10">Xbox</button>
+            <button class="px-4 py-2 rounded-full glass text-gray-300 font-semibold text-sm hover:bg-white/10">Mobile</button>
+        </div>
+
+        <!-- Leaderboard -->
+        <div class="space-y-4">
+            <!-- Rank 1 -->
+            <div class="glass p-6 rounded-2xl flex items-center gap-6 border-l-4 border-yellow-500 hover:bg-white/5 transition-all cursor-pointer group" onclick="switchView('review')">
+                <div class="text-4xl font-display font-black text-yellow-500 w-12 text-center">#1</div>
+                <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b2b0a?w=150&h=150&fit=crop" class="w-20 h-20 rounded-lg object-cover" alt="Game">
+                <div class="flex-1">
+                    <h3 class="font-display font-bold text-2xl text-white group-hover:text-neonBlue transition-colors">Apex Legends</h3>
+                    <p class="text-sm text-gray-400">Respawn Entertainment • Hero Shooter BR</p>
+                </div>
+                <div class="text-center hidden sm:block">
+                    <div class="text-3xl font-display font-bold text-neonGreen">9.4</div>
+                    <div class="text-xs text-gray-500 uppercase">Score</div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-gray-600 group-hover:text-white transition-colors"></i>
+            </div>
+
+            <!-- Rank 2 -->
+            <div class="glass p-6 rounded-2xl flex items-center gap-6 border-l-4 border-gray-400 hover:bg-white/5 transition-all cursor-pointer group" onclick="switchView('review')">
+                <div class="text-4xl font-display font-black text-gray-400 w-12 text-center">#2</div>
+                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=150&h=150&fit=crop" class="w-20 h-20 rounded-lg object-cover" alt="Game">
+                <div class="flex-1">
+                    <h3 class="font-display font-bold text-2xl text-white group-hover:text-neonBlue transition-colors">Nexus Royale</h3>
+                    <p class="text-sm text-gray-400">Vanguard Studios • Movement Shooter BR</p>
+                </div>
+                <div class="text-center hidden sm:block">
+                    <div class="text-3xl font-display font-bold text-neonGreen">9.2</div>
+                    <div class="text-xs text-gray-500 uppercase">Score</div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-gray-600 group-hover:text-white transition-colors"></i>
+            </div>
+
+            <!-- Rank 3 -->
+            <div class="glass p-6 rounded-2xl flex items-center gap-6 border-l-4 border-orange-700 hover:bg-white/5 transition-all cursor-pointer group">
+                <div class="text-4xl font-display font-black text-orange-700 w-12 text-center">#3</div>
+                <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=150&h=150&fit=crop" class="w-20 h-20 rounded-lg object-cover" alt="Game">
+                <div class="flex-1">
+                    <h3 class="font-display font-bold text-2xl text-white group-hover:text-neonBlue transition-colors">PUBG: Battlegrounds</h3>
+                    <p class="text-sm text-gray-400">Krafton • Tactical Realistic BR</p>
+                </div>
+                <div class="text-center hidden sm:block">
+                    <div class="text-3xl font-display font-bold text-neonBlue">8.9</div>
+                    <div class="text-xs text-gray-500 uppercase">Score</div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-gray-600 group-hover:text-white transition-colors"></i>
+            </div>
+
+            <!-- Rank 4 -->
+            <div class="glass p-6 rounded-2xl flex items-center gap-6 border-l-4 border-transparent hover:bg-white/5 transition-all cursor-pointer group">
+                <div class="text-4xl font-display font-black text-gray-600 w-12 text-center">#4</div>
+                <img src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=150&h=150&fit=crop" class="w-20 h-20 rounded-lg object-cover" alt="Game">
+                <div class="flex-1">
+                    <h3 class="font-display font-bold text-2xl text-white group-hover:text-neonBlue transition-colors">Call of Duty: Warzone</h3>
+                    <p class="text-sm text-gray-400">Activision • Arcade Tactical BR</p>
+                </div>
+                <div class="text-center hidden sm:block">
+                    <div class="text-3xl font-display font-bold text-neonBlue">8.7</div>
+                    <div class="text-xs text-gray-500 uppercase">Score</div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-gray-600 group-hover:text-white transition-colors"></i>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-charcoal border-t border-white/10 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Review Methodology (Trust) -->
+            <div class="glass p-8 rounded-2xl mb-12 border border-neonBlue/20">
+                <h3 class="font-display font-bold text-xl text-neonBlue mb-4 flex items-center gap-2"><i class="fa-solid fa-shield-halved"></i> OUR REVIEW METHODOLOGY</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                    At VANGUARD, our scores are determined by a rigorous, multi-point evaluation process. Every game is played for a minimum of 40 hours across multiple platforms by our dedicated FPS editorial team. We evaluate Gameplay, Graphics, Performance, Sound, Multiplayer, Difficulty, and Value independently. 
+                </p>
+                <div class="flex flex-wrap gap-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                    <span class="flex items-center gap-2"><i class="fa-solid fa-check text-neonGreen"></i> No Paid Reviews</span>
+                    <span class="flex items-center gap-2"><i class="fa-solid fa-check text-neonGreen"></i> Transparent Scoring</span>
+                    <span class="flex items-center gap-2"><i class="fa-solid fa-check text-neonGreen"></i> Clear Separation of Ads & Editorial</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 mb-12">
+                <div class="col-span-2 lg:col-span-2">
+                    <div class="flex items-center gap-2 mb-4">
+                        <i class="fa-solid fa-crosshairs text-neonBlue text-2xl"></i>
+                        <span class="font-display font-black text-xl tracking-wider text-white">VANGUARD</span>
+                    </div>
+                    <p class="text-gray-500 text-sm mb-6">The definitive destination for battle royale game reviews, comparisons, and community discussion.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-neonBlue hover:text-void transition-all"><i class="fa-brands fa-discord"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-neonBlue hover:text-void transition-all"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-neonBlue hover:text-void transition-all"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-white mb-4">Platform</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-neonBlue transition-colors">Home</a></li>
+                        <li><a href="#" class="hover:text-neonBlue transition-colors">Reviews</a></li>
+                        <li><a href="#" class="hover:text-neonBlue transition-colors">Rankings</a></li>
+                        <li><a href="#" class="hover:text-neonBlue transition-colors">Compare</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-white mb-4">Community</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-neonBlue transition-colors">Forums</a></li>
+                        <li><a href="#" class="hover:text-neonBlue transition-colors">Guidelines</a></li>
+                        <li><a href="#" class="hover:text-neonBlue transition-colors">Reviewers</a></li>
+                        <li><a href="#" class="hover:text-neonBlue transition-colors">Support</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white mb-4">Legal</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-neonBlue transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-neonBlue transition-colors">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-neonBlue transition-colors">Editorial Policy</a></li>
+                        <li><a href="#" class="hover:text-neonBlue transition-colors">Advertise</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-600 text-sm">&copy; 2024 VANGUARD Reviews. All rights reserved.</p>
+                <div class="flex items-center gap-2 text-sm text-gray-600">
+                    <span class="w-2 h-2 rounded-full bg-neonGreen animate-pulse"></span>
+                    All Systems Operational
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // View Router
+        function switchView(viewName) {
+            // Hide all views
+            document.querySelectorAll('.view-section').forEach(el => {
+                el.classList.remove('active');
+            });
+            // Show target view
+            const target = document.getElementById(`view-${viewName}`);
+            if (target) {
+                target.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Search Modal Toggle
+        function toggleSearch() {
+            const modal = document.getElementById('search-modal');
+            modal.classList.toggle('hidden');
+            if (!modal.classList.contains('hidden')) {
+                modal.querySelector('input').focus();
+            }
+        }
+
+        // Close search on outside click
+        document.getElementById('search-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                toggleSearch();
+            }
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-lg');
+                nav.style.background = 'rgba(10, 10, 12, 0.95)';
+            } else {
+                nav.classList.remove('shadow-lg');
+                nav.style.background = 'rgba(19, 19, 22, 0.85)';
+            }
+        });
+    </script>
+</body>
+</html>

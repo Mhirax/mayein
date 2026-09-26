@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Gaming - Play Free Online Games</title>
+    <!-- Favicon (Browser Tab Icon) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 10 L85 30 L85 70 L50 90 L15 70 L15 30 Z' fill='%231a1a2e' stroke='%2300d4ff' stroke-width='5'/><path d='M40 35 L40 65 L50 55 L60 65 L60 35 L50 45 Z' fill='%23ff0055'/></svg>">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <!-- Smaller Header Logo -->
+            <svg class="header-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="50" height="50">
+                <path d="M50 8 L88 30 L88 70 L50 92 L12 70 L12 30 Z" fill="none" stroke="#00d4ff" stroke-width="5"/>
+                <path d="M38 32 L38 68 L50 56 L62 68 L62 32 L50 44 Z" fill="#ff0055"/>
+            </svg>
+            <div class="header-text">
+                <h1>NEXUS GAMING</h1>
+                <p>Over 50+ Premium Games directly from CrazyGames</p>
+            </div>
+        </div>
+        <a href="index2.html" class="back-button">← Back to Welcome</a>
+    </header>
+    
+    <main>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search for a game (e.g., Veck.io, Fragen)..." onkeyup="filterGames()">
+        </div>
+        <div class="games-grid" id="gamesGrid">
+            <!-- Games will be injected here by JavaScript -->
+        </div>
+    </main>
+
+    <script>
+        // List of 52 exact games from CrazyGames with images
+        const games = [
+            { name: "Veck.io", url: "https://www.crazygames.com/game/veck-io", image: "https://placehold.co/400x250/2d1b4e/ff6b6b?text=Veck.io&font=montserrat" },
+            { name: "Fragen", url: "https://www.crazygames.com/game/fragen", image: "https://placehold.co/400x250/2d1b4e/ff6b6b?text=Fragen&font=montserrat" },
+            { name: "Overtide.io", url: "https://www.crazygames.com/game/overtide-io", image: "https://placehold.co/400x250/1e3a5f/00d4ff?text=Overtide.io&font=montserrat" },
+            { name: "Smash Karts", url: "https://www.crazygames.com/game/smash-karts", image: "https://placehold.co/400x250/ff6b35/ffffff?text=Smash+Karts&font=montserrat" },
+            { name: "Shell Shockers", url: "https://www.crazygames.com/game/shell-shockers", image: "https://placehold.co/400x250/ffd93d/333333?text=Shell+Shockers&font=montserrat" },
+            { name: "Agar.io", url: "https://www.crazygames.com/game/agar-io", image: "https://placehold.co/400x250/6bcf7f/ffffff?text=Agar.io&font=montserrat" },
+            { name: "Uno Online", url: "https://www.crazygames.com/game/uno-online", image: "https://placehold.co/400x250/4ecdc4/ffffff?text=Uno+Online&font=montserrat" },
+            { name: "Geometry Dash", url: "https://www.crazygames.com/game/geometry-dash", image: "https://placehold.co/400x250/00b4d8/ffffff?text=Geometry+Dash&font=montserrat" },
+            { name: "Moto X3M", url: "https://www.crazygames.com/game/moto-x3m", image: "https://placehold.co/400x250/ff9f1c/ffffff?text=Moto+X3M&font=montserrat" },
+            { name: "GeoGuessr", url: "https://www.crazygames.com/game/geoguessr", image: "https://placehold.co/400x250/2d6a4f/ffffff?text=GeoGuessr&font=montserrat" },
+            { name: "Hangman", url: "https://www.crazygames.com/game/hangman", image: "https://placehold.co/400x250/6c757d/ffffff?text=Hangman&font=montserrat" },
+            { name: "Bloxd.io", url: "https://www.crazygames.com/game/bloxd-io", image: "https://placehold.co/400x250/74c69d/ffffff?text=Bloxd.io&font=montserrat" },
+            { name: "Slither.io", url: "https://www.crazygames.com/game/slither-io", image: "https://placehold.co/400x250/95d5b2/333333?text=Slither.io&font=montserrat" },
+            { name: "Rocket Bot Royale", url: "https://www.crazygames.com/game/rocket-bot-royale", image: "https://placehold.co/400x250/d90429/ffffff?text=Rocket+Bot+Royale&font=montserrat" },
+            { name: "Pixel Warfare", url: "https://www.crazygames.com/game/pixel-warfare", image: "https://placehold.co/400x250/2b2d42/8d99ae?text=Pixel+Warfare&font=montserrat" },
+            { name: "Mk48.io", url: "https://www.crazygames.com/game/mk48-io", image: "https://placehold.co/400x250/1d3557/457b9d?text=Mk48.io&font=montserrat" },
+            { name: "Helix Jump", url: "https://www.crazygames.com/game/helix-jump", image: "https://placehold.co/400x250/f72585/ffffff?text=Helix+Jump&font=montserrat" },
+            { name: "Tap-Tap Shots", url: "https://www.crazygames.com/game/tap-tap-shots", image: "https://placehold.co/400x250/b5179e/ffffff?text=Tap-Tap+Shots&font=montserrat" },
+            { name: "Drift Boss", url: "https://www.crazygames.com/game/drift-boss", image: "https://placehold.co/400x250/7209b7/ffffff?text=Drift+Boss&font=montserrat" },
+            { name: "Snow Rider 3D", url: "https://www.crazygames.com/game/snow-rider-3d", image: "https://placehold.co/400x250/560bad/ffffff?text=Snow+Rider+3D&font=montserrat" },
+            { name: "Kour.io", url: "https://www.crazygames.com/game/kour-io", image: "https://placehold.co/400x250/3a0ca3/ffffff?text=Kour.io&font=montserrat" },
+            { name: "BodyCamera Shooter", url: "https://www.crazygames.com/game/bodycamera-shooter", image: "https://placehold.co/400x250/4361ee/ffffff?text=BodyCamera+Shooter&font=montserrat" },
+            { name: "Bullet Force Multiplayer", url: "https://www.crazygames.com/game/bullet-force-multiplayer", image: "https://placehold.co/400x250/3f37c9/ffffff?text=Bullet+Force&font=montserrat" },
+            { name: "Kirka.io", url: "https://www.crazygames.com/game/kirka-io", image: "https://placehold.co/400x250/4895ef/ffffff?text=Kirka.io&font=montserrat" },
+            { name: "Redcoats.io", url: "https://www.crazygames.com/game/redcoats-io", image: "https://placehold.co/400x250/dc143c/ffffff?text=Redcoats.io&font=montserrat" },
+            { name: "Poxel.io", url: "https://www.crazygames.com/game/poxel-io", image: "https://placehold.co/400x250/4cc9f0/333333?text=Poxel.io&font=montserrat" },
+            { name: "BrutalMania.io", url: "https://www.crazygames.com/game/brutalmania-io", image: "https://placehold.co/400x250/f72585/ffffff?text=BrutalMania.io&font=montserrat" },
+            { name: "Blombo.io", url: "https://www.crazygames.com/game/blombo-io", image: "https://placehold.co/400x250/7209b7/ffffff?text=Blombo.io&font=montserrat" },
+            { name: "Paint to Hide!", url: "https://www.crazygames.com/game/paint-to-hide", image: "https://placehold.co/400x250/ff006e/ffffff?text=Paint+to+Hide&font=montserrat" },
+            { name: "2v2.io", url: "https://www.crazygames.com/game/2v2-io", image: "https://placehold.co/400x250/fb5607/ffffff?text=2v2.io&font=montserrat" },
+            { name: "Mage Castle Idle Defense", url: "https://www.crazygames.com/game/mage-castle-idle-defense", image: "https://placehold.co/400x250/ffbe0b/333333?text=Mage+Castle&font=montserrat" },
+            { name: "Hexa Stack", url: "https://www.crazygames.com/game/hexa-stack", image: "https://placehold.co/400x250/8338ec/ffffff?text=Hexa+Stack&font=montserrat" },
+            { name: "FrontWars.io", url: "https://www.crazygames.com/game/frontwars-io", image: "https://placehold.co/400x250/3a86ff/ffffff?text=FrontWars.io&font=montserrat" },
+            { name: "Chicken Hell", url: "https://www.crazygames.com/game/chicken-hell", image: "https://placehold.co/400x250/ff9900/333333?text=Chicken+Hell&font=montserrat" },
+            { name: "Space Waves", url: "https://www.crazygames.com/game/space-waves", image: "https://placehold.co/400x250/06ffa5/333333?text=Space+Waves&font=montserrat" },
+            { name: "Man Runner", url: "https://www.crazygames.com/game/man-runner", image: "https://placehold.co/400x250/00f5ff/333333?text=Man+Runner&font=montserrat" },
+            { name: "Piles of Mahjong", url: "https://www.crazygames.com/game/piles-of-mahjong", image: "https://placehold.co/400x250/90be6d/ffffff?text=Piles+of+Mahjong&font=montserrat" },
+            { name: "Words of Wonders", url: "https://www.crazygames.com/game/words-of-wonders", image: "https://placehold.co/400x250/f94144/ffffff?text=Words+of+Wonders&font=montserrat" },
+            { name: "Skydom", url: "https://www.crazygames.com/game/skydom", image: "https://placehold.co/400x250/43aa8b/ffffff?text=Skydom&font=montserrat" },
+            { name: "Ragdoll Archers", url: "https://www.crazygames.com/game/ragdoll-archers", image: "https://placehold.co/400x250/f9c74f/333333?text=Ragdoll+Archers&font=montserrat" },
+            { name: "Pixel Blast", url: "https://www.crazygames.com/game/pixel-blast", image: "https://placehold.co/400x250/ff9f1c/ffffff?text=Pixel+Blast&font=montserrat" },
+            { name: "2048", url: "https://www.crazygames.com/game/2048", image: "https://placehold.co/400x250/f77f00/ffffff?text=2048&font=montserrat" },
+            { name: "Squid Game Online", url: "https://www.crazygames.com/game/squid-game-online", image: "https://placehold.co/400x250/d00000/ffffff?text=Squid+Game&font=montserrat" },
+            { name: "Dig out of Prison", url: "https://www.crazygames.com/game/dig-out-of-prison", image: "https://placehold.co/400x250/9b5de5/ffffff?text=Dig+out+of+Prison&font=montserrat" },
+            { name: "Bubble Fall", url: "https://www.crazygames.com/game/bubble-fall", image: "https://placehold.co/400x250/00bbf9/ffffff?text=Bubble+Fall&font=montserrat" },
+            { name: "Idle Billionaire", url: "https://www.crazygames.com/game/idle-billionaire", image: "https://placehold.co/400x250/00f5d4/333333?text=Idle+Billionaire&font=montserrat" },
+            { name: "Babel Tower", url: "https://www.crazygames.com/game/babel-tower", image: "https://placehold.co/400x250/00a8e8/ffffff?text=Babel+Tower&font=montserrat" },
+            { name: "Block Puzzle", url: "https://www.crazygames.com/game/block-puzzle", image: "https://placehold.co/400x250/0096c7/ffffff?text=Block+Puzzle&font=montserrat" },
+            { name: "Western Sniper", url: "https://www.crazygames.com/game/western-sniper", image: "https://placehold.co/400x250/480ca8/ffffff?text=Western+Sniper&font=montserrat" },
+            { name: "Gin Rummy Mania", url: "https://www.crazygames.com/game/gin-rummy-mania", image: "https://placehold.co/400x250/6a0572/ffffff?text=Gin+Rummy+Mania&font=montserrat" },
+            { name: "Om Nom: Run", url: "https://www.crazygames.com/game/om-nom-run", image: "https://placehold.co/400x250/ab83a1/ffffff?text=Om+Nom+Run&font=montserrat" },
+            { name: "Potion Merge", url: "https://www.crazygames.com/game/potion-merge", image: "https://placehold.co/400x250/7209b7/ffffff?text=Potion+Merge&font=montserrat" }
+        ];
+
+        const gamesGrid = document.getElementById('gamesGrid');
+
+        function renderGames(gamesToRender) {
+            gamesGrid.innerHTML = '';
+            if (gamesToRender.length === 0) {
+                gamesGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #888; padding: 40px;">No games found matching your search.</p>';
+                return;
+            }
+            gamesToRender.forEach(game => {
+                const card = document.createElement('a');
+                card.href = game.url;
+                card.target = "_blank";
+                card.className = 'game-card';
+                
+                const imageUrl = game.image || `https://placehold.co/400x250/1a1a2e/00d4ff?text=${encodeURIComponent(game.name)}&font=montserrat`;
+                
+                card.innerHTML = `
+                    <img src="${imageUrl}" alt="${game.name} thumbnail" class="game-image" onerror="this.src='https://placehold.co/400x250/1a1a2e/00d4ff?text=${encodeURIComponent(game.name)}&font=montserrat'">
+                    <h3>${game.name}</h3>
+                    <p>Play on CrazyGames</p>
+                `;
+                gamesGrid.appendChild(card);
+            });
+        }
+
+        function filterGames() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = games.filter(game => game.name.toLowerCase().includes(searchTerm));
+            renderGames(filtered);
+        }
+
+        renderGames(games);
+    </script>
+</body>
+</html>
