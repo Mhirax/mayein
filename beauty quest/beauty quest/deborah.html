@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beauty Quest - Bag Making & Decoration</title>
+  
+  <!-- CSS is combined right here in the style tag! -->
+  <style>
+    /* ===== RESET & BASE ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    html { 
+      scroll-behavior: smooth; 
+      scroll-padding-top: 80px; /* Prevents navbar from covering section titles */
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #fdf8f5;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; height: auto; display: block; }
+
+    /* ===== NAVIGATION BAR ===== */
+    .navbar {
+      background: linear-gradient(135deg, #d4738a, #e8a0bf);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #fff;
+      letter-spacing: 1px;
+    }
+    .logo span { color: #ffe0ec; }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      color: #fff;
+      font-weight: 500;
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      background-color: rgba(255,255,255,0.25);
+      transform: translateY(-2px);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      padding: 2rem;
+      animation: fadeInUp 1s ease;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.9rem 2.5rem;
+      background: #fff;
+      color: #d4738a;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      border: 2px solid #fff;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: transparent;
+      color: #fff;
+      transform: translateY(-3px);
+    }
+
+    .btn-primary {
+      background: #d4738a;
+      color: #fff;
+      border-color: #d4738a;
+    }
+    .btn-primary:hover {
+      background: #b85a72;
+      border-color: #b85a72;
+      color: #fff;
+    }
+
+    /* ===== GENERAL SECTIONS ===== */
+    section {
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      color: #d4738a;
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: #777;
+      font-size: 1.1rem;
+      margin-bottom: 3rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ===== FEATURES GRID ===== */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: #fff;
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease;
+    }
+    .feature-card:hover { transform: translateY(-8px); }
+    .feature-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .feature-card h3 { color: #d4738a; margin-bottom: 0.8rem; }
+
+    /* ===== ABOUT SECTION ===== */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .about-content img {
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+    .about-text h2 { color: #d4738a; font-size: 2rem; margin-bottom: 1rem; }
+    .about-text p { margin-bottom: 1rem; color: #555; }
+
+    /* ===== TUTORIALS SECTION ===== */
+    .tutorial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .tutorial-card {
+      background: #fff;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease;
+    }
+    .tutorial-card:hover { transform: translateY(-5px); }
+    .tutorial-card img { width: 100%; height: 220px; object-fit: cover; }
+    .tutorial-info { padding: 1.5rem; }
+    .tutorial-info h3 { color: #d4738a; margin-bottom: 0.5rem; }
+    .difficulty {
+      display: inline-block;
+      padding: 0.2rem 0.8rem;
+      background: #ffe0ec;
+      color: #d4738a;
+      border-radius: 15px;
+      font-size: 0.85rem;
+      margin-bottom: 0.8rem;
+    }
+
+    /* ===== GALLERY SECTION ===== */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    .gallery-item {
+      position: relative;
+      border-radius: 15px;
+      overflow: hidden;
+      aspect-ratio: 1;
+      cursor: pointer;
+    }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .gallery-item:hover img { transform: scale(1.1); }
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(212,115,138,0.9));
+      color: #fff;
+      padding: 2rem 1rem 1rem;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+    .gallery-item:hover .gallery-overlay { transform: translateY(0); }
+
+    /* ===== CONTACT SECTION ===== */
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    .contact-box {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+    .contact-box h3 { color: #d4738a; margin-bottom: 1rem; }
+    .contact-item { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; color: #555; }
+    .contact-item .icon { font-size: 1.5rem; color: #d4738a; }
+    
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; margin-bottom: 0.4rem; color: #555; font-weight: 500; }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 2px solid #f0d5de;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #d4738a; }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: #3d2b32;
+      color: #fff;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 3rem;
+    }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1rem; flex-wrap: wrap; }
+    .footer-links a { color: #ffe0ec; }
+    .footer-links a:hover { color: #fff; }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== RESPONSIVE MOBILE ===== */
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #d4738a;
+        flex-direction: column;
+        padding: 1rem;
+        gap: 0.5rem;
+      }
+      .nav-links.active { display: flex; }
+      .hero h1 { font-size: 2.2rem; }
+      .about-content, .contact-wrapper { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#home" class="logo">Beauty<span>Quest</span> </a>
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#tutorials">Tutorials</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HOME SECTION -->
+  <section id="home" class="hero" style="max-width: 100%; padding: 0;">
+    <div class="hero-content">
+      <h1>Craft Your Dream Bag ✨</h1>
+      <p>Discover the art of bag making and decoration. Create unique, stunning bags that express your personal style.</p>
+      <a href="#tutorials" class="btn">Start Crafting</a>
+      <a href="#gallery" class="btn" style="margin-left:1rem;">View Gallery</a>
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section id="about">
+    <h2 class="section-title">About Beauty Quest</h2>
+    <p class="section-subtitle">Our story, our passion, our craft</p>
+    <div class="about-content">
+      <img src="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?auto=format&fit=crop&w=800&q=80" alt="Crafting workspace">
+      <div class="about-text">
+        <h2>Our Story</h2>
+        <p>Beauty Quest was born from a simple love for handmade bags and the joy of creating something beautiful with your own hands. What started as a small hobby has grown into a thriving community of passionate crafters.</p>
+        <p>We believe that everyone has a creative spirit waiting to be unleashed. Our mission is to provide the tools, knowledge, and inspiration you need to transform ordinary materials into extraordinary bags.</p>
+        <a href="#tutorials" class="btn btn-primary" style="margin-top:1rem;">Start Learning</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TUTORIALS SECTION -->
+  <section id="tutorials" style="background-color: #fff;">
+    <h2 class="section-title">Bag Making Tutorials</h2>
+    <p class="section-subtitle">Learn, create, and master the art of bag decoration</p>
+    <div class="tutorial-grid">
+      <div class="tutorial-card">
+        <img src="https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=800&q=80" alt="Canvas tote">
+        <div class="tutorial-info">
+          <span class="difficulty">Beginner</span>
+          <h3>Basic Canvas Tote Bag</h3>
+          <p>Learn to make a simple yet elegant canvas tote bag from scratch. Perfect for beginners!</p>
+        </div>
+      </div>
+      <div class="tutorial-card">
+        <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80" alt="Beaded clutch">
+        <div class="tutorial-info">
+          <span class="difficulty">Intermediate</span>
+          <h3>Beaded Evening Clutch</h3>
+          <p>Create a stunning beaded clutch perfect for special occasions. Add glamour to your style!</p>
+        </div>
+      </div>
+      <div class="tutorial-card">
+        <img src="https://images.unsplash.com/photo-1615486511484-92e172cc416d?auto=format&fit=crop&w=800&q=80" alt="Embroidered bag">
+        <div class="tutorial-info">
+          <span class="difficulty">Intermediate</span>
+          <h3>Embroidered Boho Bag</h3>
+          <p>Master beautiful embroidery techniques to create a bohemian-style bag with floral patterns.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY SECTION -->
+  <section id="gallery">
+    <h2 class="section-title">Our Gallery</h2>
+    <p class="section-subtitle">Inspiring creations from our community of crafters</p>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=800&q=80" alt="Bag 1">
+        <div class="gallery-overlay"><h4>Colorful Collection</h4><p>By Sarah M.</p></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?auto=format&fit=crop&w=800&q=80" alt="Bag 2">
+        <div class="gallery-overlay"><h4>Minimalist Tote</h4><p>By Emma L.</p></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80" alt="Bag 3">
+        <div class="gallery-overlay"><h4>Beaded Elegance</h4><p>By Priya K.</p></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80" alt="Bag 4">
+        <div class="gallery-overlay"><h4>Floral Dreams</h4><p>By Lisa T.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact" style="background-color: #fff;">
+    <h2 class="section-title">Get In Touch</h2>
+    <p class="section-subtitle">We'd love to hear from you!</p>
+    <div class="contact-wrapper">
+      <div class="contact-box">
+        <h3>Contact Information</h3>
+        <p style="margin-bottom: 1.5rem; color: #555;">Have questions about our tutorials, want to collaborate, or just want to say hello? Reach out to us!</p>
+        <div class="contact-item"><span class="icon">📍</span><span>18 Asiwaju Streeet Okoro Okeitunu</span></div>
+        <div class="contact-item"><span class="icon">📧</span><span>hello@beautyquest.com</span></div>
+        <div class="contact-item"><span class="icon">📞</span><span>08055950011 and 08082189303</span></div>
+        <h3 style="margin-top:2rem;">Follow Us</h3>
+        <p>📸 Instagram | 📘 Facebook | 🎥 YouTube</p>
+      </div>
+
+      <form class="contact-box" onsubmit="handleSubmit(event)">
+        <h3 style="color:#d4738a; margin-bottom:1.5rem;">Send Us a Message</h3>
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Your Email</label>
+          <input type="email" id="email" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%; border:none;">Send Message ✉️</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#tutorials">Tutorials</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <p>&copy; 2026 Beauty Quest. All rights reserved. | Crafted with quality love </p>
+  </footer>
+
+  <!-- JavaScript for Navbar -->
+  <script>
+    // Toggle Mobile Menu
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('active');
+    }
+
+    // Close mobile menu when a link is clicked
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('navLinks').classList.remove('active');
+      });
+    });
+
+    // Highlight active nav link on scroll
+    window.addEventListener('scroll', () => {
+      let current = '';
+      const sections = document.querySelectorAll('section');
+      const navLinks = document.querySelectorAll('.nav-links a');
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (pageYOffset >= (sectionTop - 150)) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').includes(current)) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Handle Form Submit
+    function handleSubmit(e) {
+      e.preventDefault();
+      alert('Thank you for your message! We will get back to you soon. 💖');
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>
