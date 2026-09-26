@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forma Studio — Architecture & Design</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --font: 'Inter', sans-serif;
+            --color-bg: #fafaf9;
+            --color-surface: #f5f5f4;
+            --color-text: #1c1917;
+            --color-text-muted: #78716c;
+            --color-primary: #1c1917;
+            --color-accent: #a8a29e;
+            --color-accent-light: #d6d3d1;
+            --color-border: #e7e5e4;
+            --transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        [data-theme="dark"] {
+            --color-bg: #0c0a09;
+            --color-surface: #1c1917;
+            --color-text: #fafaf9;
+            --color-text-muted: #a8a29e;
+            --color-primary: #fafaf9;
+            --color-accent: #78716c;
+            --color-accent-light: #57534e;
+            --color-border: #292524;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font); background: var(--color-bg); color: var(--color-text); line-height: 1.6; overflow-x: hidden; cursor: none; }
+        @media (max-width: 768px) { body { cursor: auto; } }
+
+        a { text-decoration: none; color: inherit; cursor: none; }
+        button { cursor: none; border: none; background: none; font-family: inherit; }
+        @media (max-width: 768px) { a, button { cursor: pointer; } }
+        img { max-width: 100%; display: block; }
+
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+
+        .cursor-dot, .cursor-ring { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9998; border-radius: 50%; transform: translate(-50%, -50%); }
+        .cursor-dot { width: 6px; height: 6px; background: var(--color-primary); }
+        .cursor-ring { width: 36px; height: 36px; border: 1.5px solid var(--color-primary); opacity: 0.4; transition: width 0.3s, height 0.3s, opacity 0.3s; }
+        .cursor-ring.hover { width: 56px; height: 56px; opacity: 0.2; }
+        @media (max-width: 768px) { .cursor-dot, .cursor-ring { display: none; } }
+
+        .nav-header { position: fixed; top: 0; left: 0; width: 100%; height: 80px; z-index: 1000; background: rgba(250,250,249,0.9); backdrop-filter: blur(16px); border-bottom: 1px solid transparent; transition: var(--transition); }
+        [data-theme="dark"] .nav-header { background: rgba(12,10,9,0.9); }
+        .nav-header.scrolled { border-bottom-color: var(--color-border); }
+        .nav-container { max-width: 1400px; margin: 0 auto; padding: 0 40px; height: 100%; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { font-size: 20px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+        .nav-links { display: flex; gap: 40px; list-style: none; }
+        .nav-link { font-size: 13px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-text-muted); transition: color 0.3s; }
+        .nav-link:hover { color: var(--color-text); }
+        .nav-actions { display: flex; align-items: center; gap: 16px; }
+        .theme-toggle { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--color-text-muted); transition: background 0.3s; }
+        .theme-toggle:hover { background: var(--color-surface); color: var(--color-text); }
+        .theme-toggle svg { width: 18px; height: 18px; }
+        .icon-moon { display: none; }
+        [data-theme="dark"] .icon-sun { display: none; }
+        [data-theme="dark"] .icon-moon { display: block; }
+
+        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 16px 40px; font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 0; transition: var(--transition); }
+        .btn-primary { background: var(--color-primary); color: var(--color-bg); }
+        .btn-primary:hover { background: var(--color-accent); }
+        .btn-secondary { background: transparent; color: var(--color-text); border: 1px solid var(--color-text); }
+        .btn-secondary:hover { background: var(--color-text); color: var(--color-bg); }
+
+        /* HERO */
+        .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; }
+        .hero-content { display: flex; flex-direction: column; justify-content: center; padding: 120px 80px; }
+        .hero-tag { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 32px; }
+        .hero-title { font-size: clamp(3rem, 6vw, 5rem); font-weight: 300; line-height: 1.1; margin-bottom: 32px; letter-spacing: -0.02em; }
+        .hero-title strong { font-weight: 700; }
+        .hero-desc { font-size: 16px; color: var(--color-text-muted); margin-bottom: 48px; max-width: 450px; line-height: 1.7; }
+        .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+
+        .hero-image { position: relative; overflow: hidden; }
+        .hero-image img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* STATS */
+        .stats { padding: 80px 0; background: var(--color-primary); color: var(--color-bg); }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; text-align: center; }
+        .stat-number { font-size: 48px; font-weight: 300; margin-bottom: 8px; }
+        .stat-label { font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; }
+
+        /* PROJECTS */
+        .projects { padding: 120px 0; }
+        .section-header { margin-bottom: 80px; }
+        .section-tag { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 16px; }
+        .section-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; line-height: 1.2; margin-bottom: 16px; }
+        .section-title strong { font-weight: 700; }
+        .section-desc { font-size: 16px; color: var(--color-text-muted); max-width: 600px; }
+
+        .projects-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
+        .project-card { position: relative; overflow: hidden; cursor: none; transition: var(--transition); }
+        @media (max-width: 768px) { .project-card { cursor: pointer; } }
+        .project-card:hover { transform: translateY(-4px); }
+        .project-image { aspect-ratio: 4/3; overflow: hidden; background: var(--color-surface); }
+        .project-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s; }
+        .project-card:hover .project-image img { transform: scale(1.05); }
+        .project-info { padding: 24px 0; }
+        .project-category { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 8px; }
+        .project-title { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+        .project-location { font-size: 14px; color: var(--color-text-muted); }
+
+        .project-card:nth-child(1) { grid-column: span 7; }
+        .project-card:nth-child(2) { grid-column: span 5; }
+        .project-card:nth-child(3) { grid-column: span 5; }
+        .project-card:nth-child(4) { grid-column: span 7; }
+        .project-card:nth-child(5) { grid-column: span 4; }
+        .project-card:nth-child(6) { grid-column: span 4; }
+        .project-card:nth-child(7) { grid-column: span 4; }
+
+        /* PHILOSOPHY */
+        .philosophy { padding: 120px 0; background: var(--color-surface); }
+        .philosophy-content { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .philosophy-image { position: relative; }
+        .philosophy-image img { width: 100%; height: 600px; object-fit: cover; }
+        .philosophy-text h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; line-height: 1.2; margin-bottom: 32px; }
+        .philosophy-text h2 strong { font-weight: 700; }
+        .philosophy-text p { font-size: 16px; color: var(--color-text-muted); line-height: 1.8; margin-bottom: 24px; }
+
+        /* SERVICES */
+        .services { padding: 120px 0; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        .service-card { padding: 48px; border: 1px solid var(--color-border); transition: var(--transition); }
+        .service-card:hover { border-color: var(--color-primary); background: var(--color-surface); }
+        .service-number { font-size: 48px; font-weight: 300; color: var(--color-border); margin-bottom: 24px; }
+        .service-card h3 { font-size: 24px; font-weight: 600; margin-bottom: 16px; }
+        .service-card p { font-size: 15px; color: var(--color-text-muted); line-height: 1.7; }
+
+        /* TEAM */
+        .team { padding: 120px 0; background: var(--color-surface); }
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; }
+        .team-card { text-align: center; }
+        .team-image { width: 200px; height: 200px; margin: 0 auto 24px; border-radius: 50%; overflow: hidden; }
+        .team-image img { width: 100%; height: 100%; object-fit: cover; }
+        .team-name { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+        .team-role { font-size: 14px; color: var(--color-text-muted); margin-bottom: 12px; }
+        .team-bio { font-size: 14px; color: var(--color-text-muted); line-height: 1.6; }
+
+        /* AWARDS */
+        .awards { padding: 120px 0; }
+        .awards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 32px; }
+        .award-card { padding: 32px; border: 1px solid var(--color-border); text-align: center; }
+        .award-year { font-size: 14px; font-weight: 600; letter-spacing: 0.1em; color: var(--color-text-muted); margin-bottom: 12px; }
+        .award-name { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .award-org { font-size: 14px; color: var(--color-text-muted); }
+
+        /* CONTACT */
+        .contact { padding: 120px 0; background: var(--color-surface); }
+        .contact-content { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+        .contact-info h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; line-height: 1.2; margin-bottom: 24px; }
+        .contact-info h2 strong { font-weight: 700; }
+        .contact-info p { font-size: 16px; color: var(--color-text-muted); line-height: 1.7; margin-bottom: 40px; }
+        .contact-details { display: flex; flex-direction: column; gap: 24px; }
+        .contact-detail-label { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 4px; }
+        .contact-detail-value { font-size: 18px; }
+        .contact-detail-value a { color: var(--color-primary); }
+
+        .contact-form { display: flex; flex-direction: column; gap: 24px; }
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
+        .form-group label { font-size: 13px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+        .form-group input, .form-group textarea, .form-group select { padding: 14px 0; border: none; border-bottom: 1px solid var(--color-border); background: transparent; color: var(--color-text); font-size: 16px; font-family: inherit; outline: none; transition: border-color 0.3s; }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-bottom-color: var(--color-primary); }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+
+        /* FOOTER */
+        .footer { background: var(--color-primary); color: var(--color-bg); padding: 80px 0 40px; }
+        .footer-content { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+        .footer-brand p { font-size: 14px; opacity: 0.7; margin-top: 16px; max-width: 300px; line-height: 1.7; }
+        .footer-column h4 { font-size: 12px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 24px; }
+        .footer-column ul { list-style: none; }
+        .footer-column li { margin-bottom: 12px; }
+        .footer-column a { font-size: 14px; opacity: 0.7; transition: opacity 0.3s; }
+        .footer-column a:hover { opacity: 1; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px; display: flex; justify-content: space-between; align-items: center; }
+        .footer-bottom p { font-size: 13px; opacity: 0.5; }
+        .footer-social { display: flex; gap: 24px; }
+        .footer-social a { font-size: 13px; opacity: 0.7; transition: opacity 0.3s; letter-spacing: 0.1em; text-transform: uppercase; }
+        .footer-social a:hover { opacity: 1; }
+
+        @media (max-width: 1024px) {
+            .hero { grid-template-columns: 1fr; }
+            .hero-content { padding: 120px 40px 60px; }
+            .hero-image { height: 60vh; }
+            .philosophy-content, .contact-content { grid-template-columns: 1fr; gap: 60px; }
+            .philosophy-image img { height: 500px; }
+            .projects-grid { grid-template-columns: 1fr 1fr; }
+            .project-card { grid-column: span 1 !important; }
+            .footer-content { grid-template-columns: 1fr 1fr; gap: 40px; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .container { padding: 0 24px; }
+            .hero-content { padding: 100px 24px 40px; }
+            .hero-ctas { flex-direction: column; }
+            .hero-ctas .btn { width: 100%; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; gap: 40px; }
+            .footer-bottom { flex-direction: column; gap: 24px; text-align: center; }
+        }
+        /* MOBILE NAVIGATION */
+.hamburger { display: none; flex-direction: column; gap: 6px; width: 28px; padding: 4px 0; cursor: pointer; }
+.hamburger span { display: block; height: 2px; background: var(--color-text); border-radius: 2px; transition: 0.3s; }
+.hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+.mobile-menu { position: fixed; inset: 0; z-index: 999; background: var(--color-bg); display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: 0.4s; }
+.mobile-menu.open { opacity: 1; visibility: visible; }
+.mobile-menu-links { list-style: none; text-align: center; display: flex; flex-direction: column; gap: 32px; }
+.mobile-link { font-family: var(--font-heading); font-size: 32px; font-weight: 600; color: var(--color-text); transition: color 0.3s; }
+.mobile-link:hover { color: var(--color-accent); }
+
+/* CURSOR FIX */
+.cursor-dot, .cursor-ring { z-index: 99999 !important; }
+
+/* RESPONSIVE BREAKPOINTS */
+@media (max-width: 768px) {
+    body { cursor: auto; }
+    a, button { cursor: pointer; }
+    .cursor-dot, .cursor-ring { display: none; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .container { padding: 0 24px; }
+    .section { padding: 80px 0; }
+}
+
+@media (max-width: 480px) {
+    .container { padding: 0 16px; }
+    .hero-title, .page-hero-title, .section-title { font-size: clamp(1.8rem, 6vw, 2.5rem); }
+    .btn { padding: 12px 24px; font-size: 14px; }
+}
+    </style>
+</head>
+<body>
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <header class="nav-header" id="navHeader">
+        <nav class="nav-container">
+            <a href="projects.html" class="nav-logo">FORMA</a>
+            <ul class="nav-links">
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#philosophy" class="nav-link">Philosophy</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#team" class="nav-link">Team</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                </button>
+                <a href="#contact" class="btn btn-primary">Start a Project</a>
+            </div>
+        </nav>
+    </header>
+<div class="mobile-menu" id="mobileMenu">
+    <ul class="mobile-menu-links">
+        <li><a href="projects.html" class="mobile-link">← Back to Projects</a></li>
+        <li><a href="index.html" class="mobile-link">Home</a></li>
+        <li><a href="about.html" class="mobile-link">About</a></li>
+        <li><a href="contact.html" class="mobile-link">Contact</a></li>
+    </ul>
+</div>
+    <main>
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-content">
+                <span class="hero-tag">Architecture & Design Studio</span>
+                <h1 class="hero-title">Shaping spaces that <strong>inspire</strong> and endure.</h1>
+                <p class="hero-desc">We design buildings and spaces that harmonize with their environment, elevate human experience, and stand the test of time.</p>
+                <div class="hero-ctas">
+                    <a href="#projects" class="btn btn-primary">View Projects</a>
+                    <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=1200&auto=format&fit=crop" alt="Modern architecture">
+            </div>
+        </section>
+
+        <!-- STATS -->
+        <section class="stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div>
+                        <div class="stat-number">150+</div>
+                        <div class="stat-label">Projects Completed</div>
+                    </div>
+                    <div>
+                        <div class="stat-number">18</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div>
+                        <div class="stat-number">25+</div>
+                        <div class="stat-label">Design Awards</div>
+                    </div>
+                    <div>
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">Countries</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section class="projects" id="projects">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Selected Work</span>
+                    <h2 class="section-title">Featured <strong>Projects</strong></h2>
+                    <p class="section-desc">A curated selection of our most impactful architectural projects across residential, commercial, and cultural spaces.</p>
+                </div>
+                <div class="projects-grid">
+                    <a href="#" class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop" alt="Horizon House">
+                        </div>
+                        <div class="project-info">
+                            <div class="project-category">Residential</div>
+                            <h3 class="project-title">Horizon House</h3>
+                            <p class="project-location">Malibu, California</p>
+                        </div>
+                    </a>
+                    <a href="#" class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop" alt="Vertex Tower">
+                        </div>
+                        <div class="project-info">
+                            <div class="project-category">Commercial</div>
+                            <h3 class="project-title">Vertex Tower</h3>
+                            <p class="project-location">Chicago, Illinois</p>
+                        </div>
+                    </a>
+                    <a href="#" class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800&auto=format&fit=crop" alt="Lumina Cultural Center">
+                        </div>
+                        <div class="project-info">
+                            <div class="project-category">Cultural</div>
+                            <h3 class="project-title">Lumina Cultural Center</h3>
+                            <p class="project-location">Portland, Oregon</p>
+                        </div>
+                    </a>
+                    <a href="#" class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200&auto=format&fit=crop" alt="Serene Villa">
+                        </div>
+                        <div class="project-info">
+                            <div class="project-category">Residential</div>
+                            <h3 class="project-title">Serene Villa</h3>
+                            <p class="project-location">Aspen, Colorado</p>
+                        </div>
+                    </a>
+                    <a href="#" class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop" alt="Nexus Office">
+                        </div>
+                        <div class="project-info">
+                            <div class="project-category">Commercial</div>
+                            <h3 class="project-title">Nexus Office Complex</h3>
+                            <p class="project-location">Austin, Texas</p>
+                        </div>
+                    </a>
+                    <a href="#" class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=800&auto=format&fit=crop" alt="Coastal Retreat">
+                        </div>
+                        <div class="project-info">
+                            <div class="project-category">Residential</div>
+                            <h3 class="project-title">Coastal Retreat</h3>
+                            <p class="project-location">Hamptons, New York</p>
+                        </div>
+                    </a>
+                    <a href="#" class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1464146072230-91cabc968266?q=80&w=800&auto=format&fit=crop" alt="Metro Library">
+                        </div>
+                        <div class="project-info">
+                            <div class="project-category">Cultural</div>
+                            <h3 class="project-title">Metro Public Library</h3>
+                            <p class="project-location">Seattle, Washington</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHILOSOPHY -->
+        <section class="philosophy" id="philosophy">
+            <div class="container">
+                <div class="philosophy-content">
+                    <div class="philosophy-image">
+                        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1000&auto=format&fit=crop" alt="Design process">
+                    </div>
+                    <div class="philosophy-text">
+                        <span class="section-tag">Our Philosophy</span>
+                        <h2>Design that <strong>transcends</strong> trends.</h2>
+                        <p>At Forma Studio, we believe architecture is more than building—it's about creating environments that enhance how people live, work, and connect. Every project begins with deep listening: understanding the site, the client's vision, and the community context.</p>
+                        <p>Our approach balances innovation with timelessness. We draw inspiration from natural forms, sustainable practices, and the rich history of architectural craft. The result is work that feels both contemporary and enduring—spaces that grow more beautiful with age.</p>
+                        <p>We're committed to sustainability in every decision, from material selection to energy systems. Great architecture should serve both people and planet.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section class="services" id="services">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">What We Do</span>
+                    <h2 class="section-title">Our <strong>Services</strong></h2>
+                    <p class="section-desc">Comprehensive architectural services from concept through completion.</p>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-number">01</div>
+                        <h3>Architectural Design</h3>
+                        <p>Full-service architectural design for residential, commercial, and cultural projects. From initial concept through construction documentation.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-number">02</div>
+                        <h3>Interior Architecture</h3>
+                        <p>Thoughtful interior spaces that complement and enhance the architectural vision. Material selection, lighting design, and spatial planning.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-number">03</div>
+                        <h3>Urban Planning</h3>
+                        <p>Master planning and urban design that creates cohesive, livable communities. Contextual analysis and sustainable development strategies.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-number">04</div>
+                        <h3>Renovation & Restoration</h3>
+                        <p>Sensitive renovation of existing structures and historic preservation. Breathing new life into buildings while honoring their heritage.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-number">05</div>
+                        <h3>Sustainable Design</h3>
+                        <p>LEED-certified green building strategies. Energy modeling, passive design, and renewable integration for minimal environmental impact.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-number">06</div>
+                        <h3>Project Management</h3>
+                        <p>End-to-end project oversight from feasibility through occupancy. Budget management, contractor coordination, and quality assurance.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TEAM -->
+        <section class="team" id="team">
+            <div class="container">
+                <div class="section-header" style="text-align: center; margin-bottom: 80px;">
+                    <span class="section-tag">Our Team</span>
+                    <h2 class="section-title">The minds behind <strong>Forma</strong></h2>
+                    <p class="section-desc">A multidisciplinary team of architects, designers, and thinkers.</p>
+                </div>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400&auto=format&fit=crop" alt="Marcus Chen">
+                        </div>
+                        <h3 class="team-name">Marcus Chen</h3>
+                        <p class="team-role">Founding Principal</p>
+                        <p class="team-bio">20+ years leading award-winning projects. Harvard GSD graduate with focus on sustainable urban design.</p>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop" alt="Sarah Martinez">
+                        </div>
+                        <h3 class="team-name">Sarah Martinez</h3>
+                        <p class="team-role">Design Director</p>
+                        <p class="team-bio">Specializes in residential architecture and interior spaces. Known for warm, human-centered design approach.</p>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=400&auto=format&fit=crop" alt="David Thompson">
+                        </div>
+                        <h3 class="team-name">David Thompson</h3>
+                        <p class="team-role">Technical Director</p>
+                        <p class="team-bio">Expert in building systems and construction technology. Ensures every design is buildable and performant.</p>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=400&auto=format&fit=crop" alt="Emily Park">
+                        </div>
+                        <h3 class="team-name">Emily Park</h3>
+                        <p class="team-role">Sustainability Lead</p>
+                        <p class="team-bio">LEED AP with passion for regenerative design. Leads our green building initiatives and certifications.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AWARDS -->
+        <section class="awards">
+            <div class="container">
+                <div class="section-header" style="text-align: center; margin-bottom: 80px;">
+                    <span class="section-tag">Recognition</span>
+                    <h2 class="section-title">Awards & <strong>Honors</strong></h2>
+                </div>
+                <div class="awards-grid">
+                    <div class="award-card">
+                        <div class="award-year">2024</div>
+                        <div class="award-name">AIA National Award</div>
+                        <div class="award-org">American Institute of Architects</div>
+                    </div>
+                    <div class="award-card">
+                        <div class="award-year">2023</div>
+                        <div class="award-name">Best Residential Design</div>
+                        <div class="award-org">Architectural Digest</div>
+                    </div>
+                    <div class="award-card">
+                        <div class="award-year">2023</div>
+                        <div class="award-name">Sustainability Excellence</div>
+                        <div class="award-org">US Green Building Council</div>
+                    </div>
+                    <div class="award-card">
+                        <div class="award-year">2022</div>
+                        <div class="award-name">Design of the Year</div>
+                        <div class="award-org">Dezeen Awards</div>
+                    </div>
+                    <div class="award-card">
+                        <div class="award-year">2022</div>
+                        <div class="award-name">Emerging Firm Award</div>
+                        <div class="award-org">Architect Magazine</div>
+                    </div>
+                    <div class="award-card">
+                        <div class="award-year">2021</div>
+                        <div class="award-name">Urban Design Honor</div>
+                        <div class="award-org">AIA California Council</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section class="contact" id="contact">
+            <div class="container">
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <span class="section-tag">Get in Touch</span>
+                        <h2>Let's build something <strong>extraordinary</strong>.</h2>
+                        <p>Whether you're planning a new build, renovation, or just exploring ideas, we'd love to hear about your project. Every great building starts with a conversation.</p>
+                        <div class="contact-details">
+                            <div>
+                                <div class="contact-detail-label">Email</div>
+                                <div class="contact-detail-value"><a href="mailto:studio@forma-arch.com">studio@forma-arch.com</a></div>
+                            </div>
+                            <div>
+                                <div class="contact-detail-label">Phone</div>
+                                <div class="contact-detail-value">+1 (415) 555-0147</div>
+                            </div>
+                            <div>
+                                <div class="contact-detail-label">Studio</div>
+                                <div class="contact-detail-value">582 Market Street, San Francisco, CA 94104</div>
+                            </div>
+                            <div>
+                                <div class="contact-detail-label">Hours</div>
+                                <div class="contact-detail-value">Monday - Friday, 9am - 6pm PST</div>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="contact-form" onsubmit="submitForm(event)">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" placeholder="Your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="projectType">Project Type</label>
+                            <select id="projectType">
+                                <option value="">Select project type</option>
+                                <option value="residential">Residential</option>
+                                <option value="commercial">Commercial</option>
+                                <option value="cultural">Cultural / Public</option>
+                                <option value="renovation">Renovation</option>
+                                <option value="interior">Interior Architecture</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Project Details</label>
+                            <textarea id="message" placeholder="Tell us about your vision, timeline, and any specific requirements..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Inquiry</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="projects.html" class="nav-logo" style="color: var(--color-bg);">FORMA</a>
+                    <p>Architecture and design studio creating spaces that inspire, endure, and enhance the human experience.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#philosophy">Philosophy</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#team">Team</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#services">Architecture</a></li>
+                        <li><a href="#services">Interiors</a></li>
+                        <li><a href="#services">Urban Planning</a></li>
+                        <li><a href="#services">Renovation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">Archinect</a></li>
+                        <li><a href="#">Newsletter</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Forma Studio. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Accessibility</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Form
+            window.submitForm = function(e) {
+                e.preventDefault();
+                const name = document.getElementById('name').value;
+                alert(`Thank you, ${name}! We'll review your inquiry and respond within 2 business days.`);
+                e.target.reset();
+            };
+
+            // Dark Mode
+            const themeToggle = document.getElementById('themeToggle');
+            const html = document.documentElement;
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) html.setAttribute('data-theme', savedTheme);
+            else if (window.matchMedia('(prefers-color-scheme: dark)').matches) html.setAttribute('data-theme', 'dark');
+
+            if (themeToggle) {
+                themeToggle.addEventListener('click', () => {
+                    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                    html.setAttribute('data-theme', next);
+                    localStorage.setItem('theme', next);
+                });
+            }
+
+            // Custom Cursor
+            const cursorDot = document.getElementById('cursorDot');
+            const cursorRing = document.getElementById('cursorRing');
+            const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+            if (!isTouch && cursorDot && cursorRing) {
+                let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+                document.addEventListener('mousemove', (e) => {
+                    mouseX = e.clientX; mouseY = e.clientY;
+                    cursorDot.style.left = mouseX + 'px';
+                    cursorDot.style.top = mouseY + 'px';
+                });
+                function animateRing() {
+                    ringX += (mouseX - ringX) * 0.15;
+                    ringY += (mouseY - ringY) * 0.15;
+                    cursorRing.style.left = ringX + 'px';
+                    cursorRing.style.top = ringY + 'px';
+                    requestAnimationFrame(animateRing);
+                }
+                animateRing();
+                document.querySelectorAll('a, button').forEach(el => {
+                    el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
+                    el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
+                });
+            }
+
+            // Navigation
+            const navHeader = document.getElementById('navHeader');
+            if (navHeader) {
+                window.addEventListener('scroll', () => {
+                    navHeader.classList.toggle('scrolled', window.scrollY > 20);
+                }, { passive: true });
+            }
+
+            // Smooth scroll
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        });
+
+    </script>// Mobile Menu
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        mobileMenu.classList.toggle('open');
+        document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('.mobile-link').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+    });
+}
+
+// Cursor Fix
+const cursorDot = document.getElementById('cursorDot');
+const cursorRing = document.getElementById('cursorRing');
+if (cursorDot && cursorRing) {
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let ringX = mouseX;
+    let ringY = mouseY;
+    
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursorDot.style.left = mouseX + 'px';
+        cursorDot.style.top = mouseY + 'px';
+    }, { passive: true });
+    
+    function animateRing() {
+        ringX += (mouseX - ringX) * 0.15;
+        ringY += (mouseY - ringY) * 0.15;
+        cursorRing.style.left = ringX + 'px';
+        cursorRing.style.top = ringY + 'px';
+        requestAnimationFrame(animateRing);
+    }
+    animateRing();
+}
+</body>
+</html>

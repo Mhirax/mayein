@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meridian Finance — Modern Fintech Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --font-heading: 'Fraunces', serif;
+            --font-body: 'Outfit', sans-serif;
+            --color-bg: #ffffff;
+            --color-surface: #f8f9fa;
+            --color-text: #0a0a0a;
+            --color-text-muted: #6b7280;
+            --color-primary: #0a0a0a;
+            --color-accent: #2563eb;
+            --color-accent-light: #3b82f6;
+            --color-border: #e5e7eb;
+            --color-success: #10b981;
+            --transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        [data-theme="dark"] {
+            --color-bg: #0a0a0a;
+            --color-surface: #141414;
+            --color-text: #f4f4f5;
+            --color-text-muted: #a1a1aa;
+            --color-primary: #f4f4f5;
+            --color-accent: #60a5fa;
+            --color-accent-light: #93c5fd;
+            --color-border: #27272a;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); background: var(--color-bg); color: var(--color-text); line-height: 1.6; overflow-x: hidden; cursor: none; }
+        @media (max-width: 768px) { body { cursor: auto; } }
+
+        a { text-decoration: none; color: inherit; cursor: none; }
+        button { cursor: none; border: none; background: none; font-family: inherit; }
+        @media (max-width: 768px) { a, button { cursor: pointer; } }
+        img { max-width: 100%; display: block; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+        /* CURSOR */
+        .cursor-dot, .cursor-ring { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9998; border-radius: 50%; transform: translate(-50%, -50%); }
+        .cursor-dot { width: 6px; height: 6px; background: var(--color-text); }
+        .cursor-ring { width: 36px; height: 36px; border: 1.5px solid var(--color-text); opacity: 0.4; transition: width 0.3s, height 0.3s, opacity 0.3s; }
+        .cursor-ring.hover { width: 56px; height: 56px; opacity: 0.2; }
+        @media (max-width: 768px) { .cursor-dot, .cursor-ring { display: none; } }
+
+        /* NAVIGATION */
+        .nav-header { position: fixed; top: 0; left: 0; width: 100%; height: 72px; z-index: 1000; background: rgba(255,255,255,0.8); backdrop-filter: blur(16px); border-bottom: 1px solid transparent; transition: var(--transition); }
+        [data-theme="dark"] .nav-header { background: rgba(10,10,10,0.8); }
+        .nav-header.scrolled { border-bottom-color: var(--color-border); }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 40px; height: 100%; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { font-family: var(--font-heading); font-size: 24px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+        .nav-logo-icon { width: 32px; height: 32px; background: var(--color-accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 16px; }
+        .nav-links { display: flex; gap: 32px; list-style: none; }
+        .nav-link { font-size: 15px; font-weight: 500; color: var(--color-text-muted); transition: color 0.3s; }
+        .nav-link:hover { color: var(--color-text); }
+        .nav-actions { display: flex; align-items: center; gap: 16px; }
+        .theme-toggle { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--color-text-muted); transition: background 0.3s; }
+        .theme-toggle:hover { background: var(--color-surface); color: var(--color-text); }
+        .theme-toggle svg { width: 18px; height: 18px; }
+        .icon-moon { display: none; }
+        [data-theme="dark"] .icon-sun { display: none; }
+        [data-theme="dark"] .icon-moon { display: block; }
+
+        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 12px 28px; font-size: 15px; font-weight: 600; border-radius: 8px; transition: var(--transition); }
+        .btn-primary { background: var(--color-accent); color: white; }
+        .btn-primary:hover { background: var(--color-accent-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,99,235,0.3); }
+        .btn-secondary { background: transparent; color: var(--color-text); border: 1.5px solid var(--color-border); }
+        .btn-secondary:hover { border-color: var(--color-text); }
+
+        /* HERO */
+        .hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 0 80px; position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: 0; right: 0; width: 50%; height: 100%; background: radial-gradient(circle at 70% 50%, rgba(37,99,235,0.08), transparent 70%); pointer-events: none; }
+        .hero-content { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .hero-text h1 { font-family: var(--font-heading); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 400; line-height: 1.1; margin-bottom: 24px; letter-spacing: -0.02em; }
+        .hero-text h1 span { color: var(--color-accent); font-style: italic; }
+        .hero-text p { font-size: 18px; color: var(--color-text-muted); margin-bottom: 40px; max-width: 500px; }
+        .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+
+        .hero-visual { position: relative; }
+        .dashboard-preview { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 16px; padding: 32px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); }
+        .dashboard-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+        .dashboard-title { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted); }
+        .dashboard-balance { font-family: var(--font-heading); font-size: 48px; font-weight: 600; margin-bottom: 8px; }
+        .dashboard-change { font-size: 14px; color: var(--color-success); font-weight: 600; }
+        .chart-placeholder { height: 200px; background: linear-gradient(180deg, rgba(37,99,235,0.1) 0%, transparent 100%); border-radius: 8px; display: flex; align-items: end; justify-content: space-around; padding: 20px; gap: 8px; }
+        .chart-bar { width: 20px; background: var(--color-accent); border-radius: 4px 4px 0 0; animation: growUp 1s ease-out forwards; transform-origin: bottom; }
+        @keyframes growUp { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
+        /* FEATURES */
+        .features { padding: 120px 0; background: var(--color-surface); }
+        .section-header { text-align: center; margin-bottom: 80px; }
+        .section-tag { display: inline-block; font-size: 13px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 16px; }
+        .section-title { font-family: var(--font-heading); font-size: clamp(2rem, 4vw, 3rem); font-weight: 400; line-height: 1.2; margin-bottom: 16px; }
+        .section-desc { font-size: 18px; color: var(--color-text-muted); max-width: 600px; margin: 0 auto; }
+
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; }
+        .feature-card { background: var(--color-bg); padding: 40px; border-radius: 12px; border: 1px solid var(--color-border); transition: var(--transition); }
+        .feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); border-color: var(--color-accent); }
+        .feature-icon { width: 48px; height: 48px; background: rgba(37,99,235,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; color: var(--color-accent); }
+        .feature-icon svg { width: 24px; height: 24px; }
+        .feature-card h3 { font-size: 20px; font-weight: 600; margin-bottom: 12px; }
+        .feature-card p { font-size: 15px; color: var(--color-text-muted); line-height: 1.6; }
+
+        /* STATS */
+        .stats { padding: 120px 0; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 60px; text-align: center; }
+        .stat-number { font-family: var(--font-heading); font-size: clamp(3rem, 6vw, 4.5rem); font-weight: 600; line-height: 1; margin-bottom: 8px; color: var(--color-accent); }
+        .stat-label { font-size: 15px; color: var(--color-text-muted); font-weight: 500; }
+
+        /* TESTIMONIALS */
+        .testimonials { padding: 120px 0; background: var(--color-surface); }
+        .testimonial-card { max-width: 800px; margin: 0 auto; text-align: center; }
+        .testimonial-quote { font-family: var(--font-heading); font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 400; line-height: 1.4; margin-bottom: 32px; font-style: italic; }
+        .testimonial-author { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+        .testimonial-role { font-size: 14px; color: var(--color-text-muted); }
+
+        /* CTA */
+        .cta { padding: 120px 0; text-align: center; }
+        .cta-content { max-width: 700px; margin: 0 auto; }
+        .cta h2 { font-family: var(--font-heading); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 400; line-height: 1.2; margin-bottom: 24px; }
+        .cta p { font-size: 18px; color: var(--color-text-muted); margin-bottom: 40px; }
+
+        /* FOOTER */
+        .footer { border-top: 1px solid var(--color-border); padding: 60px 0 40px; }
+        .footer-content { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+        .footer-brand p { font-size: 14px; color: var(--color-text-muted); margin-top: 16px; max-width: 300px; }
+        .footer-column h4 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 20px; }
+        .footer-column ul { list-style: none; }
+        .footer-column li { margin-bottom: 12px; }
+        .footer-column a { font-size: 14px; color: var(--color-text-muted); transition: color 0.3s; }
+        .footer-column a:hover { color: var(--color-text); }
+        .footer-bottom { border-top: 1px solid var(--color-border); padding-top: 40px; text-align: center; }
+        .footer-bottom p { font-size: 13px; color: var(--color-text-muted); }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .hero-content { grid-template-columns: 1fr; gap: 60px; }
+            .footer-content { grid-template-columns: 1fr 1fr; gap: 40px; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .container { padding: 0 24px; }
+            .hero { padding: 100px 0 60px; }
+            .hero-ctas { flex-direction: column; }
+            .hero-ctas .btn { width: 100%; }
+            .footer-content { grid-template-columns: 1fr; gap: 40px; }
+        }
+        /* MOBILE NAVIGATION */
+.hamburger { display: none; flex-direction: column; gap: 6px; width: 28px; padding: 4px 0; cursor: pointer; }
+.hamburger span { display: block; height: 2px; background: var(--color-text); border-radius: 2px; transition: 0.3s; }
+.hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+.mobile-menu { position: fixed; inset: 0; z-index: 999; background: var(--color-bg); display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: 0.4s; }
+.mobile-menu.open { opacity: 1; visibility: visible; }
+.mobile-menu-links { list-style: none; text-align: center; display: flex; flex-direction: column; gap: 32px; }
+.mobile-link { font-family: var(--font-heading); font-size: 32px; font-weight: 600; color: var(--color-text); transition: color 0.3s; }
+.mobile-link:hover { color: var(--color-accent); }
+
+/* CURSOR FIX */
+.cursor-dot, .cursor-ring { z-index: 99999 !important; }
+
+/* RESPONSIVE BREAKPOINTS */
+@media (max-width: 768px) {
+    body { cursor: auto; }
+    a, button { cursor: pointer; }
+    .cursor-dot, .cursor-ring { display: none; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .container { padding: 0 24px; }
+    .section { padding: 80px 0; }
+}
+
+@media (max-width: 480px) {
+    .container { padding: 0 16px; }
+    .hero-title, .page-hero-title, .section-title { font-size: clamp(1.8rem, 6vw, 2.5rem); }
+    .btn { padding: 12px 24px; font-size: 14px; }
+}
+    </style>
+</head>
+<body>
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <header class="nav-header" id="navHeader">
+        <nav class="nav-container">
+            <a href="projects.html" class="nav-logo">
+                <span class="nav-logo-icon">M</span>
+                <span>Meridian</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#stats" class="nav-link">Stats</a></li>
+                <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                </button>
+                <a href="#cta" class="btn btn-primary">Get Started</a>
+            </div>
+        </nav>
+    </header>
+<div class="mobile-menu" id="mobileMenu">
+    <ul class="mobile-menu-links">
+        <li><a href="projects.html" class="mobile-link">← Back to Projects</a></li>
+        <li><a href="index.html" class="mobile-link">Home</a></li>
+        <li><a href="about.html" class="mobile-link">About</a></li>
+        <li><a href="contact.html" class="mobile-link">Contact</a></li>
+    </ul>
+</div>
+    <main>
+        <!-- HERO -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1>Finance made <span>simple</span>, secure, and smart.</h1>
+                        <p>Meridian gives you real-time insights, intelligent automation, and bank-grade security—all in one beautiful dashboard.</p>
+                        <div class="hero-ctas">
+                            <a href="#cta" class="btn btn-primary">Start Free Trial</a>
+                            <a href="#features" class="btn btn-secondary">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="dashboard-preview">
+                            <div class="dashboard-header">
+                                <span class="dashboard-title">Portfolio Balance</span>
+                            </div>
+                            <div class="dashboard-balance">$124,582.40</div>
+                            <div class="dashboard-change">↑ +12.4% this month</div>
+                            <div class="chart-placeholder">
+                                <div class="chart-bar" style="height: 40%;"></div>
+                                <div class="chart-bar" style="height: 65%;"></div>
+                                <div class="chart-bar" style="height: 55%;"></div>
+                                <div class="chart-bar" style="height: 80%;"></div>
+                                <div class="chart-bar" style="height: 70%;"></div>
+                                <div class="chart-bar" style="height: 90%;"></div>
+                                <div class="chart-bar" style="height: 85%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURES -->
+        <section class="features" id="features">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Features</span>
+                    <h2 class="section-title">Everything you need to manage your money</h2>
+                    <p class="section-desc">Powerful tools designed for modern finance, built with simplicity and security in mind.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        </div>
+                        <h3>Real-Time Analytics</h3>
+                        <p>Track your portfolio performance with live data updates and interactive charts that give you instant insights.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                        </div>
+                        <h3>Bank-Grade Security</h3>
+                        <p>256-bit encryption, two-factor authentication, and continuous monitoring keep your assets safe 24/7.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                        </div>
+                        <h3>Smart Automation</h3>
+                        <p>Set up intelligent rules to automate transfers, investments, and alerts based on your preferences.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                        </div>
+                        <h3>24/7 Support</h3>
+                        <p>Our dedicated team is always available to help you with questions, issues, or financial guidance.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                        </div>
+                        <h3>Instant Notifications</h3>
+                        <p>Stay informed with real-time alerts for transactions, market movements, and account activity.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+                        </div>
+                        <h3>Team Collaboration</h3>
+                        <p>Share access with team members, assign roles, and collaborate on financial decisions seamlessly.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STATS -->
+        <section class="stats" id="stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div>
+                        <div class="stat-number">$2.4B+</div>
+                        <div class="stat-label">Assets Managed</div>
+                    </div>
+                    <div>
+                        <div class="stat-number">150K+</div>
+                        <div class="stat-label">Active Users</div>
+                    </div>
+                    <div>
+                        <div class="stat-number">99.9%</div>
+                        <div class="stat-label">Uptime</div>
+                    </div>
+                    <div>
+                        <div class="stat-number">4.9★</div>
+                        <div class="stat-label">User Rating</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section class="testimonials" id="testimonials">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Testimonials</span>
+                    <h2 class="section-title">Trusted by thousands</h2>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"Meridian transformed how I manage my investments. The interface is intuitive, the insights are invaluable, and I've never felt more in control of my financial future."</p>
+                    <p class="testimonial-author">Sarah Chen</p>
+                    <p class="testimonial-role">Portfolio Manager, Tech Ventures</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta" id="cta">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Ready to take control of your finances?</h2>
+                    <p>Join thousands of users who trust Meridian to manage their money smarter. Start your free 30-day trial today.</p>
+                    <a href="#" class="btn btn-primary">Get Started Free</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="projects.html" class="nav-logo">
+                        <span class="nav-logo-icon">M</span>
+                        <span>Meridian</span>
+                    </a>
+                    <p>Modern finance, simplified. Built for individuals and teams who demand more from their money.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Security</a></li>
+                        <li><a href="#">Integrations</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Meridian Finance. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Dark Mode
+            const themeToggle = document.getElementById('themeToggle');
+            const html = document.documentElement;
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) html.setAttribute('data-theme', savedTheme);
+            else if (window.matchMedia('(prefers-color-scheme: dark)').matches) html.setAttribute('data-theme', 'dark');
+
+            if (themeToggle) {
+                themeToggle.addEventListener('click', () => {
+                    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                    html.setAttribute('data-theme', next);
+                    localStorage.setItem('theme', next);
+                });
+            }
+
+            // Custom Cursor
+            const cursorDot = document.getElementById('cursorDot');
+            const cursorRing = document.getElementById('cursorRing');
+            const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+            if (!isTouch && cursorDot && cursorRing) {
+                let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+                document.addEventListener('mousemove', (e) => {
+                    mouseX = e.clientX; mouseY = e.clientY;
+                    cursorDot.style.left = mouseX + 'px';
+                    cursorDot.style.top = mouseY + 'px';
+                });
+                function animateRing() {
+                    ringX += (mouseX - ringX) * 0.15;
+                    ringY += (mouseY - ringY) * 0.15;
+                    cursorRing.style.left = ringX + 'px';
+                    cursorRing.style.top = ringY + 'px';
+                    requestAnimationFrame(animateRing);
+                }
+                animateRing();
+                document.querySelectorAll('a, button').forEach(el => {
+                    el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
+                    el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
+                });
+            }
+
+            // Navigation
+            const navHeader = document.getElementById('navHeader');
+            if (navHeader) {
+                window.addEventListener('scroll', () => {
+                    navHeader.classList.toggle('scrolled', window.scrollY > 20);
+                }, { passive: true });
+            }
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        });
+        // Mobile Menu
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        mobileMenu.classList.toggle('open');
+        document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('.mobile-link').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+    });
+}
+
+// Cursor Fix
+const cursorDot = document.getElementById('cursorDot');
+const cursorRing = document.getElementById('cursorRing');
+if (cursorDot && cursorRing) {
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let ringX = mouseX;
+    let ringY = mouseY;
+    
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursorDot.style.left = mouseX + 'px';
+        cursorDot.style.top = mouseY + 'px';
+    }, { passive: true });
+    
+    function animateRing() {
+        ringX += (mouseX - ringX) * 0.15;
+        ringY += (mouseY - ringY) * 0.15;
+        cursorRing.style.left = ringX + 'px';
+        cursorRing.style.top = ringY + 'px';
+        requestAnimationFrame(animateRing);
+    }
+    animateRing();
+}
+    </script>
+</body>
+</html>

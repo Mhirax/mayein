@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kinetic Motion — Experimental Design</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --font: 'Space Grotesk', sans-serif;
+            --color-bg: #0a0a0a;
+            --color-surface: #141414;
+            --color-text: #ffffff;
+            --color-text-muted: #71717a;
+            --color-primary: #ff006e;
+            --color-secondary: #8338ec;
+            --color-tertiary: #3a86ff;
+            --color-accent: #ffbe0b;
+            --transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font); background: var(--color-bg); color: var(--color-text); line-height: 1.6; overflow-x: hidden; cursor: none; }
+        @media (max-width: 768px) { body { cursor: auto; } }
+
+        a { text-decoration: none; color: inherit; cursor: none; }
+        button { cursor: none; border: none; background: none; font-family: inherit; }
+        @media (max-width: 768px) { a, button { cursor: pointer; } }
+
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+
+        /* CUSTOM CURSOR */
+        .cursor { position: fixed; width: 20px; height: 20px; border: 2px solid var(--color-primary); border-radius: 50%; pointer-events: none; z-index: 9999; transition: transform 0.2s, width 0.3s, height 0.3s, border-color 0.3s; transform: translate(-50%, -50%); mix-blend-mode: difference; }
+        .cursor.hover { width: 60px; height: 60px; border-color: var(--color-accent); }
+        @media (max-width: 768px) { .cursor { display: none; } }
+
+        /* PARTICLE CANVAS */
+        #particleCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+
+        /* NAVIGATION */
+        .nav-header { position: fixed; top: 0; left: 0; width: 100%; height: 72px; z-index: 1000; background: rgba(10,10,10,0.8); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .nav-container { max-width: 1400px; margin: 0 auto; padding: 0 40px; height: 100%; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; }
+        .nav-logo span { background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .nav-links { display: flex; gap: 32px; list-style: none; }
+        .nav-link { font-size: 14px; font-weight: 500; color: var(--color-text-muted); transition: color 0.3s; text-transform: uppercase; letter-spacing: 0.05em; }
+        .nav-link:hover { color: var(--color-text); }
+
+        /* HERO */
+        .hero { min-height: 100vh; display: flex; align-items: center; position: relative; z-index: 1; }
+        .hero-content { text-align: center; width: 100%; }
+        .hero-tag { display: inline-block; font-size: 13px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 32px; }
+        .hero-title { font-size: clamp(4rem, 12vw, 10rem); font-weight: 700; line-height: 0.9; letter-spacing: -0.04em; margin-bottom: 32px; }
+        .hero-title span { display: block; background: linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-tertiary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-style: italic; }
+        .hero-desc { font-size: 20px; color: var(--color-text-muted); max-width: 600px; margin: 0 auto 48px; line-height: 1.7; }
+        .hero-ctas { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 16px 40px; font-size: 15px; font-weight: 600; border-radius: 99px; transition: var(--transition); text-transform: uppercase; letter-spacing: 0.05em; }
+        .btn-primary { background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)); color: white; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(255,0,110,0.4); }
+        .btn-secondary { background: transparent; color: var(--color-text); border: 1.5px solid var(--color-text); }
+        .btn-secondary:hover { background: var(--color-text); color: var(--color-bg); }
+
+        /* INTERACTIVE SECTION */
+        .interactive { padding: 120px 0; position: relative; z-index: 1; }
+        .section-header { text-align: center; margin-bottom: 80px; }
+        .section-tag { display: inline-block; font-size: 13px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-primary); margin-bottom: 16px; }
+        .section-title { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; line-height: 1.1; margin-bottom: 16px; letter-spacing: -0.03em; }
+        .section-desc { font-size: 18px; color: var(--color-text-muted); max-width: 600px; margin: 0 auto; }
+
+        .physics-demo { width: 100%; height: 500px; background: var(--color-surface); border-radius: 24px; position: relative; overflow: hidden; cursor: none; border: 1px solid rgba(255,255,255,0.1); }
+        @media (max-width: 768px) { .physics-demo { cursor: pointer; } }
+        .physics-ball { position: absolute; width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)); cursor: grab; transition: transform 0.1s; }
+        .physics-ball:active { cursor: grabbing; }
+        .physics-ball:nth-child(1) { background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)); }
+        .physics-ball:nth-child(2) { background: linear-gradient(135deg, var(--color-secondary), var(--color-tertiary)); }
+        .physics-ball:nth-child(3) { background: linear-gradient(135deg, var(--color-tertiary), var(--color-accent)); }
+        .physics-ball:nth-child(4) { background: linear-gradient(135deg, var(--color-accent), var(--color-primary)); }
+
+        /* EXPERIMENTS GRID */
+        .experiments { padding: 120px 0; position: relative; z-index: 1; }
+        .experiments-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
+        .experiment-item { position: relative; overflow: hidden; border-radius: 16px; cursor: none; transition: var(--transition); }
+        @media (max-width: 768px) { .experiment-item { cursor: pointer; } }
+        .experiment-item:hover { transform: scale(1.02); }
+        .experiment-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+        .experiment-item:hover img { transform: scale(1.1); }
+        .experiment-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.9) 100%); display: flex; flex-direction: column; justify-content: end; padding: 32px; opacity: 0; transition: opacity 0.4s; }
+        .experiment-item:hover .experiment-overlay { opacity: 1; }
+        .experiment-tag { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-accent); margin-bottom: 8px; }
+        .experiment-title { font-size: 24px; font-weight: 700; }
+
+        .experiment-item:nth-child(1) { grid-column: span 7; aspect-ratio: 16/10; }
+        .experiment-item:nth-child(2) { grid-column: span 5; aspect-ratio: 4/3; }
+        .experiment-item:nth-child(3) { grid-column: span 4; aspect-ratio: 1; }
+        .experiment-item:nth-child(4) { grid-column: span 4; aspect-ratio: 1; }
+        .experiment-item:nth-child(5) { grid-column: span 4; aspect-ratio: 1; }
+
+        /* CAPABILITIES */
+        .capabilities { padding: 120px 0; position: relative; z-index: 1; }
+        .capabilities-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
+        .capability-card { background: var(--color-surface); padding: 48px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); transition: var(--transition); position: relative; overflow: hidden; }
+        .capability-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-tertiary)); transform: scaleX(0); transform-origin: left; transition: transform 0.4s; }
+        .capability-card:hover::before { transform: scaleX(1); }
+        .capability-card:hover { transform: translateY(-4px); border-color: var(--color-primary); }
+        .capability-number { font-size: 64px; font-weight: 700; color: rgba(255,255,255,0.05); margin-bottom: 24px; }
+        .capability-card h3 { font-size: 24px; font-weight: 700; margin-bottom: 16px; }
+        .capability-card p { font-size: 15px; color: var(--color-text-muted); line-height: 1.7; }
+
+        /* CTA */
+        .cta { padding: 120px 0; text-align: center; position: relative; z-index: 1; }
+        .cta-content { max-width: 700px; margin: 0 auto; }
+        .cta h2 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 700; line-height: 1.1; margin-bottom: 24px; letter-spacing: -0.03em; }
+        .cta h2 span { background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-style: italic; }
+        .cta p { font-size: 18px; color: var(--color-text-muted); margin-bottom: 40px; }
+
+        /* FOOTER */
+        .footer { background: var(--color-surface); padding: 80px 0 40px; position: relative; z-index: 1; }
+        .footer-content { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+        .footer-brand p { font-size: 14px; color: var(--color-text-muted); margin-top: 16px; max-width: 300px; line-height: 1.7; }
+        .footer-column h4 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 20px; }
+        .footer-column ul { list-style: none; }
+        .footer-column li { margin-bottom: 12px; }
+        .footer-column a { font-size: 14px; color: var(--color-text-muted); transition: color 0.3s; }
+        .footer-column a:hover { color: var(--color-text); }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 40px; text-align: center; }
+        .footer-bottom p { font-size: 13px; color: var(--color-text-muted); }
+
+        @media (max-width: 1024px) {
+            .footer-content { grid-template-columns: 1fr 1fr; gap: 40px; }
+            .experiments-grid { grid-template-columns: 1fr; }
+            .experiment-item { grid-column: span 1 !important; aspect-ratio: 16/10 !important; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .container { padding: 0 24px; }
+            .hero-ctas { flex-direction: column; }
+            .hero-ctas .btn { width: 100%; }
+            .footer-content { grid-template-columns: 1fr; gap: 40px; }
+        }
+        /* MOBILE NAVIGATION */
+.hamburger { display: none; flex-direction: column; gap: 6px; width: 28px; padding: 4px 0; cursor: pointer; }
+.hamburger span { display: block; height: 2px; background: var(--color-text); border-radius: 2px; transition: 0.3s; }
+.hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+.mobile-menu { position: fixed; inset: 0; z-index: 999; background: var(--color-bg); display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: 0.4s; }
+.mobile-menu.open { opacity: 1; visibility: visible; }
+.mobile-menu-links { list-style: none; text-align: center; display: flex; flex-direction: column; gap: 32px; }
+.mobile-link { font-family: var(--font-heading); font-size: 32px; font-weight: 600; color: var(--color-text); transition: color 0.3s; }
+.mobile-link:hover { color: var(--color-accent); }
+
+/* CURSOR FIX */
+.cursor-dot, .cursor-ring { z-index: 99999 !important; }
+
+/* RESPONSIVE BREAKPOINTS */
+@media (max-width: 768px) {
+    body { cursor: auto; }
+    a, button { cursor: pointer; }
+    .cursor-dot, .cursor-ring { display: none; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .container { padding: 0 24px; }
+    .section { padding: 80px 0; }
+}
+
+@media (max-width: 480px) {
+    .container { padding: 0 16px; }
+    .hero-title, .page-hero-title, .section-title { font-size: clamp(1.8rem, 6vw, 2.5rem); }
+    .btn { padding: 12px 24px; font-size: 14px; }
+}
+    </style>
+</head>
+<body>
+    <div class="cursor" id="cursor"></div>
+    <canvas id="particleCanvas"></canvas>
+
+    <header class="nav-header">
+        <nav class="nav-container">
+            <a href="projects.html" class="nav-logo">Kinetic <span>Motion</span></a>
+            <ul class="nav-links">
+                <li><a href="#interactive" class="nav-link">Demo</a></li>
+                <li><a href="#experiments" class="nav-link">Experiments</a></li>
+                <li><a href="#capabilities" class="nav-link">Capabilities</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+        </nav>
+    </header>
+
+    <main><div class="mobile-menu" id="mobileMenu">
+    <ul class="mobile-menu-links">
+        <li><a href="projects.html" class="mobile-link">← Back to Projects</a></li>
+        <li><a href="index.html" class="mobile-link">Home</a></li>
+        <li><a href="about.html" class="mobile-link">About</a></li>
+        <li><a href="contact.html" class="mobile-link">Contact</a></li>
+    </ul>
+</div>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <span class="hero-tag">Experimental Design Studio</span>
+                    <h1 class="hero-title">
+                        Where code meets
+                        <span>creativity</span>
+                    </h1>
+                    <p class="hero-desc">Pushing the boundaries of web design through physics-based animations, generative art, and interactive experiences that challenge conventions.</p>
+                    <div class="hero-ctas">
+                        <a href="#interactive" class="btn btn-primary">Try the Demo</a>
+                        <a href="#experiments" class="btn btn-secondary">View Experiments</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="interactive" id="interactive">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Interactive Demo</span>
+                    <h2 class="section-title">Drag, throw, collide.</h2>
+                    <p class="section-desc">Experience physics-based interactions in real-time. Grab the balls and see what happens.</p>
+                </div>
+                <div class="physics-demo" id="physicsDemo">
+                    <div class="physics-ball" style="top: 100px; left: 100px;"></div>
+                    <div class="physics-ball" style="top: 150px; left: 300px;"></div>
+                    <div class="physics-ball" style="top: 200px; left: 500px;"></div>
+                    <div class="physics-ball" style="top: 250px; left: 700px;"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="experiments" id="experiments">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Selected Experiments</span>
+                    <h2 class="section-title">Pushing pixels to the limit</h2>
+                    <p class="section-desc">A curated selection of our most ambitious creative coding projects.</p>
+                </div>
+                <div class="experiments-grid">
+                    <a href="#" class="experiment-item">
+                        <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=1200&auto=format&fit=crop" alt="Experiment 1">
+                        <div class="experiment-overlay">
+                            <span class="experiment-tag">WebGL</span>
+                            <h3 class="experiment-title">Fluid Dynamics</h3>
+                        </div>
+                    </a>
+                    <a href="#" class="experiment-item">
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop" alt="Experiment 2">
+                        <div class="experiment-overlay">
+                            <span class="experiment-tag">Generative</span>
+                            <h3 class="experiment-title">Particle Systems</h3>
+                        </div>
+                    </a>
+                    <a href="#" class="experiment-item">
+                        <img src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=800&auto=format&fit=crop" alt="Experiment 3">
+                        <div class="experiment-overlay">
+                            <span class="experiment-tag">3D</span>
+                            <h3 class="experiment-title">Abstract Forms</h3>
+                        </div>
+                    </a>
+                    <a href="#" class="experiment-item">
+                        <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=800&auto=format&fit=crop" alt="Experiment 4">
+                        <div class="experiment-overlay">
+                            <span class="experiment-tag">Motion</span>
+                            <h3 class="experiment-title">Kinetic Typography</h3>
+                        </div>
+                    </a>
+                    <a href="#" class="experiment-item">
+                        <img src="https://images.unsplash.com/photo-1633419461186-7d40a38105ec?q=80&w=800&auto=format&fit=crop" alt="Experiment 5">
+                        <div class="experiment-overlay">
+                            <span class="experiment-tag">Interactive</span>
+                            <h3 class="experiment-title">Sound Visualizer</h3>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="capabilities" id="capabilities">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">What We Do</span>
+                    <h2 class="section-title">Creative capabilities</h2>
+                    <p class="section-desc">From concept to code, we bring experimental visions to life.</p>
+                </div>
+                <div class="capabilities-grid">
+                    <div class="capability-card">
+                        <div class="capability-number">01</div>
+                        <h3>Physics Simulations</h3>
+                        <p>Real-time physics engines that create lifelike motion, collisions, and particle effects directly in the browser.</p>
+                    </div>
+                    <div class="capability-card">
+                        <div class="capability-number">02</div>
+                        <h3>Generative Art</h3>
+                        <p>Algorithm-driven visuals that create unique, ever-evolving digital artworks using mathematical precision.</p>
+                    </div>
+                    <div class="capability-card">
+                        <div class="capability-number">03</div>
+                        <h3>WebGL & 3D</h3>
+                        <p>Immersive 3D experiences and real-time rendering that push the boundaries of web-based graphics.</p>
+                    </div>
+                    <div class="capability-card">
+                        <div class="capability-number">04</div>
+                        <h3>Gesture Control</h3>
+                        <p>Interactive experiences controlled by mouse movement, scroll, touch, and even device orientation.</p>
+                    </div>
+                    <div class="capability-card">
+                        <div class="capability-number">05</div>
+                        <h3>Audio Visualization</h3>
+                        <p>Dynamic visual experiences that respond to sound in real-time, creating synesthetic digital art.</p>
+                    </div>
+                    <div class="capability-card">
+                        <div class="capability-number">06</div>
+                        <h3>Creative Coding</h3>
+                        <p>Custom algorithms and creative programming that blend art and technology in unexpected ways.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Ready to create something <span>extraordinary</span>?</h2>
+                    <p>Let's collaborate on your next project and push the boundaries of what's possible on the web.</p>
+                    <a href="mailto:hello@kineticmotion.studio" class="btn btn-primary">Start a Project</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="projects.html" class="nav-logo">Kinetic <span>Motion</span></a>
+                    <p>Experimental design studio crafting bold digital experiences that challenge conventions and push creative boundaries.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Work</h4>
+                    <ul>
+                        <li><a href="#experiments">Experiments</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">Open Source</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Studio</h4>
+                    <ul>
+                        <li><a href="#capabilities">Capabilities</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Process</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="#">GitHub</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Dribbble</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Kinetic Motion. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Custom Cursor
+            const cursor = document.getElementById('cursor');
+            const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+            if (!isTouch && cursor) {
+                document.addEventListener('mousemove', (e) => {
+                    cursor.style.left = e.clientX + 'px';
+                    cursor.style.top = e.clientY + 'px';
+                });
+                document.querySelectorAll('a, button, .physics-ball, .experiment-item').forEach(el => {
+                    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+                    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+                });
+            }
+
+            // Particle Background
+            const canvas = document.getElementById('particleCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const particles = [];
+            const particleCount = 100;
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.vx = (Math.random() - 0.5) * 0.5;
+                    this.vy = (Math.random() - 0.5) * 0.5;
+                    this.radius = Math.random() * 2 + 1;
+                }
+
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+
+                    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255, 0, 110, 0.3)';
+                    ctx.fill();
+                }
+            }
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                particles.forEach(particle => {
+                    particle.update();
+                    particle.draw();
+                });
+
+                // Draw connections
+                particles.forEach((a, i) => {
+                    particles.slice(i + 1).forEach(b => {
+                        const dx = a.x - b.x;
+                        const dy = a.y - b.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < 100) {
+                            ctx.beginPath();
+                            ctx.moveTo(a.x, a.y);
+                            ctx.lineTo(b.x, b.y);
+                            ctx.strokeStyle = `rgba(131, 56, 236, ${0.2 * (1 - distance / 100)})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.stroke();
+                        }
+                    });
+                });
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+
+            // Physics Demo
+            const balls = document.querySelectorAll('.physics-ball');
+            const demo = document.getElementById('physicsDemo');
+
+            balls.forEach(ball => {
+                let isDragging = false;
+                let currentX = 0;
+                let currentY = 0;
+                let initialX = 0;
+                let initialY = 0;
+
+                ball.addEventListener('mousedown', (e) => {
+                    isDragging = true;
+                    initialX = e.clientX - ball.offsetLeft;
+                    initialY = e.clientY - ball.offsetTop;
+                    ball.style.cursor = 'grabbing';
+                });
+
+                document.addEventListener('mousemove', (e) => {
+                    if (isDragging) {
+                        e.preventDefault();
+                        currentX = e.clientX - initialX;
+                        currentY = e.clientY - initialY;
+
+                        const demoRect = demo.getBoundingClientRect();
+                        const maxX = demoRect.width - ball.offsetWidth;
+                        const maxY = demoRect.height - ball.offsetHeight;
+
+                        currentX = Math.max(0, Math.min(currentX, maxX));
+                        currentY = Math.max(0, Math.min(currentY, maxY));
+
+                        ball.style.left = currentX + 'px';
+                        ball.style.top = currentY + 'px';
+                    }
+                });
+
+                document.addEventListener('mouseup', () => {
+                    isDragging = false;
+                    ball.style.cursor = 'grab';
+                });
+            });
+
+            // Smooth scroll
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        });
+        // Mobile Menu
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        mobileMenu.classList.toggle('open');
+        document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('.mobile-link').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+    });
+}
+
+// Cursor Fix
+const cursorDot = document.getElementById('cursorDot');
+const cursorRing = document.getElementById('cursorRing');
+if (cursorDot && cursorRing) {
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let ringX = mouseX;
+    let ringY = mouseY;
+    
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursorDot.style.left = mouseX + 'px';
+        cursorDot.style.top = mouseY + 'px';
+    }, { passive: true });
+    
+    function animateRing() {
+        ringX += (mouseX - ringX) * 0.15;
+        ringY += (mouseY - ringY) * 0.15;
+        cursorRing.style.left = ringX + 'px';
+        cursorRing.style.top = ringY + 'px';
+        requestAnimationFrame(animateRing);
+    }
+    animateRing();
+}
+    </script>
+</body>
+</html>
