@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Gaming - Play Free Online Games</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>NEXUS GAMING</h1>
+        <p>Over 50+ Premium Games directly from CrazyGames</p>
+        <a href="index.html" class="back-button">← Back to Welcome</a>
+    </header>
+    
+    <main>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search for a game (e.g., Veck.io, Fragen)..." onkeyup="filterGames()">
+        </div>
+        <div class="games-grid" id="gamesGrid">
+            <!-- Games will be injected here by JavaScript -->
+        </div>
+    </main>
+
+    <script>
+        // List of 52 exact games from CrazyGames
+        const games = [
+            { name: "Veck.io", url: "https://www.crazygames.com/game/veck-io" },
+            { name: "Fragen", url: "https://www.crazygames.com/game/fragen" },
+            { name: "Overtide.io", url: "https://www.crazygames.com/game/overtide-io" },
+            { name: "Smash Karts", url: "https://www.crazygames.com/game/smash-karts" },
+            { name: "Shell Shockers", url: "https://www.crazygames.com/game/shell-shockers" },
+            { name: "Agar.io", url: "https://www.crazygames.com/game/agar-io" },
+            { name: "Uno Online", url: "https://www.crazygames.com/game/uno-online" },
+            { name: "Geometry Dash", url: "https://www.crazygames.com/game/geometry-dash" },
+            { name: "Moto X3M", url: "https://www.crazygames.com/game/moto-x3m" },
+            { name: "GeoGuessr", url: "https://www.crazygames.com/game/geoguessr" },
+            { name: "Hangman", url: "https://www.crazygames.com/game/hangman" },
+            { name: "Bloxd.io", url: "https://www.crazygames.com/game/bloxd-io" },
+            { name: "Slither.io", url: "https://www.crazygames.com/game/slither-io" },
+            { name: "Rocket Bot Royale", url: "https://www.crazygames.com/game/rocket-bot-royale" },
+            { name: "Pixel Warfare", url: "https://www.crazygames.com/game/pixel-warfare" },
+            { name: "Mk48.io", url: "https://www.crazygames.com/game/mk48-io" },
+            { name: "Helix Jump", url: "https://www.crazygames.com/game/helix-jump" },
+            { name: "Tap-Tap Shots", url: "https://www.crazygames.com/game/tap-tap-shots" },
+            { name: "Drift Boss", url: "https://www.crazygames.com/game/drift-boss" },
+            { name: "Snow Rider 3D", url: "https://www.crazygames.com/game/snow-rider-3d" },
+            { name: "Kour.io", url: "https://www.crazygames.com/game/kour-io" },
+            { name: "BodyCamera Shooter", url: "https://www.crazygames.com/game/bodycamera-shooter" },
+            { name: "Bullet Force Multiplayer", url: "https://www.crazygames.com/game/bullet-force-multiplayer" },
+            { name: "Kirka.io", url: "https://www.crazygames.com/game/kirka-io" },
+            { name: "Redcoats.io", url: "https://www.crazygames.com/game/redcoats-io" },
+            { name: "Poxel.io", url: "https://www.crazygames.com/game/poxel-io" },
+            { name: "BrutalMania.io", url: "https://www.crazygames.com/game/brutalmania-io" },
+            { name: "Blombo.io", url: "https://www.crazygames.com/game/blombo-io" },
+            { name: "Paint to Hide!", url: "https://www.crazygames.com/game/paint-to-hide" },
+            { name: "2v2.io", url: "https://www.crazygames.com/game/2v2-io" },
+            { name: "Mage Castle Idle Defense", url: "https://www.crazygames.com/game/mage-castle-idle-defense" },
+            { name: "Hexa Stack", url: "https://www.crazygames.com/game/hexa-stack" },
+            { name: "FrontWars.io", url: "https://www.crazygames.com/game/frontwars-io" },
+            { name: "Chicken Hell", url: "https://www.crazygames.com/game/chicken-hell" },
+            { name: "Space Waves", url: "https://www.crazygames.com/game/space-waves" },
+            { name: "Man Runner", url: "https://www.crazygames.com/game/man-runner" },
+            { name: "Piles of Mahjong", url: "https://www.crazygames.com/game/piles-of-mahjong" },
+            { name: "Words of Wonders", url: "https://www.crazygames.com/game/words-of-wonders" },
+            { name: "Skydom", url: "https://www.crazygames.com/game/skydom" },
+            { name: "Ragdoll Archers", url: "https://www.crazygames.com/game/ragdoll-archers" },
+            { name: "Pixel Blast", url: "https://www.crazygames.com/game/pixel-blast" },
+            { name: "2048", url: "https://www.crazygames.com/game/2048" },
+            { name: "Squid Game Online", url: "https://www.crazygames.com/game/squid-game-online" },
+            { name: "Dig out of Prison", url: "https://www.crazygames.com/game/dig-out-of-prison" },
+            { name: "Bubble Fall", url: "https://www.crazygames.com/game/bubble-fall" },
+            { name: "Idle Billionaire", url: "https://www.crazygames.com/game/idle-billionaire" },
+            { name: "Babel Tower", url: "https://www.crazygames.com/game/babel-tower" },
+            { name: "Block Puzzle", url: "https://www.crazygames.com/game/block-puzzle" },
+            { name: "Western Sniper", url: "https://www.crazygames.com/game/western-sniper" },
+            { name: "Gin Rummy Mania", url: "https://www.crazygames.com/game/gin-rummy-mania" },
+            { name: "Om Nom: Run", url: "https://www.crazygames.com/game/om-nom-run" },
+            { name: "Potion Merge", url: "https://www.crazygames.com/game/potion-merge" }
+        ];
+
+        const gamesGrid = document.getElementById('gamesGrid');
+
+        function renderGames(gamesToRender) {
+            gamesGrid.innerHTML = '';
+            if (gamesToRender.length === 0) {
+                gamesGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #888;">No games found matching your search.</p>';
+                return;
+            }
+            gamesToRender.forEach(game => {
+                const card = document.createElement('a');
+                card.href = game.url;
+                card.target = "_blank"; // Opens in a new tab so users don't lose your site
+                card.className = 'game-card';
+                card.innerHTML = `
+                    <div class="game-icon">🎮</div>
+                    <h3>${game.name}</h3>
+                    <p>Play on CrazyGames</p>
+                `;
+                gamesGrid.appendChild(card);
+            });
+        }
+
+        function filterGames() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = games.filter(game => game.name.toLowerCase().includes(searchTerm));
+            renderGames(filtered);
+        }
+
+        // Initial render of all games
+        renderGames(games);
+    </script>
+</body>
+</html>
