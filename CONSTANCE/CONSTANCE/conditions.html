@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Health Conditions — Medicare Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+ <!-- ========== HEADER START ========== -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="site-logo" aria-label="Medicare Hub Home">
+      <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      <span class="logo-text">Medicare<span>Hub</span></span>
+    </a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <ul class="nav-list">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-dropdown">
+          <button class="nav-link dropdown-toggle" type="button" aria-expanded="false" aria-controls="dropdown-health">Health Topics <span class="dropdown-arrow" aria-hidden="true">▾</span></button>
+          <ul id="dropdown-health" class="dropdown-menu">
+            <li><a href="conditions.html">Diseases & Conditions</a></li>
+            <li><a href="prevention.html">Prevention & Wellness</a></li>
+            <li><a href="living.html">Healthy Living</a></li>
+          </ul>
+        </li>
+        <li class="nav-dropdown">
+          <button class="nav-link dropdown-toggle" type="button" aria-expanded="false" aria-controls="dropdown-treatments">Treatments <span class="dropdown-arrow" aria-hidden="true">▾</span></button>
+          <ul id="dropdown-treatments" class="dropdown-menu">
+            <li><a href="medications.html">Medications</a></li>
+            <li><a href="medical-tests.html">Medical Tests</a></li>
+          </ul>
+        </li>
+        <li class="nav-dropdown">
+          <button class="nav-link dropdown-toggle" type="button" aria-expanded="false" aria-controls="dropdown-resources">Resources <span class="dropdown-arrow" aria-hidden="true">▾</span></button>
+          <ul id="dropdown-resources" class="dropdown-menu">
+            <li><a href="health-topics.html">All Health Topics</a></li>
+            <li><a href="firstaid.html">First Aid & Emergency</a></li>
+            <li><a href="community.html">Community Health</a></li>
+            <li><a href="quiz.html">Health Knowledge Quiz</a></li>
+            <li><a href="resources.html">Patient Resources</a></li>
+          </ul>
+        </li>
+        <li><a href="about.html" class="nav-link">About Us</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="hamburger-btn" id="mobileMenuBtn" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation menu">
+        <span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu-backdrop" id="mobileMenuBackdrop" aria-hidden="true"></div>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
+  <button class="mobile-menu-close" id="mobileMenuClose" type="button" aria-label="Close navigation menu"><span aria-hidden="true">&times;</span></button>
+  <ul class="mobile-nav-list">
+    <li><a href="index.html" class="mobile-nav-link">Home</a></li>
+    <li><a href="conditions.html" class="mobile-nav-link">Diseases & Conditions</a></li>
+    <li><a href="prevention.html" class="mobile-nav-link">Prevention & Wellness</a></li>
+    <li><a href="living.html" class="mobile-nav-link">Healthy Living</a></li>
+    <li><a href="medications.html" class="mobile-nav-link">Medications</a></li>
+    <li><a href="medical-tests.html" class="mobile-nav-link">Medical Tests</a></li>
+    <li><a href="health-topics.html" class="mobile-nav-link">All Health Topics</a></li>
+    <li><a href="firstaid.html" class="mobile-nav-link">First Aid & Emergency</a></li>
+    <li><a href="community.html" class="mobile-nav-link">Community Health</a></li>
+    <li><a href="quiz.html" class="mobile-nav-link">Health Quiz</a></li>
+    <li><a href="resources.html" class="mobile-nav-link">Patient Resources</a></li>
+    <li><a href="about.html" class="mobile-nav-link">About Us</a></li>
+    <li class="mobile-emergency-item"><a href="tel:+2347011366455" class="btn btn-danger btn-block">🚨 Call: +234 701 136 6455</a></li>
+  </ul>
+</nav>
+<!-- ========== HEADER END ========== -->
+
+     <main id="main-content">
+    <section class="section">
+      <div class="container">
+        
+        <!-- Section Header -->
+        <div class="section-header">
+          <h2>Diseases & Conditions</h2>
+          <p>Search and learn about common health conditions, their warning signs, and prevention strategies.</p>
+        </div>
+
+        <!-- Disease Cards Grid -->
+        <div class="card-grid" id="diseaseGrid">
+          
+          <!-- Heart Attack -->
+          <article class="info-card" id="heart-attack" data-category="cardio">
+            <div class="info-card-image">
+              <img src="images/conditions/heart. jpg.jpeg" alt="Human heart anatomy">
+            </div>
+            <div class="info-card-content">
+              <span class="category-label">Cardiovascular</span>
+              <h3>Heart Attack</h3>
+              <p>Sudden blockage of blood flow to the heart muscle requiring immediate emergency care.</p>
+              <a href="#heart-attack" class="card-link">Learn more <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <!-- Stroke -->
+          <article class="info-card" id="stroke" data-category="cardio">
+            <div class="info-card-image">
+              <img src="images/conditions/brain. jpg.jpeg" alt="Human brain anatomy">
+            </div>
+            <div class="info-card-content">
+              <span class="category-label">Cardiovascular</span>
+              <h3>Stroke</h3>
+              <p>Disruption of blood supply to the brain causing neurological symptoms.</p>
+              <a href="#stroke" class="card-link">Learn more <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <!-- Diabetes -->
+          <article class="info-card" id="diabetes" data-category="metabolic">
+            <div class="info-card-image">
+              <img src="images/conditions/diabetes. jpg.jpeg" alt="Blood glucose monitoring">
+            </div>
+            <div class="info-card-content">
+              <span class="category-label">Metabolic</span>
+              <h3>Diabetes</h3>
+              <p>Condition where blood sugar levels are too high requiring management.</p>
+              <a href="#diabetes" class="card-link">Learn more <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <!-- Malaria -->
+          <article class="info-card" id="malaria" data-category="infectious">
+            <div class="info-card-image">
+              <img src="images/conditions/malaria. jpg.jpeg" alt="Malaria mosquito and prevention">
+            </div>
+            <div class="info-card-content">
+              <span class="category-label">Infectious</span>
+              <h3>Malaria</h3>
+              <p>Mosquito-borne disease common in tropical regions requiring prevention.</p>
+              <a href="#malaria" class="card-link">Learn more <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <!-- Asthma -->
+          <article class="info-card" id="asthma" data-category="respiratory">
+            <div class="info-card-image">
+              <img src="images/conditions/lungs. jpg.jpeg" alt="Human lungs respiratory system">
+            </div>
+            <div class="info-card-content">
+              <span class="category-label">Respiratory</span>
+              <h3>Asthma</h3>
+              <p>Chronic condition that narrows the airways causing breathing difficulty.</p>
+              <a href="#asthma" class="card-link">Learn more <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <!-- Tuberculosis -->
+          <article class="info-card" id="tuberculosis" data-category="infectious">
+            <div class="info-card-image">
+              <img src="images/conditions/tuberculosis. jpg.jpeg" alt="Tuberculosis lung infection">
+            </div>
+            <div class="info-card-content">
+              <span class="category-label">Infectious</span>
+              <h3>Tuberculosis (TB)</h3>
+              <p>Bacterial infection that mainly affects the lungs requiring treatment.</p>
+              <a href="#tuberculosis" class="card-link">Learn more <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <!-- Anaemia -->
+          <article class="info-card" id="anaemia" data-category="blood">
+            <div class="info-card-image">
+              <img src="images/conditions/blood-cells. jpg.jpeg" alt="Red blood cells">
+            </div>
+            <div class="info-card-content">
+              <span class="category-label">Blood</span>
+              <h3>Anaemia</h3>
+              <p>Blood lacks enough healthy red cells or hemoglobin to carry oxygen.</p>
+              <a href="#anaemia" class="card-link">Learn more <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <!-- Hypertension -->
+          <article class="info-card" id="hypertension" data-category="cardio">
+            <div class="info-card-image">
+              <img src="images/conditions/blood-pressure. jpg.jpeg" alt="Blood pressure monitor">
+            </div>
+            <div class="info-card-content">
+              <span class="category-label">Cardiovascular</span>
+              <h3>Hypertension</h3>
+              <p>High blood pressure, often called the "silent killer" requiring monitoring.</p>
+              <a href="#hypertension" class="card-link">Learn more <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <!-- Pneumonia -->
+          <article class="info-card" id="pneumonia" data-category="respiratory">
+            <div class="info-card-image">
+              <img src="images/conditions/pneumonia. jpg.jpeg" alt="Pneumonia lung infection">
+            </div>
+            <div class="info-card-content">
+              <span class="category-label">Respiratory</span>
+              <h3>Pneumonia</h3>
+              <p>Infection that inflames the air sacs in one or both lungs.</p>
+              <a href="#pneumonia" class="card-link">Learn more <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <!-- Cholera -->
+          <article class="info-card" id="cholera" data-category="infectious">
+            <div class="info-card-image">
+              <img src="images/conditions/cholera. jpg.jpeg" alt="Cholera bacteria and water">
+            </div>
+            <div class="info-card-content">
+              <span class="category-label">Infectious</span>
+              <h3>Cholera</h3>
+              <p>Bacterial disease causing severe diarrhea and dehydration.</p>
+              <a href="#cholera" class="card-link">Learn more <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Search Bar (With LOTS of spacing) -->
+        <form class="hero-search-form" role="search" style="margin-top: 120px; margin-bottom: 24px; max-width: 700px; margin-left: auto; margin-right: auto;">
+          <label for="condition-search" class="visually-hidden">Search conditions</label>
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="search" id="condition-search" placeholder="Search conditions (e.g., malaria, diabetes, heart)..." />
+        </form>
+
+        <!-- Filter Buttons (With spacing) -->
+        <div class="filter-bar" id="filterBar" style="margin-bottom: 40px;">
+          <button class="chip active" data-filter="all">All</button>
+          <button class="chip" data-filter="cardio">Cardiovascular</button>
+          <button class="chip" data-filter="respiratory">Respiratory</button>
+          <button class="chip" data-filter="infectious">Infectious</button>
+          <button class="chip" data-filter="metabolic">Metabolic</button>
+          <button class="chip" data-filter="blood">Blood</button>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-disclaimer">
+        <p><strong>⚕️ Medical Disclaimer:</strong> Medicare Hub is an educational resource only. It does not diagnose, treat, or replace professional medical advice.</p>
+        <p class="copyright">© 2026 Medicare Hub.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Patient Resources — Medicare Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="site-logo" aria-label="Medicare Hub Home">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span class="logo-text">Medicare<span>Hub</span></span>
+      </a>
+      <nav class="primary-nav" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li class="nav-dropdown">
+            <button class="nav-link dropdown-toggle" type="button" aria-expanded="false" aria-controls="dropdown-health">Health Topics <span class="dropdown-arrow" aria-hidden="true">▾</span></button>
+            <ul id="dropdown-health" class="dropdown-menu">
+              <li><a href="conditions.html">Diseases & Conditions</a></li>
+              <li><a href="prevention.html">Prevention & Wellness</a></li>
+              <li><a href="living.html">Healthy Living</a></li>
+            </ul>
+          </li>
+          <li class="nav-dropdown">
+            <button class="nav-link dropdown-toggle" type="button" aria-expanded="false" aria-controls="dropdown-treatments">Treatments <span class="dropdown-arrow" aria-hidden="true">▾</span></button>
+            <ul id="dropdown-treatments" class="dropdown-menu">
+              <li><a href="medications.html">Medications</a></li>
+              <li><a href="medical-tests.html">Medical Tests</a></li>
+            </ul>
+          </li>
+          <li class="nav-dropdown">
+            <button class="nav-link dropdown-toggle" type="button" aria-expanded="false" aria-controls="dropdown-resources">Resources <span class="dropdown-arrow" aria-hidden="true">▾</span></button>
+            <ul id="dropdown-resources" class="dropdown-menu">
+              <li><a href="health-topics.html">All Health Topics</a></li>
+              <li><a href="firstaid.html">First Aid & Emergency</a></li>
+              <li><a href="community.html">Community Health</a></li>
+              <li><a href="quiz.html">Health Knowledge Quiz</a></li>
+              <li><a href="resources.html">Patient Resources</a></li>
+            </ul>
+          </li>
+          <li><a href="about.html" class="nav-link">About Us</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="hamburger-btn" id="mobileMenuBtn" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation menu">
+          <span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu-backdrop" id="mobileMenuBackdrop" aria-hidden="true"></div>
+  <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
+    <button class="mobile-menu-close" id="mobileMenuClose" type="button" aria-label="Close navigation menu"><span aria-hidden="true">&times;</span></button>
+    <ul class="mobile-nav-list">
+      <li><a href="index.html" class="mobile-nav-link">Home</a></li>
+      <li><a href="conditions.html" class="mobile-nav-link">Diseases & Conditions</a></li>
+      <li><a href="prevention.html" class="mobile-nav-link">Prevention & Wellness</a></li>
+      <li><a href="living.html" class="mobile-nav-link">Healthy Living</a></li>
+      <li><a href="medications.html" class="mobile-nav-link">Medications</a></li>
+      <li><a href="medical-tests.html" class="mobile-nav-link">Medical Tests</a></li>
+      <li><a href="health-topics.html" class="mobile-nav-link">All Health Topics</a></li>
+      <li><a href="firstaid.html" class="mobile-nav-link">First Aid & Emergency</a></li>
+      <li><a href="community.html" class="mobile-nav-link">Community Health</a></li>
+      <li><a href="quiz.html" class="mobile-nav-link">Health Quiz</a></li>
+      <li><a href="resources.html" class="mobile-nav-link">Patient Resources</a></li>
+      <li><a href="about.html" class="mobile-nav-link">About Us</a></li>
+      <li class="mobile-emergency-item"><a href="tel:+2347011366455" class="btn btn-danger btn-block">🚨 Call: +234 701 136 6455</a></li>
+    </ul>
+  </nav>
+
+  <main id="main-content">
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Patient Resources</h2>
+          <p>Helpful tools, educational materials, and external resources for patients and caregivers.</p>
+        </div>
+        <div class="card-grid">
+  <!-- Educational Materials -->
+  <article class="info-card">
+    <div class="info-card-image">
+      <img src="images/resources/educational-materials. jpg.jpeg" alt="Educational health materials and guides">
+    </div>
+    <div class="info-card-content">
+      <h3>Educational Materials</h3>
+      <p>Downloadable guides, fact sheets, and educational brochures on common health conditions and prevention strategies.</p>
+    </div>
+  </article>
+
+  <!-- Finding Healthcare -->
+  <article class="info-card">
+    <div class="info-card-image">
+      <img src="images/resources/finding-healthcare. jpg.jpeg" alt="Finding healthcare services">
+    </div>
+    <div class="info-card-content">
+      <h3>Finding Healthcare</h3>
+      <p>How to find a doctor, locate nearby hospitals, understand health insurance, and access primary healthcare services in your area.</p>
+    </div>
+  </article>
+
+  <!-- Caregiver Support -->
+  <article class="info-card">
+    <div class="info-card-image">
+      <img src="images/resources/caregiver. jpg.jpeg" alt="Caregiver support and resources">
+    </div>
+    <div class="info-card-content">
+      <h3>Caregiver Support</h3>
+      <p>Resources for family caregivers, including tips for managing chronic conditions, caregiver stress, and support groups.</p>
+    </div>
+  </article>
+
+  <!-- Health Glossary -->
+  <article class="info-card">
+    <div class="info-card-image">
+      <img src="images/resources/glossary.jpg" alt="Health glossary and medical terms">
+    </div>
+    <div class="info-card-content">
+      <h3>Health Glossary</h3>
+      <p>Definitions of common medical terms, abbreviations, and healthcare terminology to help you understand your health information.</p>
+    </div>
+  </article>
+
+  <!-- External Resources -->
+  <article class="info-card">
+    <div class="info-card-image">
+      <img src="images/resources/external-resources.jpg" alt="External health resources and organizations">
+    </div>
+    <div class="info-card-content">
+      <h3>External Resources</h3>
+      <p>Links to trusted health organizations including the World Health Organization (WHO), Centers for Disease Control (CDC), and local health ministries.</p>
+    </div>
+  </article>
+
+  <!-- Emergency Contacts -->
+  <article class="info-card">
+    <div class="info-card-image">
+      <img src="images/resources/emergency-contacts.jpg" alt="Emergency contacts and hotlines">
+    </div>
+    <div class="info-card-content">
+      <h3>Emergency Contacts</h3>
+      <p>Important phone numbers for emergency services, poison control, mental health hotlines, and local healthcare facilities.</p>
+    </div>
+  </article>
+</div>
+
+        <div class="section-header" style="margin-top: 60px;">
+          <h3>Trusted External Links</h3>
+          <p>Visit these reputable health organizations for additional information.</p>
+        </div>
+        <div class="card-grid">
+          <a href="https://www.who.int" target="_blank" rel="noopener noreferrer" class="info-card" style="text-decoration: none; color: inherit;">
+            <div class="card-icon">🌍</div>
+            <h3>World Health Organization</h3>
+            <p>Global health information, disease outbreaks, and international health standards.</p>
+          </a>
+          <a href="https://www.cdc.gov" target="_blank" rel="noopener noreferrer" class="info-card" style="text-decoration: none; color: inherit;">
+            <div class="card-icon">🇺🇸</div>
+            <h3>Centers for Disease Control</h3>
+            <p>US-based disease prevention, health statistics, and public health guidance.</p>
+          </a>
+          <a href="https://www.nlm.nih.gov" target="_blank" rel="noopener noreferrer" class="info-card" style="text-decoration: none; color: inherit;">
+            <div class="card-icon">📖</div>
+            <h3>National Library of Medicine</h3>
+            <p>Medical research, PubMed database, and health information resources.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-disclaimer">
+        <p><strong>⚕️ Medical Disclaimer:</strong> Medicare Hub is an educational resource only. Always consult a qualified healthcare professional for medical concerns.</p>
+        <p class="copyright">© 2026 Medicare Hub.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>

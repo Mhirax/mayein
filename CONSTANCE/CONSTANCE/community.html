@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Community Health — Medicare Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+ <!-- ========== HEADER START ========== -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="site-logo" aria-label="Medicare Hub Home">
+      <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      <span class="logo-text">Medicare<span>Hub</span></span>
+    </a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <ul class="nav-list">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-dropdown">
+          <button class="nav-link dropdown-toggle" type="button" aria-expanded="false" aria-controls="dropdown-health">Health Topics <span class="dropdown-arrow" aria-hidden="true">▾</span></button>
+          <ul id="dropdown-health" class="dropdown-menu">
+            <li><a href="conditions.html">Diseases & Conditions</a></li>
+            <li><a href="prevention.html">Prevention & Wellness</a></li>
+            <li><a href="living.html">Healthy Living</a></li>
+          </ul>
+        </li>
+        <li class="nav-dropdown">
+          <button class="nav-link dropdown-toggle" type="button" aria-expanded="false" aria-controls="dropdown-treatments">Treatments <span class="dropdown-arrow" aria-hidden="true">▾</span></button>
+          <ul id="dropdown-treatments" class="dropdown-menu">
+            <li><a href="medications.html">Medications</a></li>
+            <li><a href="medical-tests.html">Medical Tests</a></li>
+          </ul>
+        </li>
+        <li class="nav-dropdown">
+          <button class="nav-link dropdown-toggle" type="button" aria-expanded="false" aria-controls="dropdown-resources">Resources <span class="dropdown-arrow" aria-hidden="true">▾</span></button>
+          <ul id="dropdown-resources" class="dropdown-menu">
+            <li><a href="health-topics.html">All Health Topics</a></li>
+            <li><a href="firstaid.html">First Aid & Emergency</a></li>
+            <li><a href="community.html">Community Health</a></li>
+            <li><a href="quiz.html">Health Knowledge Quiz</a></li>
+            <li><a href="resources.html">Patient Resources</a></li>
+          </ul>
+        </li>
+        <li><a href="about.html" class="nav-link">About Us</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="hamburger-btn" id="mobileMenuBtn" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation menu">
+        <span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu-backdrop" id="mobileMenuBackdrop" aria-hidden="true"></div>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
+  <button class="mobile-menu-close" id="mobileMenuClose" type="button" aria-label="Close navigation menu"><span aria-hidden="true">&times;</span></button>
+  <ul class="mobile-nav-list">
+    <li><a href="index.html" class="mobile-nav-link">Home</a></li>
+    <li><a href="conditions.html" class="mobile-nav-link">Diseases & Conditions</a></li>
+    <li><a href="prevention.html" class="mobile-nav-link">Prevention & Wellness</a></li>
+    <li><a href="living.html" class="mobile-nav-link">Healthy Living</a></li>
+    <li><a href="medications.html" class="mobile-nav-link">Medications</a></li>
+    <li><a href="medical-tests.html" class="mobile-nav-link">Medical Tests</a></li>
+    <li><a href="health-topics.html" class="mobile-nav-link">All Health Topics</a></li>
+    <li><a href="firstaid.html" class="mobile-nav-link">First Aid & Emergency</a></li>
+    <li><a href="community.html" class="mobile-nav-link">Community Health</a></li>
+    <li><a href="quiz.html" class="mobile-nav-link">Health Quiz</a></li>
+    <li><a href="resources.html" class="mobile-nav-link">Patient Resources</a></li>
+    <li><a href="about.html" class="mobile-nav-link">About Us</a></li>
+    <li class="mobile-emergency-item"><a href="tel:+2347011366455" class="btn btn-danger btn-block">🚨 Call: +234 701 136 6455</a></li>
+  </ul>
+</nav>
+<!-- ========== HEADER END ========== -->
+
+  <main id="main-content">
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Community Health Focus</h2>
+          <p>Targeted health information for Nigerian and African communities, focusing on prevention and accessible care.</p>
+        </div>
+       <div class="card-grid">
+  <!-- Malaria Prevention -->
+  <article class="info-card">
+    <div class="info-card-image">
+      <img src="images/community/mosquito-net. jpg.jpeg" alt="Malaria prevention with mosquito net">
+    </div>
+    <div class="info-card-content">
+      <h3>Malaria Prevention</h3>
+      <p>Sleep under insecticide-treated nets (ITNs), clear stagnant water around your home, use approved insect repellents, and seek immediate testing if a fever develops.</p>
+    </div>
+  </article>
+
+  <!-- Sanitation & Hygiene -->
+  <article class="info-card">
+    <div class="info-card-image">
+      <img src="images/community/sanitation. jpg.jpeg" alt="Sanitation and hygiene practices">
+    </div>
+    <div class="info-card-content">
+      <h3>Sanitation & Hygiene</h3>
+      <p>Use proper toilet facilities, dispose of waste safely, and keep your immediate surroundings clean to prevent the spread of cholera, typhoid, and other waterborne diseases.</p>
+    </div>
+  </article>
+
+  <!-- Clean Water Access -->
+  <article class="info-card">
+    <div class="info-card-image">
+      <img src="images/community/clean-water. jpg.jpeg" alt="Clean water access and treatment">
+    </div>
+    <div class="info-card-content">
+      <h3>Clean Water Access</h3>
+      <p>Always boil, filter, or chemically treat water before drinking. Store drinking water in clean, covered containers to prevent contamination.</p>
+    </div>
+  </article>
+
+  <!-- Childhood Vaccination -->
+  <article class="info-card">
+    <div class="info-card-image">
+      <img src="images/community/child-vaccination. jpg.jpeg" alt="Childhood vaccination and immunization">
+    </div>
+    <div class="info-card-content">
+      <h3>Childhood Vaccination</h3>
+      <p>Ensure children complete their full immunization schedule at the local primary health centre, including BCG, polio, measles, and DPT vaccines.</p>
+    </div>
+  </article>
+
+  <!-- Maternal & Child Health -->
+  <article class="info-card">
+    <div class="info-card-image">
+      <img src="images/community/maternal-health. jpg.jpeg" alt="Maternal and child healthcare">
+    </div>
+    <div class="info-card-content">
+      <h3>Maternal & Child Health</h3>
+      <p>Attend all scheduled antenatal care (ANC) visits, deliver with the assistance of a skilled healthcare provider, and breastfeed exclusively for the first 6 months.</p>
+    </div>
+  </article>
+
+  <!-- Primary Healthcare -->
+  <article class="info-card">
+    <div class="info-card-image">
+      <img src="images/community/health-center. jpg.jpeg" alt="Primary healthcare center">
+    </div>
+    <div class="info-card-content">
+      <h3>Primary Healthcare</h3>
+      <p>Your nearest Primary Health Centre (PHC) offers free or highly subsidized basic services, including immunizations, family planning, and routine health screenings.</p>
+    </div>
+  </article>
+</div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-disclaimer">
+        <p><strong>⚕️ Medical Disclaimer:</strong> Medicare Hub is an educational resource only. Always consult a qualified healthcare professional.</p>
+        <p class="copyright">© 2026 Medicare Hub.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>

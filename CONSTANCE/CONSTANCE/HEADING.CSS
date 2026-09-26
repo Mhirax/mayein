@@ -1,0 +1,47 @@
+h1{
+    color: aqua;
+    font-style: oblique;
+    font-size: medium;
+    text-align: left;
+}
+  button{
+    color: rgb(220, 231, 245);
+    font-weight: bold;
+    font-style: oblique;
+    font-size: x-small;
+    text-align: center;
+    text-decoration: wavy;
+    background-color: black;
+    border-radius: 8px;
+  }  
+  .a{
+    color: brown;
+flood-color: rgb(102, 255, 0);
+font-style: italic;
+font-size: smaller;
+font-weight: lighter;
+text-align: left;
+text-decoration: solid;
+}
+.c{
+    text-decoration: underline;
+    font-size: xx-small;
+    font-style: oblique;
+    font-weight: lighter;
+    font-variant: small-caps;
+
+
+}
+li{
+    resize: vertical;
+    color: blue;
+}
+body{
+    background-color: beige;
+}
+img{
+    position: absolute;
+    z-index: inherit;
+   z-index: -2 ;
+   height: 100%;
+}

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>First Aid & Emergency — Medicare Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+ <!-- ========== HEADER START ========== -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="site-logo" aria-label="Medicare Hub Home">
+      <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      <span class="logo-text">Medicare<span>Hub</span></span>
+    </a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <ul class="nav-list">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-dropdown">
+          <button class="nav-link dropdown-toggle" type="button" aria-expanded="false" aria-controls="dropdown-health">Health Topics <span class="dropdown-arrow" aria-hidden="true">▾</span></button>
+          <ul id="dropdown-health" class="dropdown-menu">
+            <li><a href="conditions.html">Diseases & Conditions</a></li>
+            <li><a href="prevention.html">Prevention & Wellness</a></li>
+            <li><a href="living.html">Healthy Living</a></li>
+          </ul>
+        </li>
+        <li class="nav-dropdown">
+          <button class="nav-link dropdown-toggle" type="button" aria-expanded="false" aria-controls="dropdown-treatments">Treatments <span class="dropdown-arrow" aria-hidden="true">▾</span></button>
+          <ul id="dropdown-treatments" class="dropdown-menu">
+            <li><a href="medications.html">Medications</a></li>
+            <li><a href="medical-tests.html">Medical Tests</a></li>
+          </ul>
+        </li>
+        <li class="nav-dropdown">
+          <button class="nav-link dropdown-toggle" type="button" aria-expanded="false" aria-controls="dropdown-resources">Resources <span class="dropdown-arrow" aria-hidden="true">▾</span></button>
+          <ul id="dropdown-resources" class="dropdown-menu">
+            <li><a href="health-topics.html">All Health Topics</a></li>
+            <li><a href="firstaid.html">First Aid & Emergency</a></li>
+            <li><a href="community.html">Community Health</a></li>
+            <li><a href="quiz.html">Health Knowledge Quiz</a></li>
+            <li><a href="resources.html">Patient Resources</a></li>
+          </ul>
+        </li>
+        <li><a href="about.html" class="nav-link">About Us</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="hamburger-btn" id="mobileMenuBtn" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation menu">
+        <span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu-backdrop" id="mobileMenuBackdrop" aria-hidden="true"></div>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
+  <button class="mobile-menu-close" id="mobileMenuClose" type="button" aria-label="Close navigation menu"><span aria-hidden="true">&times;</span></button>
+  <ul class="mobile-nav-list">
+    <li><a href="index.html" class="mobile-nav-link">Home</a></li>
+    <li><a href="conditions.html" class="mobile-nav-link">Diseases & Conditions</a></li>
+    <li><a href="prevention.html" class="mobile-nav-link">Prevention & Wellness</a></li>
+    <li><a href="living.html" class="mobile-nav-link">Healthy Living</a></li>
+    <li><a href="medications.html" class="mobile-nav-link">Medications</a></li>
+    <li><a href="medical-tests.html" class="mobile-nav-link">Medical Tests</a></li>
+    <li><a href="health-topics.html" class="mobile-nav-link">All Health Topics</a></li>
+    <li><a href="firstaid.html" class="mobile-nav-link">First Aid & Emergency</a></li>
+    <li><a href="community.html" class="mobile-nav-link">Community Health</a></li>
+    <li><a href="quiz.html" class="mobile-nav-link">Health Quiz</a></li>
+    <li><a href="resources.html" class="mobile-nav-link">Patient Resources</a></li>
+    <li><a href="about.html" class="mobile-nav-link">About Us</a></li>
+    <li class="mobile-emergency-item"><a href="tel:+2347011366455" class="btn btn-danger btn-block">🚨 Call: +234 701 136 6455</a></li>
+  </ul>
+</nav>
+<!-- ========== HEADER END ========== --> 
+
+  <main id="main-content">
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2>First Aid Basics</h2>
+          <p>Essential emergency response knowledge. <strong>Note:</strong> Always call emergency services for serious situations.</p>
+        </div>
+       <div class="card-grid">
+  <!-- Burns -->
+  <article class="info-card">
+    <div class="info-card-image">
+      <img src="images/first aid/burns. jpg.jpeg" alt="Burn first aid treatment">
+    </div>
+    <div class="info-card-content">
+      <h3>Burns</h3>
+      <p>Cool the burn under cool (not cold) running water for 10–20 minutes. Do NOT apply butter, toothpaste, oil, or ice. Cover loosely with a clean, dry, non-stick cloth. Seek medical help immediately for large, deep, or facial burns.</p>
+    </div>
+  </article>
+
+  <!-- Choking -->
+  <article class="info-card">
+    <div class="info-card-image">
+      <img src="images/first aid/choking. jpg.jpeg" alt="Choking first aid Heimlich maneuver">
+    </div>
+    <div class="info-card-content">
+      <h3>Choking</h3>
+      <p>Encourage the person to cough forcefully. If they cannot cough, give up to 5 firm back blows between the shoulder blades. If still blocked, perform up to 5 abdominal thrusts (Heimlich maneuver). Call emergency services immediately if the blockage persists.</p>
+    </div>
+  </article>
+
+  <!-- Severe Bleeding -->
+  <article class="info-card">
+    <div class="info-card-image">
+      <img src="images/first aid/bleeding. jpg.jpeg" alt="Bleeding first aid treatment">
+    </div>
+    <div class="info-card-content">
+      <h3>Severe Bleeding</h3>
+      <p>Apply firm, direct pressure to the wound with a clean cloth or bandage. Elevate the injured area above the heart if possible. Do not remove the cloth if it soaks through; add more layers on top. Seek immediate medical help for deep, spurting, or uncontrolled bleeding.</p>
+    </div>
+  </article>
+
+  <!-- Fainting -->
+  <article class="info-card">
+    <div class="info-card-image">
+      <img src="images/first aid/fainting. jpg.jpeg" alt="Fainting first aid response">
+    </div>
+    <div class="info-card-content">
+      <h3>Fainting</h3>
+      <p>Lay the person flat on their back and gently raise their legs. Loosen any tight clothing around the neck or waist. Ensure the area has fresh, circulating air. If they do not regain consciousness within 1 minute, call for emergency help.</p>
+    </div>
+  </article>
+
+  <!-- Suspected Stroke -->
+  <article class="info-card">
+    <div class="info-card-image">
+      <img src="images/first aid/stroke-emergency. jpg.jpeg" alt="Stroke emergency FAST response">
+    </div>
+    <div class="info-card-content">
+      <h3>Suspected Stroke</h3>
+      <p>Remember <strong>FAST</strong>: Face drooping, Arm weakness, Speech difficulty, Time to call. Call emergency services immediately and note the exact time symptoms started. Keep the person calm, still, and do not give them anything to eat or drink.</p>
+    </div>
+  </article>
+
+  <!-- Suspected Heart Attack -->
+  <article class="info-card">
+    <div class="info-card-image">
+      <img src="images/first aid/heart-attack-emergency. jpg.jpeg" alt="Heart attack emergency response">
+    </div>
+    <div class="info-card-content">
+      <h3>Suspected Heart Attack</h3>
+      <p>Call emergency services immediately. Do not drive the person yourself. Have the person sit down, rest, and stay calm. Loosen tight clothing. If prescribed, assist them with their nitroglycerin. If they become unresponsive and stop breathing, begin CPR if you are trained.</p>
+    </div>
+  </article>
+</div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-disclaimer">
+        <p><strong>⚕️ Medical Disclaimer:</strong> Medicare Hub is an educational resource only. Always consult a qualified healthcare professional.</p>
+        <p class="copyright">© 2026 Medicare Hub.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
