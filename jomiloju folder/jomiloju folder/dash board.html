@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Dashboard — JODAM Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="jomiloju1.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__logo">
+        <span class="navbar__logo-icon">⚡</span>JODAM
+      </a>
+      <nav class="navbar__nav" id="navMenu" aria-label="Main navigation">
+        <a href="index.html" class="navbar__link">Home</a>
+        <a href="html.html" class="navbar__link">Learn HTML</a>
+        <a href="css.html" class="navbar__link">Learn CSS</a>
+        <a href="lessons.html" class="navbar__link">Lessons</a>
+        <a href="practice.html" class="navbar__link">Practice</a>
+        <a href="projects.html" class="navbar__link">Projects</a>
+        <a href="resources.html" class="navbar__link">Resources</a>
+        <a href="about.html" class="navbar__link">About</a>
+      </nav>
+      <a href="dashboard.html" class="navbar__cta">My Dashboard</a>
+      <button class="navbar__toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <span class="section__label">Your Profile</span>
+        <h1 class="page-header__title">My Dashboard</h1>
+        <p class="page-header__desc">Track your learning journey, see your progress, and celebrate your achievements.</p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <div class="container">
+
+        <!-- NOT LOGGED IN MESSAGE -->
+        <div class="dashboard-not-logged-in" id="notLoggedIn">
+          <div class="dashboard-not-logged-in__icon">🔒</div>
+          <h2 class="dashboard-not-logged-in__title">You're not logged in</h2>
+          <p class="dashboard-not-logged-in__desc">Sign up or log in to see your dashboard and track your progress.</p>
+          <a href="about.html#auth" class="btn btn--primary btn--large">Sign Up / Log In →</a>
+        </div>
+
+        <!-- DASHBOARD CONTENT (Hidden until logged in) -->
+        <div class="dashboard-content" id="dashboardContent" style="display:none">
+
+          <!-- Profile Card -->
+          <div class="dashboard-profile fade-in">
+            <div class="dashboard-profile__avatar" id="userAvatar">U</div>
+            <div class="dashboard-profile__info">
+              <h2 class="dashboard-profile__name" id="userName">User Name</h2>
+              <p class="dashboard-profile__email" id="userEmail">user@example.com</p>
+              <p class="dashboard-profile__meta">
+                <span id="userAge">Age: --</span> • 
+                <span id="userJoined">Joined: --</span>
+              </p>
+            </div>
+            <button class="btn btn--secondary" id="logoutBtn">Log Out</button>
+          </div>
+
+          <!-- Progress Overview -->
+          <div class="dashboard-stats fade-in">
+            <div class="dashboard-stat">
+              <div class="dashboard-stat__icon">📚</div>
+              <div class="dashboard-stat__value" id="lessonsCompleted">0</div>
+              <div class="dashboard-stat__label">Lessons Completed</div>
+            </div>
+            <div class="dashboard-stat">
+              <div class="dashboard-stat__icon">🎯</div>
+              <div class="dashboard-stat__value" id="quizScore">0/10</div>
+              <div class="dashboard-stat__label">Quiz Score</div>
+            </div>
+            <div class="dashboard-stat">
+              <div class="dashboard-stat__icon">🚀</div>
+              <div class="dashboard-stat__value" id="projectsBuilt">0</div>
+              <div class="dashboard-stat__label">Projects Built</div>
+            </div>
+          </div>
+
+          <!-- Detailed Progress -->
+          <div class="dashboard-progress fade-in">
+            <h3 class="dashboard-progress__title">Your Learning Progress</h3>
+            
+            <div class="dashboard-progress__item">
+              <div class="dashboard-progress__header">
+                <span>HTML</span>
+                <span id="htmlProgress">0%</span>
+              </div>
+              <div class="dashboard-progress__bar">
+                <div class="dashboard-progress__fill" id="htmlFill" style="width:0%"></div>
+              </div>
+            </div>
+
+            <div class="dashboard-progress__item">
+              <div class="dashboard-progress__header">
+                <span>CSS</span>
+                <span id="cssProgress">0%</span>
+              </div>
+              <div class="dashboard-progress__bar">
+                <div class="dashboard-progress__fill" id="cssFill" style="width:0%"></div>
+              </div>
+            </div>
+
+            <div class="dashboard-progress__item">
+              <div class="dashboard-progress__header">
+                <span>Projects</span>
+                <span id="projectsProgress">0%</span>
+              </div>
+              <div class="dashboard-progress__bar">
+                <div class="dashboard-progress__fill" id="projectsFill" style="width:0%"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Actions -->
+          <div class="dashboard-actions fade-in">
+            <h3 class="dashboard-actions__title">Continue Learning</h3>
+            <div class="dashboard-actions__grid">
+              <a href="html.html" class="dashboard-action-card">
+                <div class="dashboard-action-card__icon">📝</div>
+                <h4>Learn HTML</h4>
+                <p>Master the structure of websites</p>
+              </a>
+              <a href="css.html" class="dashboard-action-card">
+                <div class="dashboard-action-card__icon">🎨</div>
+                <h4>Learn CSS</h4>
+                <p>Style and design beautiful pages</p>
+              </a>
+              <a href="quiz.html" class="dashboard-action-card">
+                <div class="dashboard-action-card__icon">🧠</div>
+                <h4>Take Quiz</h4>
+                <p>Test your knowledge</p>
+              </a>
+              <a href="projects.html" class="dashboard-action-card">
+                <div class="dashboard-action-card__icon">🚀</div>
+                <h4>Build Projects</h4>
+                <p>Apply what you've learned</p>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="index.html" class="navbar__logo">
+            <span class="navbar__logo-icon">⚡</span>JODAM
+          </a>
+          <p class="footer__brand-desc">Learn HTML &amp; CSS from scratch.</p>
+          <div class="footer__contact">
+            <a href="mailto:olawumiolayinka37@gmail.com" class="footer__contact-link">✉️ olawumiolayinka37@gmail.com</a>
+            <a href="tel:09067759507" class="footer__contact-link">📞 09067759507</a>
+          </div>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__col-title">Learn</h4>
+          <a href="html.html" class="footer__link">Learn HTML</a>
+          <a href="css.html" class="footer__link">Learn CSS</a>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__col-title">Build</h4>
+          <a href="projects.html" class="footer__link">Projects</a>
+          <a href="practice.html" class="footer__link">Practice</a>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__col-title">About</h4>
+          <a href="about.html" class="footer__link">About Us</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2026 JODAM Academy.</p>
+        <p>Built with HTML, CSS &amp; ❤️</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>

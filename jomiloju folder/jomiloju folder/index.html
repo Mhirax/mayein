@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CodeCraft Academy — Learn HTML & CSS</title>
+  <meta name="description" content="Learn HTML and CSS from scratch. Build beautiful websites with interactive lessons, projects, and daily motivation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="jomiloju1.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__logo">
+        <span class="navbar__logo-icon">⚡</span>JODAM
+      </a>
+      <nav class="navbar__nav" id="navMenu" aria-label="Main navigation">
+        <a href="index.html" class="navbar__link">Home</a>
+        <a href="html.html" class="navbar__link">Learn HTML</a>
+        <a href="css.html" class="navbar__link">Learn CSS</a>
+        <a href="lessons.html" class="navbar__link">Lessons</a>
+        <a href="practice.html" class="navbar__link">Practice</a>
+        <a href="projects.html" class="navbar__link">Projects</a>
+        <a href="resources.html" class="navbar__link">Resources</a>
+        <a href="about.html" class="navbar__link">About</a>
+        <a href="quote.html" class="navbar__link">qoute</a>
+      </nav>
+      <a href="lessons.html" class="navbar__cta">Start Learning →</a>
+      <button class="navbar__toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero__inner">
+        <div class="hero__content fade-in">
+          <div class="hero__badge">
+            <span class="hero__badge-dot"></span>
+            <span>Beginner-friendly learning platform</span>
+          </div>
+          <h1 class="hero__title">
+            Learn HTML &amp; CSS.<br/>
+            <span class="hero__title-accent">Build Your Ideas.</span>
+          </h1>
+          <p class="hero__desc">Start from the basics, practice with real examples, and learn how to turn your ideas into beautiful websites.</p>
+          <div class="hero__buttons">
+            <a href="lessons.html" class="btn btn--primary btn--large">Start Learning →</a>
+            <a href="lessons.html" class="btn btn--secondary btn--large">Explore Lessons</a>
+          </div>
+        </div>
+        <div class="hero__visual fade-in">
+          <div class="code-editor">
+            <div class="code-editor__header">
+              <span class="code-editor__dot code-editor__dot--red"></span>
+              <span class="code-editor__dot code-editor__dot--yellow"></span>
+              <span class="code-editor__dot code-editor__dot--green"></span>
+              <span class="code-editor__title">index.html</span>
+            </div>
+            <div class="code-editor__body">
+              <div class="code-line"><span class="code-line__num">1</span><span><span class="code-tag">&lt;!DOCTYPE</span> <span class="code-attr">html</span><span class="code-tag">&gt;</span></span></div>
+              <div class="code-line"><span class="code-line__num">2</span><span><span class="code-tag">&lt;html&gt;</span></span></div>
+              <div class="code-line"><span class="code-line__num">3</span><span>&nbsp;&nbsp;<span class="code-tag">&lt;head&gt;</span></span></div>
+              <div class="code-line"><span class="code-line__num">4</span><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-tag">&lt;title&gt;</span><span class="code-text">My Site</span><span class="code-tag">&lt;/title&gt;</span></span></div>
+              <div class="code-line"><span class="code-line__num">5</span><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-tag">&lt;style&gt;</span></span></div>
+              <div class="code-line"><span class="code-line__num">6</span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-sel">h1</span> { <span class="code-prop">color</span>: <span class="code-val">#6366f1</span>; }</span></div>
+              <div class="code-line"><span class="code-line__num">7</span><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-tag">&lt;/style&gt;</span></span></div>
+              <div class="code-line"><span class="code-line__num">8</span><span>&nbsp;&nbsp;<span class="code-tag">&lt;/head&gt;</span></span></div>
+              <div class="code-line"><span class="code-line__num">9</span><span>&nbsp;&nbsp;<span class="code-tag">&lt;body&gt;</span></span></div>
+              <div class="code-line"><span class="code-line__num">10</span><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-tag">&lt;h1&gt;</span><span class="code-text">Hello World</span><span class="code-tag">&lt;/h1&gt;</span></span></div>
+              <div class="code-line"><span class="code-line__num">11</span><span>&nbsp;&nbsp;<span class="code-tag">&lt;/body&gt;</span></span></div>
+              <div class="code-line"><span class="code-line__num">12</span><span><span class="code-tag">&lt;/html&gt;</span></span></div>
+            </div>
+          </div>
+          <div class="floating-tag floating-tag--1">&lt;html&gt;</div>
+          <div class="floating-tag floating-tag--2">{ css }</div>
+          <div class="floating-tag floating-tag--3">.class { }</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSPIRATIONAL QUOTES MOSAIC -->
+    <section class="section">
+      <div class="container">
+        <div class="section__header fade-in">
+          <span class="section__label">Words That Inspire</span>
+          <h2 class="section__title">Fuel your coding journey</h2>
+          <p class="section__desc">Every great developer started exactly where you are now. Let these words remind you why the journey matters.</p>
+        </div>
+        <div class="quotes-mosaic fade-in">
+          <div class="quote-card quote-card--1 quote-card--large quote-card--accent-1">
+            <p class="quote-card__text">"Every expert was once a beginner."</p>
+            <span class="quote-card__author">— H. Jackson Brown Jr.</span>
+          </div>
+          <div class="quote-card quote-card--2 quote-card--accent-2">
+            <p class="quote-card__text">"Great websites start with simple ideas."</p>
+          </div>
+          <div class="quote-card quote-card--3">
+            <p class="quote-card__text">"Don't be afraid to make mistakes. Code, break it, fix it, and learn."</p>
+          </div>
+          <div class="quote-card quote-card--4 quote-card--accent-3">
+            <p class="quote-card__text">"The best way to learn coding is to build."</p>
+          </div>
+          <div class="quote-card quote-card--5">
+            <p class="quote-card__text">"Your first website doesn't have to be perfect. It just has to exist."</p>
+          </div>
+          <div class="quote-card quote-card--6 quote-card--accent-2">
+            <p class="quote-card__text">"Small progress is still progress."</p>
+          </div>
+          <div class="quote-card quote-card--7 quote-card--accent-1">
+            <p class="quote-card__text">"Code is not about memorizing everything. It's about learning how to solve problems."</p>
+          </div>
+          <div class="quote-card quote-card--8">
+            <p class="quote-card__text">"Learn the basics. Practice the fundamentals. Build something amazing."</p>
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:var(--space-lg)">
+          <a href="quotes.html" class="btn btn--secondary" id="motivationBtn">✨ Give Me Motivation</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- DAILY MOTIVATION -->
+    <section class="section">
+      <div class="container">
+        <div class="daily-motivation fade-in">
+          <span class="daily-motivation__label">★ Today's Motivation</span>
+          <p class="daily-motivation__quote" id="dailyQuote">"Loading your daily dose of inspiration..."</p>
+          <p class="daily-motivation__author" id="dailyAuthor">— JODAM Team</p>
+          <button class="btn btn--primary" id="newQuoteBtn">New Quote ↻</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY LEARN HTML & CSS -->
+    <section class="section">
+      <div class="container">
+        <div class="section__header fade-in">
+          <span class="section__label">Why It Matters</span>
+          <h2 class="section__title">Why learn HTML &amp; CSS?</h2>
+          <p class="section__desc">The foundation of every website on the internet. Two languages, infinite possibilities.</p>
+        </div>
+        <div class="why-grid fade-in">
+          <div class="why-card">
+            <div class="why-card__icon">🏗️</div>
+            <h3 class="why-card__title">Build Websites</h3>
+            <p class="why-card__desc">HTML gives your webpage structure and CSS gives it personality.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-card__icon">🌱</div>
+            <h3 class="why-card__title">Beginner Friendly</h3>
+            <p class="why-card__desc">HTML and CSS are some of the best technologies for starting your coding journey.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-card__icon">🎨</div>
+            <h3 class="why-card__title">Creative Freedom</h3>
+            <p class="why-card__desc">Turn your ideas into real websites that people can see and interact with.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-card__icon">🧱</div>
+            <h3 class="why-card__title">Foundation</h3>
+            <p class="why-card__desc">HTML and CSS are fundamental technologies behind the web.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEARNING ROADMAP -->
+    <section class="section">
+      <div class="container">
+        <div class="section__header fade-in">
+          <span class="section__label">Your Path</span>
+          <h2 class="section__title">Your Journey From Beginner to Web Creator</h2>
+          <p class="section__desc">A clear, step-by-step roadmap that takes you from zero to confident web developer.</p>
+        </div>
+        <div class="roadmap fade-in">
+          <div class="roadmap__line"></div>
+
+          <div class="roadmap__step">
+            <div class="roadmap__marker">01</div>
+            <div class="roadmap__content">
+              <h3 class="roadmap__title">HTML Basics</h3>
+              <p class="why-card__desc">Learn what HTML is, document structure, headings, paragraphs, links, images, lists, and buttons.</p>
+              <div class="roadmap__list">
+                <span class="roadmap__tag">Tags</span>
+                <span class="roadmap__tag">Elements</span>
+                <span class="roadmap__tag">Attributes</span>
+                <span class="roadmap__tag">Links</span>
+                <span class="roadmap__tag">Images</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="roadmap__step">
+            <div class="roadmap__marker">02</div>
+            <div class="roadmap__content">
+              <h3 class="roadmap__title">HTML Structure</h3>
+              <p class="why-card__desc">Semantic HTML, forms, tables, sections, articles, navigation, and accessibility basics.</p>
+              <div class="roadmap__list">
+                <span class="roadmap__tag">Semantic</span>
+                <span class="roadmap__tag">Forms</span>
+                <span class="roadmap__tag">Tables</span>
+                <span class="roadmap__tag">A11y</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="roadmap__step">
+            <div class="roadmap__marker">03</div>
+            <div class="roadmap__content">
+              <h3 class="roadmap__title">CSS Basics</h3>
+              <p class="why-card__desc">What CSS is, selectors, colors, fonts, backgrounds, borders, and spacing.</p>
+              <div class="roadmap__list">
+                <span class="roadmap__tag">Selectors</span>
+                <span class="roadmap__tag">Colors</span>
+                <span class="roadmap__tag">Fonts</span>
+                <span class="roadmap__tag">Spacing</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="roadmap__step">
+            <div class="roadmap__marker">04</div>
+            <div class="roadmap__content">
+              <h3 class="roadmap__title">CSS Layout</h3>
+              <p class="why-card__desc">Box model, Flexbox, Grid, positioning, and responsive design fundamentals.</p>
+              <div class="roadmap__list">
+                <span class="roadmap__tag">Box Model</span>
+                <span class="roadmap__tag">Flexbox</span>
+                <span class="roadmap__tag">Grid</span>
+                <span class="roadmap__tag">Responsive</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="roadmap__step">
+            <div class="roadmap__marker">05</div>
+            <div class="roadmap__content">
+              <h3 class="roadmap__title">Build Projects</h3>
+              <p class="why-card__desc">Build a personal profile, landing page, portfolio, product page, and blog page from scratch.</p>
+              <div class="roadmap__list">
+                <span class="roadmap__tag">Portfolio</span>
+                <span class="roadmap__tag">Landing</span>
+                <span class="roadmap__tag">Blog</span>
+                <span class="roadmap__tag">Product</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="roadmap__step">
+            <div class="roadmap__marker">06</div>
+            <div class="roadmap__content">
+              <h3 class="roadmap__title">Become Confident</h3>
+              <p class="why-card__desc">Read documentation, debug CSS, structure projects, and build websites from scratch independently.</p>
+              <div class="roadmap__list">
+                <span class="roadmap__tag">Docs</span>
+                <span class="roadmap__tag">Debug</span>
+                <span class="roadmap__tag">Structure</span>
+                <span class="roadmap__tag">Ship It</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROGRESS SYSTEM -->
+    <section class="section">
+      <div class="container">
+        <div class="section__header fade-in">
+          <span class="section__label">Your Progress</span>
+          <h2 class="section__title">Your Learning Progress</h2>
+          <p class="section__desc">Track how far you've come. Every step counts.</p>
+        </div>
+        <div class="progress-grid fade-in">
+          <div class="progress-card" data-progress="html">
+            <div class="progress-card__header">
+              <span class="progress-card__title">HTML</span>
+              <span class="progress-card__percent">0%</span>
+            </div>
+            <div class="progress-card__bar">
+              <div class="progress-card__fill" style="width: 0%"></div>
+            </div>
+          </div>
+          <div class="progress-card" data-progress="css">
+            <div class="progress-card__header">
+              <span class="progress-card__title">CSS</span>
+              <span class="progress-card__percent">0%</span>
+            </div>
+            <div class="progress-card__bar">
+              <div class="progress-card__fill" style="width: 0%"></div>
+            </div>
+          </div>
+          <div class="progress-card" data-progress="projects">
+            <div class="progress-card__header">
+              <span class="progress-card__title">Projects</span>
+              <span class="progress-card__percent">0%</span>
+            </div>
+            <div class="progress-card__bar">
+              <div class="progress-card__fill" style="width: 0%"></div>
+            </div>
+          </div>
+          <div class="progress-card">
+            <div class="progress-card__header">
+              <span class="progress-card__title">Lessons Completed</span>
+              <span class="progress-card__percent" id="lessonsCompleted">0/20</span>
+            </div>
+            <div class="progress-card__bar">
+              <div class="progress-card__fill" style="width: 35%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="index.html" class="navbar__logo">
+            <span class="navbar__logo-icon">⚡</span>JODAM
+          </a>
+          <p class="footer__brand-desc">Learn HTML &amp; CSS from scratch. Build real websites. No experience required.</p>
+          <div class="footer__socials">
+            <a href="#" class="footer__social" aria-label="Twitter">𝕏</a>
+            <a href="#" class="footer__social" aria-label="GitHub">◐</a>
+            <a href="#" class="footer__social" aria-label="YouTube">▶</a>
+            <a href="#" class="footer__social" aria-label="Discord">◈</a>
+          </div>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__col-title">Learn</h4>
+          <a href="html.html" class="footer__link">Learn HTML</a>
+          <a href="css.html" class="footer__link">Learn CSS</a>
+          <a href="lessons.html" class="footer__link">Lessons</a>
+          <a href="practice.html" class="footer__link">Practice</a>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__col-title">Build</h4>
+          <a href="projects.html" class="footer__link">Projects</a>
+          <a href="quiz.html" class="footer__link">Quiz</a>
+          <a href="quotes.html" class="footer__link">Quote Wall</a>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__col-title">Resources</h4>
+          <a href="resources.html" class="footer__link">Cheat Sheets</a>
+          <a href="resources.html" class="footer__link">Glossary</a>
+          <a href="resources.html" class="footer__link">Guides</a>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__col-title">About</h4>
+          <a href="about.html" class="footer__link">About Us</a>
+          <a href="about.html" class="footer__link">Mission</a>
+          <a href="about.html" class="footer__link">Contact</a>
+        </div>
+      </div>
+      <div class="footer__brand">
+  <a href="index.html" class="navbar__logo">
+    <span class="navbar__logo-icon">⚡</span>JODAM <!-- Change "CodeCraft" to your new website name if you have one -->
+  </a>
+  <p class="footer__brand-desc">Learn HTML &amp; CSS from scratch.</p>
+  
+  <!-- NEW CONTACT INFO SECTION -->
+  <div class="footer__contact">
+    <a href="mailto:olawumiolayinka37@gmail.com" class="footer__contact-link">
+      ✉️ olawumiolayinka37@gmail.com
+    </a>
+    <a href="tel:09067759507" class="footer__contact-link">
+      📞 09067759507
+    </a>
+  </div>
+  <!-- END CONTACT INFO SECTION -->
+
+  <div class="footer__socials">
+    <a href="#" class="footer__social" aria-label="Twitter">𝕏</a>
+    <a href="#" class="footer__social" aria-label="GitHub">◐</a>
+  </div>
+</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — JODAM Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="jomiloju1.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__logo">
+        <span class="navbar__logo-icon">⚡</span>JODAM academy
+      </a>
+      <nav class="navbar__nav" id="navMenu" aria-label="Main navigation">
+        <a href="index.html" class="navbar__link">Home</a>
+        <a href="html.html" class="navbar__link">Learn HTML</a>
+        <a href="css.html" class="navbar__link">Learn CSS</a>
+        <a href="lessons.html" class="navbar__link">Lessons</a>
+        <a href="practice.html" class="navbar__link">Practice</a>
+        <a href="projects.html" class="navbar__link">Projects</a>
+        <a href="resources.html" class="navbar__link">Resources</a>
+        <a href="about.html" class="navbar__link">About</a>
+      </nav>
+      <a href="about.html#auth" class="navbar__cta">Sign Up →</a>
+      <button class="navbar__toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ABOUT HERO -->
+    <section class="about-hero">
+      <div class="container">
+        <span class="section__label">Our Mission</span>
+        <h1 class="about-hero__title">Learning to Code <span class="about-hero__title-accent">Shouldn't Feel Impossible.</span></h1>
+        <p class="about-hero__text">JODAM Academy was built for one reason: to make web development easier, friendlier, and more accessible to everyone. Whether you've never written a line of code or you're returning to learn again, this is your place.</p>
+        <p class="about-hero__text">We believe that HTML and CSS are the perfect starting point. They're visual, forgiving, and instantly rewarding. Write a tag, see the result. Change a color, watch the page transform. That feedback loop is what makes learning stick.</p>
+      </div>
+    </section>
+
+    <!-- WHAT WE OFFER -->
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__label">What We Offer</span>
+          <h2 class="section__title">Everything you need to start</h2>
+        </div>
+        <div class="about-pillars">
+          <div class="about-pillar fade-in">
+            <div class="about-pillar__icon">💡</div>
+            <h3 class="about-pillar__title">Simple Explanations</h3>
+            <p class="about-pillar__desc">No jargon. No assumptions. Every concept explained like you're smart but new.</p>
+          </div>
+          <div class="about-pillar fade-in">
+            <div class="about-pillar__icon">🛠️</div>
+            <h3 class="about-pillar__title">Practical Examples</h3>
+            <p class="about-pillar__desc">Real code, real projects, real outcomes. Learn by doing, not just reading.</p>
+          </div>
+          <div class="about-pillar fade-in">
+            <div class="about-pillar__icon">🎮</div>
+            <h3 class="about-pillar__title">Interactive Exercises</h3>
+            <p class="about-pillar__desc">Code playgrounds, quizzes, and challenges that make learning active.</p>
+          </div>
+          <div class="about-pillar fade-in">
+            <div class="about-pillar__icon">🚀</div>
+            <h3 class="about-pillar__title">Real Projects</h3>
+            <p class="about-pillar__desc">Build complete websites you can actually show to the world.</p>
+          </div>
+          <div class="about-pillar fade-in">
+            <div class="about-pillar__icon">🧠</div>
+            <h3 class="about-pillar__title">Quizzes &amp; Tests</h3>
+            <p class="about-pillar__desc">Check your understanding with fun, low-pressure quizzes.</p>
+          </div>
+          <div class="about-pillar fade-in">
+            <div class="about-pillar__icon">✨</div>
+            <h3 class="about-pillar__title">Daily Motivation</h3>
+            <p class="about-pillar__desc">Quotes and encouragement to keep you going when things get tough.</p>
+          </div>
+        </div>
+
+        <!-- MISSION STATEMENT -->
+        <div style="max-width:720px;margin:var(--space-xl) auto 0;text-align:center;padding:var(--space-xl);background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius-lg);backdrop-filter:blur(10px)">
+          <p style="font-family:var(--font-heading);font-size:1.5rem;font-style:italic;line-height:1.4;margin-bottom:var(--space-sm)">"Our mission is to make web development easier, friendlier, and more accessible to everyone."</p>
+          <p style="color:var(--text-muted);font-size:0.9rem">— The JODAM Team</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SIGN UP / LOGIN SECTION
+         ============================================================ -->
+    <section class="section" id="auth">
+      <div class="container">
+        <div class="section__header fade-in">
+          <span class="section__label">Join Us</span>
+          <h2 class="section__title">Create your free account</h2>
+          <p class="section__desc">Track your progress, save your work, and join thousands of learners building their first websites.</p>
+        </div>
+
+        <div class="auth-wrapper fade-in">
+
+          <!-- LEFT: Branding -->
+          <div class="auth-branding">
+            <div class="auth-branding__icon">⚡</div>
+            <h2 class="auth-branding__title">Start learning today</h2>
+            <p class="auth-branding__desc">Sign up in seconds and get instant access to everything JODAM Academy has to offer.</p>
+            <ul class="auth-branding__features">
+              <li>✓ 20+ structured lessons</li>
+              <li>✓ Interactive code playground</li>
+              <li>✓ Real-world projects</li>
+              <li>✓ Progress tracking</li>
+              <li>✓ Daily motivation</li>
+            </ul>
+            <div class="auth-branding__quote">
+              <p>"Every expert was once a beginner."</p>
+            </div>
+          </div>
+
+          <!-- RIGHT: Forms -->
+          <div class="auth-forms">
+
+            <!-- Tab Switcher -->
+            <div class="auth-tabs">
+              <button class="auth-tab auth-tab--active" data-tab="signup" type="button">Sign Up</button>
+              <button class="auth-tab" data-tab="login" type="button">Log In</button>
+            </div>
+
+            <!-- SIGN UP FORM -->
+            <form class="auth-form auth-form--active" id="signupForm" novalidate>
+              <h3 class="auth-form__title">Create your account</h3>
+              <p class="auth-form__subtitle">It takes less than a minute.</p>
+
+              <div class="auth-field">
+                <label for="signupName">Full Name</label>
+                <input type="text" id="signupName" name="name" placeholder="Jane Doe" required autocomplete="name" />
+                <span class="auth-field__error" id="signupNameError"></span>
+              </div>
+
+              <div class="auth-field">
+                <label for="signupEmail">Email Address</label>
+                <input type="email" id="signupEmail" name="email" placeholder="jane@example.com" required autocomplete="email" />
+                <span class="auth-field__error" id="signupEmailError"></span>
+              </div>
+
+              <div class="auth-field">
+                <label for="signupAge">Age</label>
+                <input type="number" id="signupAge" name="age" placeholder="25" min="10" max="120" required />
+                <span class="auth-field__error" id="signupAgeError"></span>
+              </div>
+
+              <div class="auth-field">
+                <label for="signupPassword">Password</label>
+                <input type="password" id="signupPassword" name="password" placeholder="At least 6 characters" required minlength="6" autocomplete="new-password" />
+                <span class="auth-field__error" id="signupPasswordError"></span>
+              </div>
+
+              <button type="submit" class="btn btn--primary btn--large auth-form__submit">Create Account →</button>
+
+              <p class="auth-form__switch">
+                Already have an account?
+                <button type="button" class="auth-form__link" data-switch="login">Log in</button>
+              </p>
+            </form>
+
+            <!-- LOGIN FORM -->
+            <form class="auth-form" id="loginForm" novalidate>
+              <h3 class="auth-form__title">Welcome back</h3>
+              <p class="auth-form__subtitle">Log in to continue learning.</p>
+
+              <div class="auth-field">
+                <label for="loginEmail">Email Address</label>
+                <input type="email" id="loginEmail" name="email" placeholder="jane@example.com" required autocomplete="email" />
+                <span class="auth-field__error" id="loginEmailError"></span>
+              </div>
+
+              <div class="auth-field">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" name="password" placeholder="Your password" required autocomplete="current-password" />
+                <span class="auth-field__error" id="loginPasswordError"></span>
+              </div>
+
+              <button type="submit" class="btn btn--primary btn--large auth-form__submit">Log In →</button>
+
+              <p class="auth-form__switch">
+                Don't have an account?
+                <button type="button" class="auth-form__link" data-switch="signup">Sign up</button>
+              </p>
+            </form>
+
+            <!-- SUCCESS MESSAGE -->
+            <div class="auth-success" id="authSuccess">
+              <div class="auth-success__icon">✓</div>
+              <h3 class="auth-success__title" id="authSuccessTitle">Welcome!</h3>
+              <p class="auth-success__desc" id="authSuccessDesc">You're all set. Let's start learning.</p>
+              <a href="lessons.html" class="btn btn--primary btn--large">Start Learning →</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="index.html" class="navbar__logo">
+            <span class="navbar__logo-icon">⚡</span>JODAM
+          </a>
+          <p class="footer__brand-desc">Learn HTML &amp; CSS from scratch.</p>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__col-title">Learn</h4>
+          <a href="html.html" class="footer__link">Learn HTML</a>
+          <a href="css.html" class="footer__link">Learn CSS</a>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__col-title">Build</h4>
+          <a href="projects.html" class="footer__link">Projects</a>
+          <a href="practice.html" class="footer__link">Practice</a>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__col-title">Resources</h4>
+          <a href="resources.html" class="footer__link">Cheat Sheets</a>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__col-title">About</h4>
+          <a href="about.html" class="footer__link">About Us</a>
+        </div>
+      </div>
+      <div class="footer__brand">
+  <a href="index.html" class="navbar__logo">
+    <span class="navbar__logo-icon">⚡</span>JODAM <!-- Change "CodeCraft" to your new website name if you have one -->
+  </a>
+  <p class="footer__brand-desc">Learn HTML &amp; CSS from scratch.</p>
+  
+  <!-- NEW CONTACT INFO SECTION -->
+  <div class="footer__contact">
+    <a href="mailto:olawumiolayinka37@gmail.com" class="footer__contact-link">
+      ✉️ olawumiolayinka37@gmail.com
+    </a>
+    <a href="tel:09067759507" class="footer__contact-link">
+      📞 09067759507
+    </a>
+  </div>
+  <!-- END CONTACT INFO SECTION -->
+
+  <div class="footer__socials">
+    <a href="#" class="footer__social" aria-label="Twitter">𝕏</a>
+    <a href="#" class="footer__social" aria-label="GitHub">◐</a>
+  </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learn HTML — CodeCraft Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="jomiloju1.css" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__logo"><span class="navbar__logo-icon">⚡</span>JODAM</a>
+      <nav class="navbar__nav" id="navMenu" aria-label="Main navigation">
+        <a href="index.html" class="navbar__link">Home</a>
+        <a href="html.html" class="navbar__link">Learn HTML</a>
+        <a href="css.html" class="navbar__link">Learn CSS</a>
+        <a href="lessons.html" class="navbar__link">Lessons</a>
+        <a href="practice.html" class="navbar__link">Practice</a>
+        <a href="projects.html" class="navbar__link">Projects</a>
+        <a href="resources.html" class="navbar__link">Resources</a>
+        <a href="about.html" class="navbar__link">About</a>
+        <a href="quote.html" class="navbar__link">qoute</a>
+      </nav>
+      <a href="lessons.html" class="navbar__cta">Start Learning →</a>
+      <button class="navbar__toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <span class="section__label">Chapter 01</span>
+        <h1 class="page-header__title">Learn HTML From Scratch</h1>
+        <p class="page-header__desc">HTML is the language that gives structure to every webpage. Master the fundamentals here.</p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div class="lesson-detail">
+
+          <div class="lesson-detail__chapter fade-in">
+            <span class="lesson-detail__chapter-num">LESSON 01</span>
+            <h2 class="lesson-detail__chapter-title">What is HTML?</h2>
+            <p class="lesson-detail__text">HTML stands for <strong>HyperText Markup Language</strong>. It's not a programming language — it's a markup language that tells your browser how to structure the content on a page. Think of HTML as the skeleton of a website.</p>
+            <div class="lesson-detail__code">
+<span class="code-tag">&lt;h1&gt;</span><span class="code-text">Hello World</span><span class="code-tag">&lt;/h1&gt;</span>
+<span class="code-tag">&lt;p&gt;</span><span class="code-text">This is a paragraph.</span><span class="code-tag">&lt;/p&gt;</span>
+            </div>
+            <div class="lesson-detail__preview">
+              <h1 style="font-size:1.5rem;margin:0 0 8px">Hello World</h1>
+              <p style="margin:0">This is a paragraph.</p>
+            </div>
+            <div class="lesson-detail__tip">Every HTML document starts with <code>&lt;!DOCTYPE html&gt;</code> to tell the browser which version of HTML you're using.</div>
+            <div class="lesson-detail__challenge">Create a file called <code>index.html</code> and write your first HTML document with a heading and a paragraph.</div>
+          </div>
+
+          <div class="lesson-detail__chapter fade-in">
+            <span class="lesson-detail__chapter-num">LESSON 02</span>
+            <h2 class="lesson-detail__chapter-title">HTML Document Structure</h2>
+            <p class="lesson-detail__text">Every HTML page follows the same basic structure. The <code>&lt;html&gt;</code> tag wraps everything, <code>&lt;head&gt;</code> contains metadata, and <code>&lt;body&gt;</code> contains what you see.</p>
+            <div class="lesson-detail__code">
+<span class="code-tag">&lt;!DOCTYPE html&gt;</span>
+<span class="code-tag">&lt;html</span> <span class="code-attr">lang</span>=<span class="code-val">"en"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;head&gt;</span>
+    <span class="code-tag">&lt;title&gt;</span><span class="code-text">My Page</span><span class="code-tag">&lt;/title&gt;</span>
+  <span class="code-tag">&lt;/head&gt;</span>
+  <span class="code-tag">&lt;body&gt;</span>
+    <span class="code-tag">&lt;h1&gt;</span><span class="code-text">Welcome</span><span class="code-tag">&lt;/h1&gt;</span>
+  <span class="code-tag">&lt;/body&gt;</span>
+<span class="code-tag">&lt;/html&gt;</span>
+            </div>
+            <div class="lesson-detail__tip">The <code>lang="en"</code> attribute helps search engines and screen readers understand your content's language.</div>
+          </div>
+
+          <div class="lesson-detail__chapter fade-in">
+            <span class="lesson-detail__chapter-num">LESSON 03</span>
+            <h2 class="lesson-detail__chapter-title">Headings</h2>
+            <p class="lesson-detail__text">HTML headings are used to create titles and subtitles on a webpage. There are six levels, from <code>&lt;h1&gt;</code> (most important) to <code>&lt;h6&gt;</code> (least important).</p>
+            <div class="lesson-detail__code">
+<span class="code-tag">&lt;h1&gt;</span><span class="code-text">Main Title</span><span class="code-tag">&lt;/h1&gt;</span>
+<span class="code-tag">&lt;h2&gt;</span><span class="code-text">Subtitle</span><span class="code-tag">&lt;/h2&gt;</span>
+<span class="code-tag">&lt;h3&gt;</span><span class="code-text">Section Title</span><span class="code-tag">&lt;/h3&gt;</span>
+            </div>
+            <div class="lesson-detail__preview">
+              <h1 style="font-size:1.75rem;margin:0 0 6px">Main Title</h1>
+              <h2 style="font-size:1.35rem;margin:0 0 6px">Subtitle</h2>
+              <h3 style="font-size:1.1rem;margin:0">Section Title</h3>
+            </div>
+            <div class="lesson-detail__tip">Use only one <code>&lt;h1&gt;</code> per page — it represents the main topic.</div>
+            <div class="lesson-detail__challenge">Write a page about your favorite hobby using at least three heading levels.</div>
+          </div>
+
+          <div class="lesson-detail__chapter fade-in">
+            <span class="lesson-detail__chapter-num">LESSON 04</span>
+            <h2 class="lesson-detail__chapter-title">Paragraphs &amp; Text</h2>
+            <p class="lesson-detail__text">Paragraphs are created with the <code>&lt;p&gt;</code> tag. You can also use <code>&lt;strong&gt;</code> for bold and <code>&lt;em&gt;</code> for italic text.</p>
+            <div class="lesson-detail__code">
+<span class="code-tag">&lt;p&gt;</span><span class="code-text">This is a paragraph.</span><span class="code-tag">&lt;/p&gt;</span>
+<span class="code-tag">&lt;p&gt;</span><span class="code-text">This has </span><span class="code-tag">&lt;strong&gt;</span><span class="code-text">bold</span><span class="code-tag">&lt;/strong&gt;</span><span class="code-text"> and </span><span class="code-tag">&lt;em&gt;</span><span class="code-text">italic</span><span class="code-tag">&lt;/em&gt;</span><span class="code-text"> text.</span><span class="code-tag">&lt;/p&gt;</span>
+            </div>
+            <div class="lesson-detail__preview">
+              <p style="margin:0 0 8px">This is a paragraph.</p>
+              <p style="margin:0">This has <strong>bold</strong> and <em>italic</em> text.</p>
+            </div>
+          </div>
+
+          <div class="lesson-detail__chapter fade-in">
+            <span class="lesson-detail__chapter-num">LESSON 05</span>
+            <h2 class="lesson-detail__chapter-title">Links &amp; Images</h2>
+            <p class="lesson-detail__text">Links use the <code>&lt;a&gt;</code> tag with an <code>href</code> attribute. Images use the self-closing <code>&lt;img&gt;</code> tag with <code>src</code> and <code>alt</code> attributes.</p>
+            <div class="lesson-detail__code">
+<span class="code-tag">&lt;a</span> <span class="code-attr">href</span>=<span class="code-val">"https://example.com"</span><span class="code-tag">&gt;</span><span class="code-text">Click me</span><span class="code-tag">&lt;/a&gt;</span>
+<span class="code-tag">&lt;img</span> <span class="code-attr">src</span>=<span class="code-val">"photo.jpg"</span> <span class="code-attr">alt</span>=<span class="code-val">"A sunset"</span><span class="code-tag"> /&gt;</span>
+            </div>
+            <div class="lesson-detail__tip">Always include <code>alt</code> text on images — it's essential for accessibility.</div>
+          </div>
+
+          <div class="lesson-detail__chapter fade-in">
+            <span class="lesson-detail__chapter-num">LESSON 06</span>
+            <h2 class="lesson-detail__chapter-title">Lists</h2>
+            <p class="lesson-detail__text">HTML supports ordered lists (<code>&lt;ol&gt;</code>) and unordered lists (<code>&lt;ul&gt;</code>). Each item is wrapped in <code>&lt;li&gt;</code>.</p>
+            <div class="lesson-detail__code">
+<span class="code-tag">&lt;ul&gt;</span>
+  <span class="code-tag">&lt;li&gt;</span><span class="code-text">Apples</span><span class="code-tag">&lt;/li&gt;</span>
+  <span class="code-tag">&lt;li&gt;</span><span class="code-text">Bananas</span><span class="code-tag">&lt;/li&gt;</span>
+<span class="code-tag">&lt;/ul&gt;</span>
+            </div>
+            <div class="lesson-detail__preview">
+              <ul style="padding-left:20px;margin:0">
+                <li>Apples</li>
+                <li>Bananas</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="lesson-detail__chapter fade-in">
+            <span class="lesson-detail__chapter-num">LESSON 07</span>
+            <h2 class="lesson-detail__chapter-title">Semantic HTML</h2>
+            <p class="lesson-detail__text">Semantic tags describe their meaning: <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;footer&gt;</code>. They make your code more readable and accessible.</p>
+            <div class="lesson-detail__code">
+<span class="code-tag">&lt;header&gt;</span>...<span class="code-tag">&lt;/header&gt;</span>
+<span class="code-tag">&lt;nav&gt;</span>...<span class="code-tag">&lt;/nav&gt;</span>
+<span class="code-tag">&lt;main&gt;</span>
+  <span class="code-tag">&lt;article&gt;</span>...<span class="code-tag">&lt;/article&gt;</span>
+<span class="code-tag">&lt;/main&gt;</span>
+<span class="code-tag">&lt;footer&gt;</span>...<span class="code-tag">&lt;/footer&gt;</span>
+            </div>
+            <div class="lesson-detail__tip">Use semantic tags instead of generic <code>&lt;div&gt;</code> whenever possible.</div>
+          </div>
+
+          <div style="text-align:center;margin-top:var(--space-xl)">
+            <a href="css.html" class="btn btn--primary btn--large">Next: Learn CSS →</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="index.html" class="navbar__logo"><span class="navbar__logo-icon">⚡</span>JODAM</a>
+          <p class="footer__brand-desc">Learn HTML &amp; CSS from scratch. Build real websites.</p>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__col-title">Learn</h4>
+          <a href="html.html" class="footer__link">Learn HTML</a>
+          <a href="css.html" class="footer__link">Learn CSS</a>
+          <a href="lessons.html" class="footer__link">Lessons</a>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__col-title">Build</h4>
+          <a href="projects.html" class="footer__link">Projects</a>
+          <a href="practice.html" class="footer__link">Practice</a>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__col-title">Resources</h4>
+          <a href="resources.html" class="footer__link">Cheat Sheets</a>
+          <a href="resources.html" class="footer__link">Guides</a>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__col-title">About</h4>
+          <a href="about.html" class="footer__link">About Us</a>
+          <a href="about.html" class="footer__link">Contact</a>
+        </div>
+      </div>
+      <divclass="footer__brand">
+  <a href="index.html" class="navbar__logo">
+    <span class="navbar__logo-icon">⚡</span>JODAM <!-- Change "CodeCraft" to your new website name if you have one -->
+  </a>
+  <p class="footer__brand-desc">Learn HTML &amp; CSS from scratch.</p>
+  
+  <!-- NEW CONTACT INFO SECTION -->
+  <div class="footer__contact">
+    <a href="mailto:olawumiolayinka37@gmail.com" class="footer__contact-link">
+      ✉️ olawumiolayinka37@gmail.com
+    </a>
+    <a href="tel:09067759507" class="footer__contact-link">
+      📞 09067759507
+    </a>
+  </div>
+  <!-- END CONTACT INFO SECTION -->
+
+  <div class="footer__socials">
+    <a href="#" class="footer__social" aria-label="Twitter">𝕏</a>
+    <a href="#" class="footer__social" aria-label="GitHub">◐</a>
+  </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

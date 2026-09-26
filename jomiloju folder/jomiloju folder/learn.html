@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learn — BUILD/WEB</title>
+  <meta name="description" content="Your learning path from HTML basics to building real websites." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="jomiloju.css" />
+</head>
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <header class="navbar" id="navbar">
+    <div class="container navbar__inner">
+      <a href="index.html" class="navbar__logo" aria-label="BUILD/WEB Home">BUILD<span class="navbar__logo-slash">/</span>WEB</a>
+      <nav class="navbar__nav" id="navMenu" aria-label="Main navigation">
+        <a href="learn.html" class="navbar__link navbar__link--active">Learn</a>
+        <a href="#html" class="navbar__link">HTML</a>
+        <a href="#css" class="navbar__link">CSS</a>
+        <a href="index.html#projects" class="navbar__link">Projects</a>
+        <a href="index.html#resources" class="navbar__link">Resources</a>
+      </nav>
+      <a href="index.html#cta" class="navbar__cta">Start Learning →</a>
+      <button class="navbar__toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ========== LEARNING PATH ========== -->
+    <section class="section" id="learn">
+      <div class="container">
+        <p class="section__label">Your Journey</p>
+        <h2 class="section__title">The learning path</h2>
+        <p class="section__desc">A clear, step-by-step progression from your first line of HTML to a fully responsive portfolio website.</p>
+        <div class="path__grid">
+          <div class="path__item">
+            <span class="path__number">01</span>
+            <h3 class="path__name">HTML</h3>
+            <p class="path__desc">Tags, elements, attributes, and document structure.</p>
+          </div>
+          <div class="path__item">
+            <span class="path__number">02</span>
+            <h3 class="path__name">CSS</h3>
+            <p class="path__desc">Selectors, properties, colors, fonts, and spacing.</p>
+          </div>
+          <div class="path__item">
+            <span class="path__number">03</span>
+            <h3 class="path__name">Box Model</h3>
+            <p class="path__desc">Margins, borders, padding, and content areas.</p>
+          </div>
+          <div class="path__item">
+            <span class="path__number">04</span>
+            <h3 class="path__name">Flexbox</h3>
+            <p class="path__desc">One-dimensional layouts, alignment, and distribution.</p>
+          </div>
+          <div class="path__item">
+            <span class="path__number">05</span>
+            <h3 class="path__name">CSS Grid</h3>
+            <p class="path__desc">Two-dimensional layouts, columns, rows, and areas.</p>
+          </div>
+          <div class="path__item">
+            <span class="path__number">06</span>
+            <h3 class="path__name">Responsive</h3>
+            <p class="path__desc">Media queries, fluid typography, and mobile-first design.</p>
+          </div>
+          <div class="path__item path__item--accent">
+            <span class="path__number">07</span>
+            <h3 class="path__name">Real Projects</h3>
+            <p class="path__desc">Build complete websites from scratch, start to finish.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="index.html" class="footer__logo">BUILD<span class="navbar__logo-slash">/</span>WEB</a>
+          <p class="footer__tagline">Learn HTML &amp; CSS from scratch. Build real websites. No frameworks required.</p>
+        </div>
+        <div class="footer__col">
+          <h4>Learn</h4>
+          <a href="index.html#html">HTML Basics</a>
+          <a href="index.html#css">CSS Fundamentals</a>
+          <a href="index.html#layout">Layout &amp; Grid</a>
+          <a href="index.html#responsive">Responsive Design</a>
+        </div>
+        <div class="footer__col">
+          <h4>Projects</h4>
+          <a href="index.html#projects">Portfolio</a>
+          <a href="index.html#projects">Restaurant</a>
+          <a href="index.html#projects">Agency</a>
+          <a href="index.html#projects">Landing Page</a>
+        </div>
+        <div class="footer__col">
+          <h4>Resources</h4>
+          <a href="#">Cheatsheets</a>
+          <a href="#">References</a>
+          <a href="#">Glossary</a>
+          <a href="#">FAQ</a>
+        </div>
+        <div class="footer__col">
+          <h4>About</h4>
+          <a href="#">About BUILD/WEB</a>
+          <a href="#">Contact</a>
+          <a href="#">GitHub</a>
+          <a href="#">Twitter / X</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2026 BUILD/WEB</p>
+        <p class="footer__built">Built with HTML &amp; CSS.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const navMenu = document.getElementById('navMenu');
+    navToggle.addEventListener('click', () => {
+      const isOpen = navMenu.classList.toggle('is-open');
+      navToggle.setAttribute('aria-expanded', isOpen);
+    });
+    navMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
+
+</body>
+</html>

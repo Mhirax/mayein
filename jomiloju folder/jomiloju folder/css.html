@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learn CSS — CodeCraft Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="jomiloju1.css" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__logo"><span class="navbar__logo-icon">⚡</span>JODAM</a>
+      <nav class="navbar__nav" id="navMenu" aria-label="Main navigation">
+        <a href="index.html" class="navbar__link">Home</a>
+        <a href="html.html" class="navbar__link">Learn HTML</a>
+        <a href="css.html" class="navbar__link">Learn CSS</a>
+        <a href="lessons.html" class="navbar__link">Lessons</a>
+        <a href="practice.html" class="navbar__link">Practice</a>
+        <a href="projects.html" class="navbar__link">Projects</a>
+        <a href="resources.html" class="navbar__link">Resources</a>
+        <a href="about.html" class="navbar__link">About</a>
+        <a href="quote.html" class="navbar__link">qoute</a>
+      </nav>
+      <a href="lessons.html" class="navbar__cta">Start Learning →</a>
+      <button class="navbar__toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <span class="section__label">Chapter 02</span>
+        <h1 class="page-header__title">Learn CSS From Scratch</h1>
+        <p class="page-header__desc">CSS brings your HTML to life with colors, layout, typography, and beautiful design.</p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div class="lesson-detail">
+
+          <div class="lesson-detail__chapter fade-in">
+            <span class="lesson-detail__chapter-num">LESSON 01</span>
+            <h2 class="lesson-detail__chapter-title">What is CSS?</h2>
+            <p class="lesson-detail__text">CSS (Cascading Style Sheets) controls how HTML elements look. It handles colors, fonts, spacing, layout, and animations. Without CSS, every website would look like a plain text document.</p>
+            <div class="lesson-detail__code">
+<span class="code-sel">h1</span> {
+  <span class="code-prop">color</span>: <span class="code-val">#6366f1</span>;
+  <span class="code-prop">font-size</span>: <span class="code-val">32px</span>;
+}
+            </div>
+            <div class="lesson-detail__tip">CSS stands for "Cascading" because styles can cascade and override each other based on specificity.</div>
+          </div>
+
+          <div class="lesson-detail__chapter fade-in">
+            <span class="lesson-detail__chapter-num">LESSON 02</span>
+            <h2 class="lesson-detail__chapter-title">How to Add CSS</h2>
+            <p class="lesson-detail__text">There are three ways to add CSS: inline (on the element), internal (in a <code>&lt;style&gt;</code> tag), or external (in a separate .css file). External is the best practice.</p>
+            <div class="lesson-detail__code">
+<span class="code-comment">/* External CSS file */</span>
+<span class="code-tag">&lt;link</span> <span class="code-attr">rel</span>=<span class="code-val">"stylesheet"</span> <span class="code-attr">href</span>=<span class="code-val">"style.css"</span><span class="code-tag"> /&gt;</span>
+            </div>
+          </div>
+
+          <div class="lesson-detail__chapter fade-in">
+            <span class="lesson-detail__chapter-num">LESSON 03</span>
+            <h2 class="lesson-detail__chapter-title">Selectors</h2>
+            <p class="lesson-detail__text">Selectors target HTML elements. Use element names, classes (.), or IDs (#).</p>
+            <div class="lesson-detail__code">
+<span class="code-sel">p</span> { <span class="code-prop">color</span>: <span class="code-val">black</span>; }        <span class="code-comment">/* element */</span>
+<span class="code-sel">.card</span> { <span class="code-prop">padding</span>: <span class="code-val">20px</span>; }   <span class="code-comment">/* class */</span>
+<span class="code-sel">#header</span> { <span class="code-prop">background</span>: <span class="code-val">blue</span>; } <span class="code-comment">/* id */</span>
+            </div>
+            <div class="lesson-detail__tip">Prefer classes over IDs for styling — they're reusable and have lower specificity.</div>
+          </div>
+
+          <div class="lesson-detail__chapter fade-in">
+            <span class="lesson-detail__chapter-num">LESSON 04</span>
+            <h2 class="lesson-detail__chapter-title">Colors</h2>
+            <p class="lesson-detail__text">CSS supports many color formats: named colors, HEX, RGB, RGBA, and HSL.</p>
+            <div class="lesson-detail__code">
+<span class="code-sel">.box</span> {
+  <span class="code-prop">color</span>: <span class="code-val">red</span>;
+  <span class="code-prop">background</span>: <span class="code-val">#6366f1</span>;
+  <span class="code-prop">border</span>: <span class="code-val">1px solid rgb(0, 0, 0)</span>;
+}
+            </div>
+          </div>
+
+          <div class="lesson-detail__chapter fade-in">
+            <span class="lesson-detail__chapter-num">LESSON 05</span>
+            <h2 class="lesson-detail__chapter-title">Box Model</h2>
+            <p class="lesson-detail__text">Every element is a box with four layers: content, padding, border, and margin.</p>
+            <div class="lesson-detail__code">
+<span class="code-sel">.box</span> {
+  <span class="code-prop">width</span>: <span class="code-val">200px</span>;
+  <span class="code-prop">padding</span>: <span class="code-val">20px</span>;
+  <span class="code-prop">border</span>: <span class="code-val">2px solid black</span>;
+  <span class="code-prop">margin</span>: <span class="code-val">10px</span>;
+}
+            </div>
+            <div class="lesson-detail__tip">Add <code>box-sizing: border-box</code> to make width include padding and border.</div>
+          </div>
+
+          <div class="lesson-detail__chapter fade-in">
+            <span class="lesson-detail__chapter-num">LESSON 06</span>
+            <h2 class="lesson-detail__chapter-title">Flexbox</h2>
+            <p class="lesson-detail__text">Flexbox is a one-dimensional layout system. Perfect for aligning items in a row or column.</p>
+            <div class="lesson-detail__code">
+<span class="code-sel">.container</span> {
+  <span class="code-prop">display</span>: <span class="code-val">flex</span>;
+  <span class="code-prop">justify-content</span>: <span class="code-val">center</span>;
+  <span class="code-prop">align-items</span>: <span class="code-val">center</span>;
+  <span class="code-prop">gap</span>: <span class="code-val">16px</span>;
+}
+            </div>
+          </div>
+
+          <div class="lesson-detail__chapter fade-in">
+            <span class="lesson-detail__chapter-num">LESSON 07</span>
+            <h2 class="lesson-detail__chapter-title">CSS Grid</h2>
+            <p class="lesson-detail__text">Grid is a two-dimensional layout system. Perfect for complex page layouts with rows and columns.</p>
+            <div class="lesson-detail__code">
+<span class="code-sel">.grid</span> {
+  <span class="code-prop">display</span>: <span class="code-val">grid</span>;
+  <span class="code-prop">grid-template-columns</span>: <span class="code-val">repeat(3, 1fr)</span>;
+  <span class="code-prop">gap</span>: <span class="code-val">20px</span>;
+}
+            </div>
+          </div>
+
+          <div class="lesson-detail__chapter fade-in">
+            <span class="lesson-detail__chapter-num">LESSON 08</span>
+            <h2 class="lesson-detail__chapter-title">Responsive Design</h2>
+            <p class="lesson-detail__text">Media queries let you apply different styles based on screen size. Mobile-first is the modern approach.</p>
+            <div class="lesson-detail__code">
+<span class="code-sel">.grid</span> { <span class="code-prop">grid-template-columns</span>: <span class="code-val">1fr</span>; }
+
+<span class="code-tag">@media</span> (<span class="code-prop">min-width</span>: <span class="code-val">768px</span>) {
+  <span class="code-sel">.grid</span> { <span class="code-prop">grid-template-columns</span>: <span class="code-val">repeat(2, 1fr)</span>; }
+}
+            </div>
+            <div class="lesson-detail__challenge">Build a card layout that's one column on mobile, two on tablet, three on desktop.</div>
+          </div>
+
+          <div style="text-align:center;margin-top:var(--space-xl)">
+            <a href="lessons.html" class="btn btn--primary btn--large">Explore All Lessons →</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="index.html" class="navbar__logo"><span class="navbar__logo-icon">⚡</span>JODAM</a>
+          <p class="footer__brand-desc">Learn HTML &amp; CSS from scratch.</p>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__col-title">Learn</h4>
+          <a href="html.html" class="footer__link">Learn HTML</a>
+          <a href="css.html" class="footer__link">Learn CSS</a>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__col-title">Build</h4>
+          <a href="projects.html" class="footer__link">Projects</a>
+          <a href="practice.html" class="footer__link">Practice</a>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__col-title">Resources</h4>
+          <a href="resources.html" class="footer__link">Cheat Sheets</a>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__col-title">About</h4>
+          <a href="about.html" class="footer__link">About Us</a>
+        </div>
+      </div>
+      <div class="footer__brand">
+  <a href="index.html" class="navbar__logo">
+    <span class="navbar__logo-icon">⚡</span>JODAM <!-- Change "CodeCraft" to your new website name if you have one -->
+  </a>
+  <p class="footer__brand-desc">Learn HTML &amp; CSS from scratch.</p>
+  
+  <!-- NEW CONTACT INFO SECTION -->
+  <div class="footer__contact">
+    <a href="mailto:olawumiolayinka37@gmail.com" class="footer__contact-link">
+      ✉️ olawumiolayinka37@gmail.com
+    </a>
+    <a href="tel:09067759507" class="footer__contact-link">
+      📞 09067759507
+    </a>
+  </div>
+  <!-- END CONTACT INFO SECTION -->
+
+  <div class="footer__socials">
+    <a href="#" class="footer__social" aria-label="Twitter">𝕏</a>
+    <a href="#" class="footer__social" aria-label="GitHub">◐</a>
+  </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
