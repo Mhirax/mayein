@@ -225,6 +225,9 @@
   /* ==========================================================
      5. HEADER, NAV, DROPDOWNS, SEARCH
      ========================================================== */
+  /* must match the nav collapse breakpoint in style.css */
+  var NAV_BREAKPOINT = 1100;
+
   function initHeader() {
     var header = $('#siteHeader');
     var toggle = $('#navToggle');
@@ -275,60 +278,50 @@
         }
       });
 
-      /* hover opens them on desktop only */
+      /* hover opens them on desktop only; below NAV_BREAKPOINT the
+         menu is a tap-to-open / tap-to-close accordion */
       item.addEventListener('mouseenter', function () {
-        if (window.innerWidth > 980) {
+        if (window.innerWidth > NAV_BREAKPOINT) {
           item.classList.add('is-open');
           btn.setAttribute('aria-expanded', 'true');
         }
       });
       item.addEventListener('mouseleave', function () {
-        if (window.innerWidth > 980) {
+        if (window.innerWidth > NAV_BREAKPOINT) {
           item.classList.remove('is-open');
           btn.setAttribute('aria-expanded', 'false');
         }
       });
     });
 
-    /* search panel */
-    var searchToggle = $('#searchToggle');
-    var searchPanel  = $('#searchPanel');
-
-    searchToggle.addEventListener('click', function (e) {
-      e.stopPropagation();
-      var open = searchPanel.hasAttribute('hidden');
-      if (open) {
-        searchPanel.removeAttribute('hidden');
-        var input = $('input', searchPanel);
-        if (input) input.focus();
-      } else {
-        searchPanel.setAttribute('hidden', '');
-      }
-      searchToggle.setAttribute('aria-expanded', String(open));
-    });
+    /* close every open dropdown */
+    function closeDropdowns() {
+      items.forEach(function (item) {
+        item.classList.remove('is-open');
+        $('.nav__link--toggle', item).setAttribute('aria-expanded', 'false');
+      });
+    }
 
     /* click-away + escape */
     document.addEventListener('click', function (e) {
       if (!header.contains(e.target)) {
-        items.forEach(function (item) {
-          item.classList.remove('is-open');
-          $('.nav__link--toggle', item).setAttribute('aria-expanded', 'false');
-        });
+        closeDropdowns();
         closeNav();
       }
     });
 
     document.addEventListener('keydown', function (e) {
       if (e.key !== 'Escape') return;
-      items.forEach(function (item) {
-        item.classList.remove('is-open');
-        $('.nav__link--toggle', item).setAttribute('aria-expanded', 'false');
-      });
-      if (!searchPanel.hasAttribute('hidden')) {
-        searchPanel.setAttribute('hidden', '');
-        searchToggle.setAttribute('aria-expanded', 'false');
-      }
+      closeDropdowns();
       closeNav();
+    });
+
+    /* a plain menu link closes the whole panel on mobile */
+    $$('.nav__list a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        closeDropdowns();
+        closeNav();
+      });
     });
 
     return { closeNav: closeNav, header: header };
@@ -383,7 +376,63 @@
   }
 
   /* ==========================================================
-     7. BOOT
+     7. NEWSLETTER (Mailchimp)
+     Validates the address, then hands off to Mailchimp's own
+     endpoint. While the form action is still the placeholder it
+     refuses to post, so nothing is silently lost.
+     ========================================================== */
+  var MC_PLACEHOLDER = 'MAILCHIMP_FORM_ACTION_URL';
+
+  function initNewsletter() {
+    var form = $('#newsletterForm');
+    if (!form) return;
+
+    var input = $('#nlEmail', form);
+    var msg   = $('#newsletterMsg');
+
+    function say(text, kind) {
+      msg.textContent = text;
+      msg.className = 'newsletter__msg is-' + kind;
+    }
+    function clear() {
+      msg.textContent = '';
+      msg.className = 'newsletter__msg';
+    }
+
+    form.addEventListener('submit', function (e) {
+      var value = input.value.trim();
+
+      /* shape check only — Mailchimp does the authoritative validation */
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) {
+        e.preventDefault();
+        input.classList.add('is-invalid');
+        say('Please enter a valid email address.', 'error');
+        input.focus();
+        return;
+      }
+
+      input.classList.remove('is-invalid');
+
+      if (form.getAttribute('action').indexOf(MC_PLACEHOLDER) !== -1) {
+        e.preventDefault();
+        say('Newsletter signup is not connected yet — add the Mailchimp form URL in index.html.', 'note');
+        if (window.console) {
+          console.warn('[newsletter] form action is still ' + MC_PLACEHOLDER + '; nothing was submitted.');
+        }
+        return;
+      }
+
+      say('Opening Mailchimp to confirm your subscription…', 'ok');
+    });
+
+    input.addEventListener('input', function () {
+      input.classList.remove('is-invalid');
+      if (msg.classList.contains('is-error')) clear();
+    });
+  }
+
+  /* ==========================================================
+     8. BOOT
      ========================================================== */
   function init() {
     var year = $('#year');
@@ -393,6 +442,7 @@
     initReveal();
     initHero();
     initCounters();
+    initNewsletter();
     initSmoothScroll(headerApi);
   }
 

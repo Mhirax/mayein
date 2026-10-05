@@ -20,17 +20,13 @@
 <header class="site-header" id="siteHeader">
   <div class="header-inner">
 
-    <a class="logo" href="#" aria-label="MAYEIN home">
+    <a class="logo" href="index.html" aria-label="MAYEIN — back to homepage">
       <img src="assets_1791032993965/asset_001.png" alt="MAYEIN — Mentors Assistance for Youth and Entrepreneurs Initiative">
     </a>
 
-    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
-
     <nav class="nav" id="primaryNav" aria-label="Primary">
       <ul class="nav__list">
-        <li><a class="nav__link is-active" href="#">Home</a></li>
+        <li><a class="nav__link is-active" href="index.html">Home</a></li>
 
         <li class="nav__item has-dropdown">
           <button class="nav__link nav__link--toggle" aria-expanded="false">
@@ -38,42 +34,38 @@
             <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
           </button>
           <ul class="dropdown">
-            <li><a href="#">Who We Are</a></li>
             <li><a href="#">Our Team</a></li>
-            <li><a href="#">Our Impact</a></li>
+            <li><a href="#">Volunteer</a></li>
           </ul>
         </li>
-
-        <li><a class="nav__link" href="#pillars">Programs</a></li>
-        <li><a class="nav__link" href="#">Resources</a></li>
-        <li><a class="nav__link" href="#cta">Donate</a></li>
 
         <li class="nav__item has-dropdown">
           <button class="nav__link nav__link--toggle" aria-expanded="false">
-            News
+            Programs
             <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
           </button>
           <ul class="dropdown">
-            <li><a href="#">Latest Stories</a></li>
-            <li><a href="#">Press Releases</a></li>
-            <li><a href="#">Events</a></li>
+            <li><a href="#">SMILS</a></li>
+            <li><a href="#pillars">Education</a></li>
+            <li><a href="#pillars">Entrepreneurship</a></li>
+            <li><a href="#pillars">Gender Equity</a></li>
+            <li><a href="#pillars">Civic Engagement</a></li>
           </ul>
         </li>
 
+        <li><a class="nav__link" href="#">Projects</a></li>
+        <li><a class="nav__link" href="#">Shop</a></li>
+        <li><a class="nav__link" href="#">Latest Content</a></li>
         <li><a class="nav__link" href="#contact">Contact</a></li>
       </ul>
-
-      <button class="search-toggle" id="searchToggle" aria-expanded="false" aria-controls="searchPanel" aria-label="Search">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
-      </button>
     </nav>
-  </div>
 
-  <div class="search-panel" id="searchPanel" hidden>
-    <form class="search-panel__form" role="search" onsubmit="return false">
-      <input type="search" name="q" placeholder="Search mayein.org…" aria-label="Search">
-      <button type="submit">Search</button>
-    </form>
+    <!-- stays outside .nav so it remains visible beside the burger on mobile -->
+    <a class="btn-donate" href="#cta">Donate</a>
+
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
@@ -298,87 +290,138 @@
 
 </main>
 
-<!-- ===================== FOOTER / CONTACT ===================== -->
+<!-- ===================== GLOBAL FOOTER =====================
+     Keep this block identical on every page. Once there is more than
+     one page, move it to a shared include rather than copying it.
+     ========================================================== -->
 <footer class="site-footer" id="contact">
-  <div class="site-footer__bg" aria-hidden="true">
-    <img src="assets_1791032993965/asset_010.jpg" alt="" loading="lazy" decoding="async">
-  </div>
 
   <!-- asset_011 / asset_11_...svg — navy curve carrying the CTA band
-       over the photo background -->
+       down into the footer -->
   <div class="site-footer__wave" aria-hidden="true">
     <svg width="100%" height="100" viewBox="0 0 1280 140" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <g fill="#000066"><path d="M320 28C160 28 80 49 0 70V0h1280v70c-80 21-160 42-320 42-320 0-320-84-640-84z"/></g>
     </svg>
   </div>
 
-  <div class="container footer__grid">
+  <!-- ---------- newsletter strip ---------- -->
+  <div class="newsletter">
+    <div class="container newsletter__inner">
 
-    <div class="footer__aside" data-reveal>
-      <h3 class="footer__heading">Our Programs</h3>
-      <ul class="footer__links">
-        <li><a href="#pillars">Education</a></li>
-        <li><a href="#pillars">Entrepreneurship</a></li>
-        <li><a href="#pillars">Civic Engagement</a></li>
-        <li><a href="#pillars">Gender Equity</a></li>
-      </ul>
+      <div class="newsletter__copy">
+        <h2>Stay in the loop</h2>
+        <p>Programme news, impact stories and ways to get involved — straight to your inbox.</p>
+      </div>
 
-      <h3 class="footer__heading">Follow us on social media</h3>
+      <!-- TODO(mailchimp): replace BOTH placeholders below with the values from
+           Mailchimp › Audience › Signup forms › Embedded forms:
+             1. action="..."              the full .list-manage.com/subscribe/post URL
+             2. name="b_<u>_<id>"         the hidden bot-trap field at the end of that form
+           Until the action is replaced, script.js blocks submission and shows a notice. -->
+      <form class="newsletter__form"
+            id="newsletterForm"
+            action="MAILCHIMP_FORM_ACTION_URL"
+            method="post"
+            target="_blank"
+            novalidate>
+        <label class="sr-only" for="nlEmail">Email address</label>
+        <input id="nlEmail" type="email" name="EMAIL" placeholder="Enter your email address" autocomplete="email" required>
+
+        <!-- Mailchimp bot trap: must stay off-screen and empty -->
+        <div class="newsletter__bot" aria-hidden="true">
+          <input type="text" name="b_REPLACE_U_REPLACE_ID" tabindex="-1" value="">
+        </div>
+
+        <button type="submit" name="subscribe">Subscribe</button>
+      </form>
+
+      <p class="newsletter__msg" id="newsletterMsg" role="status" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <!-- ---------- four columns ---------- -->
+  <div class="container footer__cols">
+
+    <!-- 1. brand -->
+    <div class="footer__col footer__col--brand" data-reveal>
+      <a class="footer__logo" href="index.html" aria-label="MAYEIN — back to homepage">
+        <img src="assets_1791032993965/asset_001.png" alt="MAYEIN — Mentors Assistance for Youth and Entrepreneurs Initiative">
+      </a>
+      <p class="footer__about">
+        A Nigerian nonprofit advancing positive youth development through education,
+        entrepreneurship, gender equity and civic engagement.<br>
+        Headquartered in Ibadan, reaching young people across 15 states.
+      </p>
+
       <ul class="socials">
-        <li><a href="#" aria-label="Facebook" class="social social--fb"><svg viewBox="0 0 24 24"><path d="M14 9V7.5c0-.9.3-1.5 1.7-1.5H17V3.1A22 22 0 0 0 14.8 3C12.3 3 10.6 4.5 10.6 7.2V9H8v3.3h2.6V21H14v-8.7h2.6l.4-3.3z"/></svg></a></li>
-        <li><a href="#" aria-label="X" class="social social--x"><svg viewBox="0 0 24 24"><path d="M3 3h4.2l4.6 6.2L17.2 3H21l-7.1 8 7.4 10h-4.2l-5-6.7L6.4 21H3l7.5-8.5z"/></svg></a></li>
-        <li><a href="#" aria-label="YouTube" class="social social--yt"><svg viewBox="0 0 24 24"><path d="M22 12s0-3.2-.4-4.7a2.5 2.5 0 0 0-1.8-1.8C18.3 5 12 5 12 5s-6.3 0-7.8.5A2.5 2.5 0 0 0 2.4 7.3 26 26 0 0 0 2 12c0 1.6 0 3.2.4 4.7a2.5 2.5 0 0 0 1.8 1.8c1.5.5 7.8.5 7.8.5s6.3 0 7.8-.5a2.5 2.5 0 0 0 1.8-1.8c.4-1.5.4-4.7.4-4.7zM10 15.2V8.8L15.5 12z"/></svg></a></li>
-        <li><a href="#" aria-label="LinkedIn" class="social social--li"><svg viewBox="0 0 24 24"><path d="M6.9 20H3.6V9.2h3.3zM5.2 7.7a1.9 1.9 0 1 1 0-3.8 1.9 1.9 0 0 1 0 3.8zM20.4 20h-3.3v-5.3c0-1.3 0-2.9-1.8-2.9s-2 1.4-2 2.8V20H10V9.2h3.1v1.5h.1a3.5 3.5 0 0 1 3.1-1.7c3.3 0 3.9 2.2 3.9 5z"/></svg></a></li>
-        <li><a href="#" aria-label="Instagram" class="social social--ig"><svg viewBox="0 0 24 24"><rect x="3.8" y="3.8" width="16.4" height="16.4" rx="4.6" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3.9" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.1" cy="6.9" r="1.2"/></svg></a></li>
+        <li><a href="https://www.facebook.com/map2mayein" target="_blank" rel="noopener noreferrer" aria-label="MAYEIN on Facebook" class="social social--fb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 9V7.5c0-.9.3-1.5 1.7-1.5H17V3.1A22 22 0 0 0 14.8 3C12.3 3 10.6 4.5 10.6 7.2V9H8v3.3h2.6V21H14v-8.7h2.6l.4-3.3z"/></svg></a></li>
+        <li><a href="https://x.com/mayeinorg" target="_blank" rel="noopener noreferrer" aria-label="MAYEIN on X" class="social social--x"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h4.2l4.6 6.2L17.2 3H21l-7.1 8 7.4 10h-4.2l-5-6.7L6.4 21H3l7.5-8.5z"/></svg></a></li>
+        <li><a href="https://www.instagram.com/mayeinorg" target="_blank" rel="noopener noreferrer" aria-label="MAYEIN on Instagram" class="social social--ig"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.8" y="3.8" width="16.4" height="16.4" rx="4.6" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3.9" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.1" cy="6.9" r="1.2"/></svg></a></li>
+        <li><a href="https://www.linkedin.com/company/mayein-organisation/" target="_blank" rel="noopener noreferrer" aria-label="MAYEIN on LinkedIn" class="social social--li"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.9 20H3.6V9.2h3.3zM5.2 7.7a1.9 1.9 0 1 1 0-3.8 1.9 1.9 0 0 1 0 3.8zM20.4 20h-3.3v-5.3c0-1.3 0-2.9-1.8-2.9s-2 1.4-2 2.8V20H10V9.2h3.1v1.5h.1a3.5 3.5 0 0 1 3.1-1.7c3.3 0 3.9 2.2 3.9 5z"/></svg></a></li>
+        <!-- YouTube icon intentionally omitted: MAYEIN has no channel yet.
+             Add it back here once a real URL exists. -->
       </ul>
     </div>
 
-    <div class="footer__main">
-      <h2 class="footer__title" data-reveal>We&rsquo;re Here Whenever You Need Us</h2>
+    <!-- 2. quick links -->
+    <nav class="footer__col" aria-label="Quick links" data-reveal data-reveal-delay="80">
+      <h3 class="footer__heading">Quick Links</h3>
+      <ul class="footer__links">
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Our Team</a></li>
+        <li><a href="#">Projects</a></li>
+        <li><a href="#">SMILS</a></li>
+        <li><a href="#cta">Donate</a></li>
+      </ul>
+    </nav>
 
-      <ul class="tiles" data-reveal data-reveal-delay="120">
-        <li class="tile tile--yellow">
-          <span class="tile__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2.8" y="5.2" width="18.4" height="13.6" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3.4 7.2l8.6 5.8 8.6-5.8" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span>
-          <h3>Email</h3>
-          <p><a href="mailto:info@mayein.org">info@mayein.org</a><br><a href="mailto:mayeinorg@gmail.com">mayeinorg@gmail.com</a></p>
-        </li>
+    <!-- 3. more -->
+    <nav class="footer__col" aria-label="More" data-reveal data-reveal-delay="160">
+      <h3 class="footer__heading">More</h3>
+      <ul class="footer__links">
+        <li><a href="#">Shop</a></li>
+        <li><a href="#">Latest Content</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="#">Volunteer</a></li>
+      </ul>
+    </nav>
 
-        <li class="tile tile--blue">
-          <span class="tile__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6.6 3.5a1.6 1.6 0 0 1 2.2.5l1.7 2.7a1.6 1.6 0 0 1-.3 2.1l-1.2 1a11 11 0 0 0 5.2 5.2l1-1.2a1.6 1.6 0 0 1 2.1-.3l2.7 1.7a1.6 1.6 0 0 1 .5 2.2l-1 1.6a2.6 2.6 0 0 1-3 1.1C11.6 18.6 5.4 12.4 3.9 6.5a2.6 2.6 0 0 1 1.1-3z"/></svg></span>
-          <h3>Phone</h3>
-          <p><a href="tel:+2348110198698">+234 811 019 8698</a></p>
-        </li>
+    <!-- 4. contact — all three locations -->
+    <div class="footer__col footer__col--contact" data-reveal data-reveal-delay="240">
+      <h3 class="footer__heading">Contact</h3>
 
-        <li class="tile tile--navy">
-          <span class="tile__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M15.6 8.4l-2.1 5.1-5.1 2.1 2.1-5.1z"/></svg></span>
-          <h3>Headquarters</h3>
-          <p>48, Adeyi Avenue, Old Bodija, Ibadan, Nigeria</p>
+      <ul class="footer__contact">
+        <li>
+          <span class="footer__label">Headquarters</span>
+          <address>48, Adeyi Avenue, Old Bodija, Ibadan, Nigeria</address>
         </li>
+        <li>
+          <span class="footer__label">MAYEIN Youth Centre</span>
+          <address>18, Zone 7, Alafia Estate, Alaka, Ojoo, Ibadan</address>
+        </li>
+        <li>
+          <span class="footer__label">MAYEIN H.E.E.D</span>
+          <address>SW9//844B Mko Abiola Way, Ring Road, Ibadan</address>
+        </li>
+      </ul>
 
-        <li class="tile tile--navy">
-          <span class="tile__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 6.6v5.8l3.8 1.9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
-          <h3>Open Hours</h3>
-          <p>Mon &ndash; Fri<br>9AM &ndash; 5PM</p>
-        </li>
-
-        <li class="tile tile--grey">
-          <span class="tile__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M15.6 8.4l-2.1 5.1-5.1 2.1 2.1-5.1z"/></svg></span>
-          <h3>MAYEIN Youth Center</h3>
-          <p>18, Zone 7, Alafia Estate, Alaka, Ojoo, Ibadan</p>
-        </li>
-
-        <li class="tile tile--sky">
-          <span class="tile__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M15.6 8.4l-2.1 5.1-5.1 2.1 2.1-5.1z"/></svg></span>
-          <h3>MAYEIN H.E.E.D</h3>
-          <p>SW9//844B Mko Abiola Way, Ring Road, Ibada</p>
-        </li>
+      <ul class="footer__contact footer__contact--direct">
+        <li><a href="tel:+2348110198698">+234 811 019 8698</a></li>
+        <li><a href="mailto:info@mayein.org">info@mayein.org</a></li>
+        <li><span class="footer__hours">Mon &ndash; Fri, 9AM &ndash; 5PM</span></li>
       </ul>
     </div>
   </div>
 
+  <!-- ---------- bottom bar ---------- -->
   <div class="footer__bar">
-    <div class="container">
-      <p>&copy; <span id="year">2026</span> MAYEIN &mdash; Mentoring Assistance for Youth and Entrepreneurs Initiative. All rights reserved.</p>
+    <div class="container footer__bar-inner">
+      <p>&copy; <span id="year">2026</span> MAYEIN. All rights reserved.</p>
+      <p class="footer__legal">
+        Registered in Nigeria &middot; CAC/IT/NO 52811 &middot;
+        Special Consultative Status with the UN Economic and Social Council (2021)
+      </p>
     </div>
   </div>
 </footer>
