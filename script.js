@@ -194,15 +194,19 @@
     var nums = $$('[data-count-to]');
     if (!nums.length) return;
 
+    /* 23000 -> "23,000", so the counter reads the way the copy does */
+    function format(n) {
+      return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
     function run(el) {
       var target = parseInt(el.getAttribute('data-count-to'), 10) || 0;
       var dur = 1600 + Math.min(target, 30000) / 30;
 
-      /* plain digits, no thousands separator — matches the reference */
       animate(dur, Ease.outExpo, function (v) {
-        el.textContent = String(Math.round(target * v));
+        el.textContent = format(Math.round(target * v));
       }, function () {
-        el.textContent = String(target);
+        el.textContent = format(target);
       });
     }
 
@@ -432,7 +436,112 @@
   }
 
   /* ==========================================================
-     8. BOOT
+     8. TESTIMONIAL SLIDER
+     Brief §7.3 item 10: one card at a time, with small dots.
+     Same crossfade and controls as the hero, at a slower pace —
+     a quote needs longer on screen than a photo.
+     ========================================================== */
+  function initVoices() {
+    var root = $('#voicesSlider');
+    if (!root) return;
+
+    var slides = $$('.voice', root);
+    var dotsEl = $('#voicesDots', root);
+    if (slides.length < 2 || !dotsEl) return;
+
+    var index  = 0;
+    var timer  = null;
+    var paused = false;
+    var DELAY  = 8000;
+
+    var dots = slides.map(function (_, i) {
+      var dot = document.createElement('button');
+      dot.className = 'voices__dot' + (i === 0 ? ' is-active' : '');
+      dot.type = 'button';
+      dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-label', 'Testimonial ' + (i + 1) + ' of ' + slides.length);
+      dot.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+      dot.addEventListener('click', function () { goTo(i); restart(); });
+      dotsEl.appendChild(dot);
+      return dot;
+    });
+
+    function goTo(n) {
+      var target = (n + slides.length) % slides.length;
+      if (target === index) return;
+
+      slides[index].classList.remove('is-active');
+      dots[index].classList.remove('is-active');
+      dots[index].setAttribute('aria-selected', 'false');
+
+      index = target;
+
+      slides[index].classList.add('is-active');
+      dots[index].classList.add('is-active');
+      dots[index].setAttribute('aria-selected', 'true');
+    }
+
+    function play() {
+      if (reduceMotion || paused) return;
+      stop();
+      timer = setInterval(function () { goTo(index + 1); }, DELAY);
+    }
+    function stop()    { if (timer) { clearInterval(timer); timer = null; } }
+    function restart() { stop(); play(); }
+
+    root.addEventListener('mouseenter', function () { paused = true;  stop(); });
+    root.addEventListener('mouseleave', function () { paused = false; play(); });
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) stop(); else play();
+    });
+
+    root.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft')  { goTo(index - 1); restart(); }
+      if (e.key === 'ArrowRight') { goTo(index + 1); restart(); }
+    });
+
+    var startX = null;
+    root.addEventListener('touchstart', function (e) {
+      startX = e.touches[0].clientX;
+      stop();
+    }, { passive: true });
+
+    root.addEventListener('touchend', function (e) {
+      if (startX === null) return;
+      var dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 45) goTo(dx < 0 ? index + 1 : index - 1);
+      startX = null;
+      play();
+    }, { passive: true });
+
+    play();
+  }
+
+  /* ==========================================================
+     9. PARTNER MARQUEE
+     The CSS scrolls the track by -50%, so the list has to appear
+     twice for the loop to have no visible jump. The clone is
+     duplicated here rather than in the markup so the real logo
+     list is only ever written out once.
+     ========================================================== */
+  function initPartners() {
+    var marquee = $('#partnersMarquee');
+    if (!marquee || reduceMotion) return;
+
+    var track = $('.partners__track', marquee);
+    if (!track) return;
+
+    var clone = track.cloneNode(true);
+    /* the copy is decorative — keep it away from screen readers */
+    clone.setAttribute('aria-hidden', 'true');
+    $$('li', clone).forEach(function (li) { li.removeAttribute('id'); });
+
+    while (clone.firstChild) track.appendChild(clone.firstChild);
+  }
+
+  /* ==========================================================
+     10. BOOT
      ========================================================== */
   function init() {
     var year = $('#year');
@@ -442,6 +551,8 @@
     initReveal();
     initHero();
     initCounters();
+    initVoices();
+    initPartners();
     initNewsletter();
     initSmoothScroll(headerApi);
   }

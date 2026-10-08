@@ -67,7 +67,11 @@ body {
   overflow-x: hidden;
 }
 
-img { max-width: 100%; display: block; }
+/* height:auto stops the width/height attributes from forcing a fixed
+   pixel height once CSS resizes the image — that is what stretches a
+   photo out of shape (brief §4.3 Rule 1). Anything needing a cropped
+   height sets it explicitly in its own rule. */
+img { max-width: 100%; height: auto; display: block; }
 ul  { list-style: none; margin: 0; padding: 0; }
 a   { color: inherit; text-decoration: none; }
 h1, h2, h3 { font-family: var(--font-head); font-weight: 700; margin: 0; line-height: 1.2; }
@@ -364,310 +368,35 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   color: var(--dark-blue);
   margin-bottom: 20px;
 }
+.section-title--center { text-align: center; }
 p { margin: 0 0 20px; }
 p:last-child { margin-bottom: 0; }
 
-/* ============================================================
-   INTRO
-   ============================================================ */
-.intro { padding: 86px 0 70px; }
-.intro__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 54px;
-  align-items: start;
-}
-.intro__text p { color: var(--dark-gray-2); }
-.intro__text strong { color: var(--neutral); font-weight: 700; }
-.intro__media img {
-  width: 100%;
-  border-radius: var(--r-md);
-  box-shadow: var(--shadow-sm);
-}
-.intro__media { margin: 6px 0 0; }
-
-/* ============================================================
-   MISSION / VISION
-   ============================================================ */
-.mv { padding: 20px 0 90px; }
-.mv__wrap { position: relative; }
-
-.mv__card {
-  position: relative;
-  background: var(--blue-2);
-  border-radius: var(--r-xl);
-  color: var(--white);
-  padding: 58px 56px 58px 0;
-  overflow: hidden;
-}
-/* text clears the photo that hangs over the card's left edge */
-.mv__body { margin-left: 56%; }
-.mv__card h2 { font-size: clamp(26px, 3vw, 34px); margin-bottom: 18px; }
-.mv__card h2 + p { margin-bottom: 34px; }
-.mv__card p:last-child { margin-bottom: 0; }
-.mv__card p { font-size: 15.5px; }
-
-.mv__deco {
-  position: absolute; top: 20px; right: 20px;
-  width: 105px; height: auto;
-  opacity: .9;
-  pointer-events: none;
-}
-
-/* photo hangs 100px past the card's left edge, vertically centred */
-.mv__media {
-  position: absolute;
-  top: 50%; left: -11.1%;
-  width: 58.9%;
-  margin: 0;
-  transform: translateY(-50%);
-}
-.mv__media img {
-  width: 100%;
-  box-shadow: var(--shadow-sm);
-}
-
-/* ============================================================
-   FOUR PILLARS
-   ============================================================ */
-.pillars { padding: 30px 0 90px; }
-.pillars__grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 38px;
-}
-.pillar__icon { display: block; margin-bottom: 18px; }
-.pillar__icon svg {
-  width: 46px; height: 46px;
-  fill: var(--blue-2);
-}
-.pillar__icon .win rect { fill: var(--light-gray-2); }
-.pillar h3 {
-  font-size: 17px;
-  color: var(--dark-blue);
-  margin-bottom: 10px;
-}
-.pillar p {
-  font-size: 14.5px;
-  line-height: 1.6;
-  color: var(--dark-gray-2);
-}
-
-/* ============================================================
-   WHAT WE DO
-   ============================================================ */
-.what { padding: 10px 0 80px; }
-.what__panel {
-  background: var(--light-gray-3);
-  border-radius: var(--r-xl);
-  padding: 54px 58px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 54px;
-  align-items: start;
-}
-.what__intro p { color: var(--dark-gray-2); font-size: 15.5px; }
-
-.checklist li {
-  display: flex; align-items: center; gap: 16px;
-  padding: 18px 4px;
-  border-bottom: 1px solid rgba(28, 28, 28, .14);
-  font-family: var(--font-head);
-  font-weight: 600;
-  font-size: 15px;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-  color: var(--dark-blue);
-  transition: transform var(--t-med) var(--ease-out), color var(--t-med) var(--ease-out);
-}
-.checklist li:hover { transform: translateX(6px); color: var(--blue); }
-.tick { flex: none; display: grid; place-items: center; width: 24px; height: 24px; }
-.tick svg {
-  width: 22px; height: 22px; fill: none;
-  stroke: var(--yellow); stroke-width: 3;
-  stroke-linecap: round; stroke-linejoin: round;
-}
-
-/* ============================================================
-   SUPPORT US / IMPACT
-   ============================================================ */
-.impact { padding: 50px 0 90px; }
-.impact__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 54px;
-  align-items: start;
-}
 .eyebrow {
   font-family: var(--font-head);
   font-weight: 600;
-  font-size: 14px;
-  letter-spacing: .08em;
+  font-size: 12.5px;
+  letter-spacing: .14em;
   text-transform: uppercase;
-  color: var(--yellow);
-  margin-bottom: 14px;
-}
-.impact__lead {
-  font-size: 19px;
-  line-height: 1.6;
-  color: var(--neutral);
-}
-
-/* scattered shapes — proportions traced from the reference */
-.impact__shapes {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 425 / 640;
-}
-.stat {
-  position: absolute;
-  margin: 0;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  text-align: center;
-}
-.stat__num {
-  font-family: var(--font-head);
-  font-weight: 600;
-  line-height: 1;
-}
-.stat__label {
-  font-family: var(--font-head);
-  font-weight: 700;
-  font-size: 13.5px;
-  line-height: 1.25;
-  margin-top: 8px;
-}
-.stat__label--out {
-  position: absolute;
-  top: calc(100% + 10px);
-  left: 50%;
-  transform: translateX(-50%);
-  /* max-content keeps the caption no wider than its text; a flat 150%
-     pushed past the container at tablet widths and caused h-scroll */
-  width: max-content;
-  max-width: 150%;
-  color: var(--dark-gray-5);
-}
-
-.stat--square { border-radius: var(--r-lg); }
-.stat--blue {
-  left: 15.3%; top: 0; width: 69.4%; height: 32.2%;
-  background: var(--blue-2);
-  z-index: 1;
-}
-.stat--blue .stat__num { font-size: clamp(38px, 5vw, 58px); color: var(--white); }
-.stat--blue .stat__label { color: var(--dark-blue); }
-
-.stat--yellow {
-  left: 0; top: 66.6%; width: 56.9%; height: 26.6%;
-  background: var(--yellow);
-  z-index: 4;
-}
-.stat--yellow .stat__num { font-size: clamp(30px, 4vw, 46px); color: var(--white); }
-.stat--yellow .stat__label { color: var(--dark-gray-5); }
-
-.stat--circle {
-  border-radius: var(--r-full);
-  aspect-ratio: 1;
-  background: var(--light-gray-2);
-}
-.stat--circle .stat__num { font-size: clamp(26px, 3.4vw, 38px); color: var(--neutral); font-weight: 500; }
-.stat--ring-navy {
-  left: 0; top: 27.5%; width: 44.2%;
-  border: 2px solid var(--dark-blue);
-  z-index: 2;
-}
-.stat--ring-blue {
-  left: 56.5%; top: 39.5%; width: 43%;
-  border: 2px solid var(--blue);
-  z-index: 3;
+  color: var(--blue-2);
+  margin-bottom: 10px;
 }
 
 /* ============================================================
-   TESTIMONIALS
+   BANDS
+   Brief §7.3 style note: alternate white and light-neutral down
+   the page so sections separate without borders.
    ============================================================ */
-.voices { padding: 40px 0 95px; }
-.voices__title {
-  text-align: center;
-  font-size: clamp(26px, 3.4vw, 36px);
-  color: var(--dark-gray-5);
-  padding-bottom: 22px;
-  margin-bottom: 70px;
-  position: relative;
-}
-.voices__title::after {
-  content: "";
-  position: absolute; left: 50%; bottom: 0;
-  transform: translateX(-50%);
-  width: 360px; max-width: 70%;
-  height: 1px; background: rgba(14, 12, 25, .35);
-}
-
-.voices__featured { margin: 0 0 70px; }
-.voices__featured p {
-  font-size: 16px;
-  color: var(--dark-gray-2);
-  margin-bottom: 26px;
-}
-
-.voices__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-  align-items: start;
-}
-.voice { margin: 0; }
-.voice p { font-size: 14.5px; color: var(--dark-gray-2); margin-bottom: 24px; }
-
-.voice--featured {
-  background: var(--orange);
-  border-radius: var(--r-xl);
-  padding: 30px 26px;
-  margin-top: -30px;
-  box-shadow: var(--shadow-lift);
-  transition: transform var(--t-med) var(--ease-out);
-}
-.voice--featured:hover { transform: translateY(-6px); }
-.voice--featured p { color: var(--white); }
-.voice--featured cite { color: var(--white); }
-.voice--featured footer span { color: rgba(255, 255, 255, .85); }
-
-blockquote footer { font-style: normal; }
-blockquote cite {
-  display: block;
-  font-family: var(--font-head);
-  font-weight: 700;
-  font-style: normal;
-  font-size: 16px;
-  color: var(--dark-gray-5);
-  margin-bottom: 4px;
-}
-blockquote footer span { font-size: 14px; color: var(--dark-gray-2); }
-.voices__featured footer { padding-left: 14px; }
+.band { padding: 84px 0; }
+.band--white { background: var(--white); }
+.band--light { background: var(--light-gray-2); }
+.band--navy  { background: var(--dark-blue); color: var(--white); }
 
 /* ============================================================
-   CTA
+   BUTTONS
+   Brief §5 Rule 2: one accent colour, used for actions only.
+   That accent is --yellow, already set by the header Donate button.
    ============================================================ */
-.cta {
-  position: relative;
-  background: var(--dark-blue);
-  color: var(--white);
-  border-radius: 20px 20px 0 0;   /* rounded.2xl */
-  padding: 92px 0 130px;
-  text-align: center;
-}
-.cta__title {
-  font-size: clamp(28px, 4.2vw, 44px);
-  line-height: 1.3;
-  margin-bottom: 44px;
-}
-.cta__actions {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  flex-wrap: wrap;
-}
 .btn {
   display: inline-flex; align-items: center; justify-content: center;
   padding: 14px 28px;
@@ -683,6 +412,21 @@ blockquote footer span { font-size: 14px; color: var(--dark-gray-2); }
     color var(--t-med) var(--ease-out),
     box-shadow var(--t-med) var(--ease-out);
 }
+
+/* on light backgrounds */
+.btn--primary { background: var(--yellow); color: var(--dark-gray-5); }
+.btn--primary:hover {
+  background: #ffd726;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 26px rgba(255, 204, 0, .34);
+}
+.btn--ghost-dark { border: 1.5px solid var(--dark-blue); color: var(--dark-blue); }
+.btn--ghost-dark:hover {
+  background: var(--dark-blue); color: var(--white);
+  transform: translateY(-3px);
+}
+
+/* on the navy CTA band */
 .btn--solid { background: var(--yellow); color: var(--dark-gray-5); }
 .btn--solid:hover {
   transform: translateY(-3px);
@@ -692,6 +436,488 @@ blockquote footer span { font-size: 14px; color: var(--dark-gray-2); }
 .btn--ghost:hover {
   background: var(--yellow); color: var(--dark-gray-5);
   transform: translateY(-3px);
+}
+
+/* ============================================================
+   PLACEHOLDERS
+   Brief §4.2: where an image is missing, show a placeholder and
+   flag it. Deliberately plain and obviously unfinished — these
+   must never read as finished design.
+   ============================================================ */
+.is-placeholder {
+  display: grid;
+  place-content: center;
+  gap: 4px;
+  background:
+    repeating-linear-gradient(135deg,
+      rgba(0, 0, 102, .035) 0 10px,
+      transparent 10px 20px),
+    var(--light-gray-3);
+  border: 1.5px dashed rgba(0, 0, 102, .3);
+  border-radius: var(--r-lg);
+  text-align: center;
+}
+.placeholder__tag {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: .12em;
+  color: rgba(0, 0, 102, .62);
+}
+.placeholder__note {
+  font-size: 10.5px;
+  letter-spacing: .06em;
+  color: rgba(0, 0, 102, .42);
+}
+/* text awaiting real copy */
+.is-pending { color: var(--dark-gray-2); opacity: .62; }
+
+/* ============================================================
+   2. ABOUT
+   ============================================================ */
+.about__grid {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 54px;
+  align-items: center;
+}
+.about__lead {
+  font-size: 17.5px;
+  line-height: 1.7;
+  color: var(--dark-gray-2);
+  margin-bottom: 28px;
+}
+.about__media img {
+  width: 100%;
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-lift);
+}
+
+/* ============================================================
+   3. MISSION & VISION  (merged, two columns)
+   ============================================================ */
+/* clips the decorative ring's bleed so it can never widen the page */
+.mv { overflow: hidden; }
+.mv__grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+.mv__col { position: relative; padding-left: 26px; }
+.mv__col::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 6px; bottom: 6px;
+  width: 4px;
+  border-radius: var(--r-full);
+  background: var(--blue-2);
+}
+.mv__col--vision::before { background: var(--yellow); }
+.mv__heading {
+  font-size: clamp(22px, 2.4vw, 28px);
+  color: var(--dark-blue);
+  margin-bottom: 14px;
+}
+.mv__col p { color: var(--dark-gray-2); font-size: 16px; }
+
+/* The Mission/Vision ring accent (brief §7.3 item 3), redrawn in CSS.
+   Sits behind the text and fully inside the grid, so it reads as a
+   deliberate flourish rather than a stray circle. */
+.mv__ring {
+  position: absolute;
+  top: 50%; right: 8px;
+  transform: translateY(-50%);
+  width: 168px; height: 168px;
+  border: 2px solid var(--orange);
+  border-radius: 50%;
+  opacity: .34;
+  z-index: 0;
+  pointer-events: none;
+}
+.mv__col { z-index: 1; }
+
+/* ============================================================
+   4. FOUR PILLARS
+   ============================================================ */
+.pillars__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 26px;
+  margin-top: 44px;
+}
+.pillar { display: flex; }
+.pillar__link {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 28px 22px 24px;
+  background: var(--white);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform var(--t-med) var(--ease-out),
+    box-shadow var(--t-med) var(--ease-out);
+}
+.pillar__link:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lift);
+}
+.pillar__icon { display: block; margin-bottom: 16px; }
+.pillar__icon svg {
+  width: 42px; height: 42px;
+  fill: var(--blue-2);
+}
+.pillar__icon .win rect { fill: var(--white); }
+.pillar h3 {
+  font-size: 18px;
+  color: var(--dark-blue);
+  margin-bottom: 10px;
+}
+.pillar p {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--dark-gray-2);
+  margin-bottom: 18px;
+}
+.pillar__more {
+  margin-top: auto;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 12.5px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--blue-2);
+  transition: transform var(--t-fast) var(--ease-out);
+}
+.pillar__link:hover .pillar__more { color: var(--dark-blue); }
+
+/* ============================================================
+   6. IMPACT NUMBERS
+   ============================================================ */
+.impact__head { text-align: center; margin-bottom: 52px; }
+.impact__head .eyebrow { color: var(--yellow); }
+.impact__title {
+  font-size: clamp(26px, 3vw, 36px);
+  color: var(--white);
+}
+.impact__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 10px;
+}
+.stat + .stat { border-left: 1px solid rgba(255, 255, 255, .16); }
+/* keeps the "+" on the same line as the figure */
+.stat__value { display: flex; align-items: baseline; }
+.stat__num {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: clamp(36px, 4.6vw, 54px);
+  line-height: 1;
+  color: var(--white);
+}
+.stat__plus {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: clamp(22px, 2.6vw, 32px);
+  line-height: 1;
+  color: var(--yellow);
+}
+.stat__label {
+  margin-top: 14px;
+  font-size: 14px;
+  letter-spacing: .04em;
+  color: rgba(255, 255, 255, .86);
+}
+/* a counter with no verified figure yet — see the note in index.html */
+.stat__num[data-count-pending] { color: rgba(255, 255, 255, .42); }
+.stat__pending {
+  margin-top: 6px;
+  font-size: 10.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  opacity: .75;
+}
+
+/* ============================================================
+   7. SMILS FEATURE
+   ============================================================ */
+.smils__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+.smils__media { margin: 0; }
+.smils__media img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-lift);
+}
+.smils__text p { color: var(--dark-gray-2); font-size: 16.5px; line-height: 1.7; margin-bottom: 28px; }
+
+/* ============================================================
+   8. LATEST NEWS / PROJECTS
+   ============================================================ */
+.news__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+.news__head .section-title { margin-bottom: 0; }
+.news__viewall { flex: none; }
+
+.news__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform var(--t-med) var(--ease-out),
+    box-shadow var(--t-med) var(--ease-out);
+}
+.card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lift); }
+.card__media {
+  aspect-ratio: 3 / 2;   /* every card the same shape — brief §4.3 Rule 1 */
+  width: 100%;
+}
+.card__media img { width: 100%; height: 100%; object-fit: cover; }
+.card__media.is-placeholder { border-radius: 0; border-width: 0 0 1.5px 0; }
+.card__body { display: flex; flex-direction: column; flex: 1; padding: 22px 22px 24px; }
+.card__cat {
+  align-self: flex-start;
+  padding: 4px 11px;
+  margin-bottom: 12px;
+  border-radius: var(--r-full);
+  background: rgba(34, 146, 241, .12);
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--blue-4);
+}
+.card__title { font-size: 18px; line-height: 1.3; color: var(--dark-blue); margin-bottom: 8px; }
+.card__date { font-size: 12.5px; letter-spacing: .04em; color: var(--dark-gray-2); margin-bottom: 12px; }
+.card__excerpt { font-size: 14.5px; line-height: 1.6; color: var(--dark-gray-2); margin-bottom: 18px; }
+.card__more {
+  margin-top: auto;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 12.5px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--blue-2);
+}
+
+/* ============================================================
+   9. SHOP STRIP
+   Light by design: a signpost, not the shop.
+   ============================================================ */
+.shop__inner {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.shop__products {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.shop__product {
+  aspect-ratio: 1;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.shop__product img { width: 100%; height: 100%; object-fit: cover; }
+.shop__title {
+  font-size: clamp(21px, 2.3vw, 27px);
+  line-height: 1.3;
+  color: var(--dark-blue);
+  margin-bottom: 22px;
+}
+
+/* ============================================================
+   10. TESTIMONIALS  (one card at a time + dots)
+   ============================================================ */
+.voices__slider { max-width: 720px; margin: 44px auto 0; }
+.voices__viewport {
+  position: relative;
+  display: grid;            /* slides stack, tallest sets the height */
+}
+.voice {
+  grid-area: 1 / 1;
+  margin: 0;
+  padding: 38px 36px 32px;
+  background: var(--white);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-sm);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(14px);
+  transition:
+    opacity var(--t-med) var(--ease-out),
+    transform var(--t-med) var(--ease-out),
+    visibility 0s linear var(--t-med);
+}
+.voice.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s, 0s, 0s;
+}
+.voice p {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--dark-gray-3);
+  margin-bottom: 26px;
+}
+/* opening quote mark */
+.voice p::before {
+  content: "\201C";
+  font-family: var(--font-head);
+  font-size: 46px;
+  line-height: 0;
+  vertical-align: -6px;
+  margin-right: 4px;
+  color: var(--blue-2);
+  opacity: .5;
+}
+.voice footer { display: flex; align-items: center; gap: 14px; }
+/* monogram stands in until real photos exist — see note in index.html */
+.voice__avatar {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  background: var(--dark-blue);
+  color: var(--white);
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: .04em;
+}
+.voice__who { display: flex; flex-direction: column; }
+.voice__who cite {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-style: normal;
+  font-size: 15px;
+  color: var(--dark-blue);
+}
+.voice__who span { font-size: 13px; color: var(--dark-gray-2); }
+
+.voices__dots { display: flex; justify-content: center; gap: 9px; margin-top: 26px; }
+.voices__dot {
+  width: 9px; height: 9px;
+  padding: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 102, .22);
+  transition:
+    background var(--t-fast) var(--ease-out),
+    transform var(--t-fast) var(--ease-out);
+}
+.voices__dot.is-active { background: var(--dark-blue); transform: scale(1.35); }
+
+/* ============================================================
+   11. SPONSORS & PARTNERS  (logo marquee)
+   ============================================================ */
+.partners__label {
+  text-align: center;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 12.5px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--dark-gray-2);
+  margin-bottom: 32px;
+}
+.partners__marquee {
+  overflow: hidden;
+  /* fade the strip out at both edges instead of cutting it off */
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent);
+          mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent);
+}
+.partners__track {
+  display: flex;
+  align-items: center;
+  gap: 56px;
+  width: max-content;
+  animation: partners-scroll 46s linear infinite;
+}
+.partners__marquee:hover .partners__track { animation-play-state: paused; }
+@keyframes partners-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }   /* script.js duplicates the track */
+}
+.partners__logo {
+  flex: none;
+  display: grid;
+  place-items: center;
+  /* one fixed height is what makes a logo strip look professional */
+  height: 58px;
+  width: 150px;
+  filter: grayscale(1);
+  opacity: .62;
+  transition:
+    filter var(--t-med) var(--ease-out),
+    opacity var(--t-med) var(--ease-out);
+}
+.partners__logo:hover { filter: grayscale(0); opacity: 1; }
+.partners__logo img { max-height: 100%; width: auto; object-fit: contain; }
+
+@media (prefers-reduced-motion: reduce) {
+  .partners__track { animation: none; }
+}
+
+/* ============================================================
+   12. CTA
+   ============================================================ */
+.cta {
+  position: relative;
+  background: var(--dark-blue);
+  color: var(--white);
+  border-radius: 20px 20px 0 0;   /* rounded.2xl */
+  padding: 92px 0 130px;
+  text-align: center;
+}
+.cta__title {
+  font-size: clamp(28px, 4.2vw, 44px);
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+.cta__lead {
+  max-width: 520px;
+  margin: 0 auto 38px;
+  font-size: 17px;
+  color: rgba(255, 255, 255, .84);
+}
+.cta__actions {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
 }
 
 /* the wave lives at the top of the footer so its navy fill paints
@@ -709,10 +935,24 @@ blockquote footer span { font-size: 14px; color: var(--dark-gray-2); }
    Dark surface, four columns, newsletter strip above, legal bar
    below. Keep identical on every page.
    ============================================================ */
+/* Photo background under a heavy blue tint, matching the footer on
+   mayein.org. The gradient is listed before the image so it paints on
+   top of it; it deepens toward the bottom so the contact column and
+   the legal bar keep their contrast. */
 .site-footer {
   position: relative;
   padding: 100px 0 0;
-  background: var(--dark-gray-5);
+  background-color: var(--dark-blue);   /* fallback before the photo loads */
+  background-image:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 102, .80) 0%,
+      rgba(0, 0, 102, .90) 42%,
+      rgba(0, 0, 102, .95) 100%),
+    url("assets_1791032993965/asset_010.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   color: var(--white);
   overflow: hidden;
 }
@@ -1013,24 +1253,32 @@ blockquote footer span { font-size: 14px; color: var(--dark-gray-2); }
   .dropdown a { border-bottom: 1px solid var(--light-gray-2); border-radius: 0; }
 }
 
-/* --- 3xl / 981px : page layout stacks --- */
+/* --- 3xl / 981px : page layout stacks --- *//* --- 3xl / 981px : page layout stacks --- */
 @media (max-width: 980px) {
-  /* mission / vision stacks */
-  .mv__card { padding: 0 28px 46px; }
-  .mv__body { margin-left: 0; padding-top: 34px; }
-  .mv__media {
-    position: static;
-    width: 100%;
-    transform: none;
-    margin-bottom: -26px;
-  }
-  .mv__wrap { display: flex; flex-direction: column; }
-  .mv__media img { border-radius: var(--r-xl) var(--r-xl) 0 0; }
-  .mv__deco { width: 84px; top: 14px; right: 14px; }
+  .band { padding: 64px 0; }
 
-  .pillars__grid { grid-template-columns: repeat(2, 1fr); gap: 34px 30px; }
-  .voices__grid { grid-template-columns: 1fr; gap: 42px; }
-  .voice--featured { margin-top: 0; }
+  .about__grid { grid-template-columns: 1fr; gap: 34px; }
+  .about__media { order: -1; }
+
+  .mv__grid { grid-template-columns: 1fr; gap: 34px; }
+  /* transform has to be reset too, or the base translateY lifts it
+     out of the section once `top` is overridden */
+  .mv__ring { top: auto; bottom: -34px; right: -20px; transform: none; width: 120px; height: 120px; }
+
+  /* brief §7.3 item 4: 2 x 2 on mobile, never a long single column */
+  .pillars__grid { grid-template-columns: repeat(2, 1fr); gap: 22px; }
+
+  .impact__grid { grid-template-columns: repeat(2, 1fr); gap: 40px 24px; }
+  .stat + .stat { border-left: 0; }
+  .stat:nth-child(even) { border-left: 1px solid rgba(255, 255, 255, .16); }
+
+  .smils__grid { grid-template-columns: 1fr; gap: 32px; }
+
+  .news__grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .news__grid .card:last-child { grid-column: 1 / -1; }
+
+  .shop__inner { grid-template-columns: 1fr; gap: 32px; text-align: center; }
+  .shop__products { order: -1; }
 
   /* brand column spans the top, the three link columns sit under it */
   .footer__cols { grid-template-columns: 1fr 1fr 1.2fr; gap: 40px 32px; }
@@ -1052,45 +1300,31 @@ blockquote footer span { font-size: 14px; color: var(--dark-gray-2); }
   .hero__arrow--prev { left: 2px; }
   .hero__arrow--next { right: 2px; }
 
-  .intro { padding: 56px 0 44px; }
-  .intro__grid { grid-template-columns: 1fr; gap: 32px; }
+  .band { padding: 52px 0; }
 
-  .mv { padding: 10px 0 60px; }
+  .about__lead { font-size: 16.5px; }
 
-  .pillars { padding: 20px 0 60px; }
+  .pillars__grid { gap: 16px; margin-top: 32px; }
+  .pillar__link { padding: 22px 16px 20px; }
+  .pillar__icon svg { width: 34px; height: 34px; }
+  .pillar h3 { font-size: 16.5px; }
+  .pillar p { font-size: 13.5px; margin-bottom: 14px; }
 
-  .what__panel { grid-template-columns: 1fr; gap: 28px; padding: 36px 26px; }
+  .impact__head { margin-bottom: 36px; }
+  .stat__label { font-size: 13px; }
 
-  .impact { padding: 30px 0 60px; }
-  .impact__grid { grid-template-columns: 1fr; gap: 44px; }
-  .impact__lead { font-size: 17px; }
+  .news__head { flex-direction: column; align-items: flex-start; gap: 18px; }
+  .news__grid { grid-template-columns: 1fr; }
+  .news__grid .card:last-child { grid-column: auto; }
 
-  /* shapes become a simple, readable grid on phones */
-  .impact__shapes {
-    aspect-ratio: auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px 18px;
-    padding-bottom: 36px;
-  }
-  .stat {
-    position: static !important;
-    width: auto !important;
-    height: auto !important;
-    aspect-ratio: 1;
-    padding: 14px;
-  }
-  .stat__label--out {
-    position: static;
-    transform: none;
-    width: auto;
-  }
-  .stat--circle .stat__label--out { color: var(--dark-gray-5); }
+  .shop__products { gap: 10px; }
 
-  .voices { padding: 20px 0 64px; }
-  .voices__title { margin-bottom: 44px; }
-  .voices__featured { margin-bottom: 44px; }
-  .voices__featured footer { padding-left: 0; }
+  .voices__slider { margin-top: 32px; }
+  .voice { padding: 28px 24px 24px; }
+  .voice p { font-size: 15.5px; }
+
+  .partners__track { gap: 36px; }
+  .partners__logo { width: 120px; height: 46px; }
 
   .cta { padding: 64px 0 90px; }
   .site-footer__wave svg { height: 58px; }
@@ -1118,9 +1352,13 @@ blockquote footer span { font-size: 14px; color: var(--dark-gray-2); }
   .nav-toggle { width: 40px; }
 
   .hero__title { font-size: 26px; }
-  .pillars__grid { grid-template-columns: 1fr; }
+
+  /* pillars stay 2 x 2 here — the brief is explicit about it */
+  .pillars__grid { grid-template-columns: repeat(2, 1fr); }
+
   .footer__cols { grid-template-columns: 1fr; }
   .newsletter__form button { width: 100%; }
   .btn { width: 100%; }
   .cta__actions { flex-direction: column; }
+  .news__viewall { width: auto; }
 }

@@ -116,174 +116,427 @@
   <div class="hero__dots" id="heroDots" role="tablist" aria-label="Choose slide"></div>
 </section>
 
-<!-- ===================== INTRO ===================== -->
-<section class="intro">
-  <div class="container intro__grid">
-    <div class="intro__text" data-reveal>
-      <h2 class="section-title">Mentoring Assistance for Youths and Entrepreneurs Initiative (MAYEIN)</h2>
-      <p><strong>MAYEIN</strong> is a nonprofit organization headquartered in Ibadan, Nigeria which focuses on Positive Youth Development through the strategic advancement of SDGs 4, 5, 16, and 17. Established formally in May 2012, with registration No: CAC/IT/NO 52811, MAYEIN has impacted over 23,000 marginalized teenagers, girls, and youth across Nigeria through a compendium of programs, campaigns, knowledge products as well as direct services.</p>
-      <p>Our main approaches to impact include research and learning, youth and girl-centered tool kits, flexible learning spaces, and community/stakeholder-based partnerships. Our organization has also recorded major internal grant partners – including the Rockefeller Philanthropy, USA (2022) and in 2021, MAYEIN was conferred special consultative status at the United Nations (UN) Economic and Social Council.</p>
+<!-- ============================================================
+     HOMEPAGE SECTIONS — order fixed by the Rebuild Brief §7.3
+       2 About · 3 Mission & Vision · 4 Pillars · 6 Impact ·
+       7 SMILS · 8 Latest News · 9 Shop · 10 Testimonials ·
+       11 Partners · 12 CTA
+     ("What We Do" was §7.3 item 5 — deleted, it repeated the pillars.)
+
+     FORWARD LINKS — these pages do not exist yet. Brief §2.2 requires
+     every button to point at the new pages rather than the old ones,
+     so they are written out in full here. Until the pages are built
+     they 404. One find-and-replace changes them all:
+       about.html · programs.html · smils.html
+       news.html  · shop.html     · donate.html · volunteer.html
+     ============================================================ -->
+
+<!-- ===================== 2. ABOUT  (§7.3 item 2 — cut to 40 words) ===================== -->
+<section class="about band band--light">
+  <div class="container about__grid">
+    <div class="about__text" data-reveal>
+      <h2 class="section-title">Positive youth development, since 2012</h2>
+
+      <!-- TODO(copy): this is the brief's own "Suggested draft" (§7.3 item 2),
+           used verbatim. Still needs sign-off — brief §8 decision #7 has not
+           assigned a copywriter. The three paragraphs this replaced (CAC
+           number, grant partners, methodology) are not deleted: they relocate
+           to the About Us page, per the brief. -->
+      <p class="about__lead">
+        MAYEIN is a Nigerian non-profit advancing positive youth development through
+        education, entrepreneurship, gender equity and civic engagement. Since 2012
+        we&rsquo;ve reached over 23,000 young people, and hold special consultative status
+        at the UN Economic and Social Council.
+      </p>
+
+      <a class="btn btn--primary" href="about.html">Read our story</a>
     </div>
 
-    <figure class="intro__media" data-reveal data-reveal-delay="140">
-      <img src="assets_1791032993965/asset_002.jpg" alt="Three beneficiaries holding MAYEIN branded bags outside the MAYEIN office" loading="lazy" decoding="async">
+    <figure class="about__media" data-reveal data-reveal-delay="140">
+      <img src="assets_1791032993965/asset_002.jpg"
+           alt="Three MAYEIN beneficiaries holding branded bags outside the MAYEIN office"
+           width="1773" height="1182" loading="lazy" decoding="async">
     </figure>
   </div>
 </section>
 
-<!-- ===================== MISSION / VISION ===================== -->
-<section class="mv">
+<!-- ===================== 3. MISSION & VISION  (§7.3 item 3 — merged) ===================== -->
+<!-- Two columns, max 25 words each. Both statements are MAYEIN's own wording,
+     unchanged — mission is 25 words, vision 22, so neither needed cutting. -->
+<section class="mv band band--white">
   <div class="container">
-    <div class="mv__wrap" data-reveal>
-      <div class="mv__card">
-        <img class="mv__deco" src="assets_1791032993965/asset_004.png" alt="" aria-hidden="true">
-        <div class="mv__body">
-          <h2>Our Mission</h2>
-          <p>To lead strategies that promote inclusive quality education and lifelong learning for all, gender equity, and civic readiness for the attainment of positive youth development.</p>
-          <h2>Our Vision</h2>
-          <p>We envision a&nbsp; country and continent where young people are thriving in communities and correspondingly communities are thriving because of young people</p>
-        </div>
+    <div class="mv__grid">
+
+      <!-- The orange ring from the original Mission/Vision block, kept per
+           brief §7.3 item 3. Drawn in CSS rather than loaded from
+           asset_004.png: that file is an opaque white square with the ring
+           painted inside it, so it stamps a white box onto the section.
+           Same artwork, same colour, no box, and it scales cleanly. -->
+      <span class="mv__ring" aria-hidden="true"></span>
+
+      <div class="mv__col" data-reveal>
+        <h2 class="mv__heading">Our Mission</h2>
+        <p>To lead strategies that promote inclusive quality education and lifelong learning
+           for all, gender equity, and civic readiness for the attainment of positive youth
+           development.</p>
       </div>
 
-      <figure class="mv__media">
-        <img src="assets_1791032993965/asset_003.jpg" alt="MAYEIN programme participants holding campaign leaflets" loading="lazy" decoding="async">
-      </figure>
+      <div class="mv__col mv__col--vision" data-reveal data-reveal-delay="120">
+        <h2 class="mv__heading">Our Vision</h2>
+        <p>A country and continent where young people are thriving in communities, and
+           communities are thriving because of young people.</p>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- ===================== FOUR PILLARS ===================== -->
-<section class="pillars" id="pillars">
+<!-- ===================== 4. FOUR PILLARS  (§7.3 item 4 — one sentence each) ===================== -->
+<!-- Copy trimmed from MAYEIN's own pillar text — shortened, nothing invented.
+     Each card links to its section on the Programs page. Mobile: 2x2 grid. -->
+<section class="pillars band band--light" id="pillars">
   <div class="container">
+    <h2 class="section-title section-title--center" data-reveal>What we work on</h2>
+
     <ul class="pillars__grid">
 
       <li class="pillar" data-reveal>
-        <span class="pillar__icon" aria-hidden="true">
-          <svg viewBox="0 0 48 48"><circle cx="13" cy="13" r="6"/><path d="M2 36c0-6.1 4.9-11 11-11s11 4.9 11 11z"/><rect x="26" y="8" width="20" height="15" rx="2.5"/><rect x="30" y="27" width="12" height="2.6" rx="1.3"/></svg>
-        </span>
-        <h3>Education</h3>
-        <p>MAYEIN champions inclusive education, and is committed to flagging education centered initiatives targeted at impacting underserved children and early youths through community-based access to literacy resources and in school projects.</p>
+        <a class="pillar__link" href="programs.html#education">
+          <span class="pillar__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><circle cx="13" cy="13" r="6"/><path d="M2 36c0-6.1 4.9-11 11-11s11 4.9 11 11z"/><rect x="26" y="8" width="20" height="15" rx="2.5"/><rect x="30" y="27" width="12" height="2.6" rx="1.3"/></svg>
+          </span>
+          <h3>Education</h3>
+          <p>Community-based access to literacy resources and in-school projects for underserved children and early youths.</p>
+          <span class="pillar__more">Explore<span aria-hidden="true"> &rarr;</span></span>
+        </a>
       </li>
 
       <li class="pillar" data-reveal data-reveal-delay="100">
-        <span class="pillar__icon" aria-hidden="true">
-          <svg viewBox="0 0 48 48"><path d="M6 44V14h17v30z"/><path d="M23 44V22h19v22z"/><g class="win"><rect x="10" y="18" width="4" height="4"/><rect x="17" y="18" width="4" height="4"/><rect x="10" y="26" width="4" height="4"/><rect x="17" y="26" width="4" height="4"/><rect x="10" y="34" width="4" height="4"/><rect x="17" y="34" width="4" height="4"/><rect x="28" y="27" width="4" height="4"/><rect x="35" y="27" width="4" height="4"/><rect x="28" y="35" width="4" height="4"/><rect x="35" y="35" width="4" height="4"/></g></svg>
-        </span>
-        <h3>Entrepreneurship</h3>
-        <p>MAYEIN fosters a culture of entrepreneurship by equipping individuals with the skills and resources necessary to launch and grow successful businesses</p>
+        <a class="pillar__link" href="programs.html#entrepreneurship">
+          <span class="pillar__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><path d="M6 44V14h17v30z"/><path d="M23 44V22h19v22z"/><g class="win"><rect x="10" y="18" width="4" height="4"/><rect x="17" y="18" width="4" height="4"/><rect x="10" y="26" width="4" height="4"/><rect x="17" y="26" width="4" height="4"/><rect x="10" y="34" width="4" height="4"/><rect x="17" y="34" width="4" height="4"/><rect x="28" y="27" width="4" height="4"/><rect x="35" y="27" width="4" height="4"/><rect x="28" y="35" width="4" height="4"/><rect x="35" y="35" width="4" height="4"/></g></svg>
+          </span>
+          <h3>Entrepreneurship</h3>
+          <p>Equipping young people with the skills and resources to launch and grow successful businesses.</p>
+          <span class="pillar__more">Explore<span aria-hidden="true"> &rarr;</span></span>
+        </a>
       </li>
 
       <li class="pillar" data-reveal data-reveal-delay="200">
-        <span class="pillar__icon" aria-hidden="true">
-          <svg viewBox="0 0 48 48"><rect x="4" y="8" width="40" height="6" rx="1.5"/><rect x="10" y="20" width="28" height="5" rx="1.5"/><rect x="21" y="25" width="6" height="19" rx="1.5"/></svg>
-        </span>
-        <h3>Gender Equity</h3>
-        <p>MAYEIN is dedicated to empowering women and girls with the necessary tools and knowledge to reach their full potential and advocate for policies that dismantle barriers to girls&rsquo; education.</p>
+        <a class="pillar__link" href="programs.html#gender-equity">
+          <span class="pillar__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><rect x="4" y="8" width="40" height="6" rx="1.5"/><rect x="10" y="20" width="28" height="5" rx="1.5"/><rect x="21" y="25" width="6" height="19" rx="1.5"/></svg>
+          </span>
+          <h3>Gender Equity</h3>
+          <p>Giving women and girls the tools to reach their potential, and dismantling barriers to girls&rsquo; education.</p>
+          <span class="pillar__more">Explore<span aria-hidden="true"> &rarr;</span></span>
+        </a>
       </li>
 
       <li class="pillar" data-reveal data-reveal-delay="300">
-        <span class="pillar__icon" aria-hidden="true">
-          <svg viewBox="0 0 48 48"><circle cx="10" cy="11" r="5"/><circle cx="38" cy="11" r="5"/><path d="M2 44V30c0-4.4 3.6-8 8-8s8 3.6 8 8v14z"/><path d="M30 44V30c0-4.4 3.6-8 8-8s8 3.6 8 8v14z"/><rect x="15" y="25" width="18" height="7" rx="1.5"/></svg>
-        </span>
-        <h3>Civic Engagement</h3>
-        <p>MAYEIN equips young people with the knowledge and skills to become active citizens towards a better society. By empowering young voices, we are building a more engaged and just society for all.</p>
+        <a class="pillar__link" href="programs.html#civic-engagement">
+          <span class="pillar__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><circle cx="10" cy="11" r="5"/><circle cx="38" cy="11" r="5"/><path d="M2 44V30c0-4.4 3.6-8 8-8s8 3.6 8 8v14z"/><path d="M30 44V30c0-4.4 3.6-8 8-8s8 3.6 8 8v14z"/><rect x="15" y="25" width="18" height="7" rx="1.5"/></svg>
+          </span>
+          <h3>Civic Engagement</h3>
+          <p>Equipping young people with the knowledge and skills to become active citizens in their communities.</p>
+          <span class="pillar__more">Explore<span aria-hidden="true"> &rarr;</span></span>
+        </a>
       </li>
 
     </ul>
   </div>
 </section>
 
-<!-- ===================== WHAT WE DO ===================== -->
-<section class="what">
+<!-- ===================== 6. IMPACT NUMBERS  (§7.3 item 6) ===================== -->
+<!-- ============================================================
+     FIGURES NEEDED — brief §8 decision #4, owner: Programmes.
+     Three of these four counters have no verified figure. The brief's
+     Rule 2 ("never invent content") rules out guessing, so they render
+     as a dash with a "figure pending" note until Programmes supplies them.
+
+     The beneficiaries count is the ONE sourced number: "over 23,000"
+     appears in MAYEIN's own live About copy. The 29,000 / 286 / 127 / 15
+     that previously sat here had no source and have been removed.
+
+     To fill one in: replace data-count-pending with data-count-to="<number>".
+     ============================================================ -->
+<section class="impact band band--navy" id="impact">
   <div class="container">
-    <div class="what__panel" data-reveal>
-      <div class="what__intro">
-        <h2 class="section-title">What We Do</h2>
-        <p>We have been able to identify clear methods and approaches&nbsp; that are highly effective when working with young people. As such our various impact&nbsp; solutions are typically designed to be delivered using any of the formats/approaches&nbsp; below</p>
+    <div class="impact__head" data-reveal>
+      <p class="eyebrow">Our impact</p>
+      <h2 class="impact__title">The work, in numbers</h2>
+    </div>
+
+    <ul class="impact__grid">
+      <li class="stat" data-reveal>
+        <span class="stat__value">
+          <span class="stat__num" data-count-to="23000">0</span><span class="stat__plus">+</span>
+        </span>
+        <span class="stat__label">Beneficiaries</span>
+      </li>
+
+      <li class="stat" data-reveal data-reveal-delay="100">
+        <span class="stat__num" data-count-pending>&mdash;</span>
+        <span class="stat__label">Schools Impacted</span>
+        <span class="stat__pending">figure pending</span>
+      </li>
+
+      <li class="stat" data-reveal data-reveal-delay="200">
+        <span class="stat__num" data-count-pending>&mdash;</span>
+        <span class="stat__label">Communities Impacted</span>
+        <span class="stat__pending">figure pending</span>
+      </li>
+
+      <li class="stat" data-reveal data-reveal-delay="300">
+        <span class="stat__num" data-count-pending>&mdash;</span>
+        <span class="stat__label">States Reached</span>
+        <span class="stat__pending">figure pending</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== 7. SMILS FEATURE  (§7.3 item 7 — NEW) ===================== -->
+<!-- Image left, text right, 30 words, full width. The flagship programme.
+     Image: reused from the existing library photo rather than a placeholder —
+     brief §4.2 says reuse what already exists where no Drive folder is to hand.
+     TODO(copy): 30-word draft below is built from the facts in brief §7.5
+     (SMART Libraries, mobile library van, ICT training, CBT prep, reading,
+     mentoring). Needs sign-off alongside the rest of the copy. -->
+<section class="smils band band--white">
+  <div class="container smils__grid">
+
+    <figure class="smils__media" data-reveal>
+      <img src="assets_1791032993965/asset_010.jpg"
+           alt="Students studying at tables in a MAYEIN SMART Library, surrounded by full bookshelves"
+           width="1920" height="1280" loading="lazy" decoding="async">
+    </figure>
+
+    <div class="smils__text" data-reveal data-reveal-delay="140">
+      <p class="eyebrow">Flagship programme</p>
+      <h2 class="section-title">SMILS &mdash; our SMART Libraries</h2>
+      <p>
+        SMILS, the SMART Libraries initiative, is MAYEIN&rsquo;s flagship programme: community
+        libraries and a mobile library van running ICT training, CBT preparation, reading
+        activities and mentoring for young people across Nigeria.
+      </p>
+      <a class="btn btn--primary" href="smils.html">Explore SMILS</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== 8. LATEST NEWS / PROJECTS  (§7.3 item 8 — NEW) ===================== -->
+<!-- ============================================================
+     CONTENT NEEDED — brief §8 decision #9, owner: Programmes.
+     Which projects appear, and who writes each description, is unresolved,
+     so all three cards below are flagged placeholders. No invented
+     headlines, dates or excerpts — brief Rule 2.
+
+     TODO(dynamic): the brief asks for these to be "pulled automatically
+     from the latest posts/projects". That is a WordPress/Divi blog module
+     in the real build. Here they are static markup, written in the card
+     shape a feed would produce, so swapping in a fetch + render later
+     touches only this block. Same convention as the Mailchimp TODO in
+     the footer.
+     ============================================================ -->
+<section class="news band band--light">
+  <div class="container">
+    <div class="news__head" data-reveal>
+      <div>
+        <p class="eyebrow">What&rsquo;s happening</p>
+        <h2 class="section-title">Latest news &amp; ongoing projects</h2>
+      </div>
+      <a class="btn btn--ghost-dark news__viewall" href="news.html">View all</a>
+    </div>
+
+    <ul class="news__grid">
+
+      <li class="card" data-reveal>
+        <div class="card__media is-placeholder" role="img" aria-label="Placeholder — project image needed">
+          <span class="placeholder__tag">IMAGE NEEDED</span>
+          <span class="placeholder__note">02_Homepage</span>
+        </div>
+        <div class="card__body">
+          <span class="card__cat">Category</span>
+          <h3 class="card__title is-pending">Project title &mdash; content needed</h3>
+          <p class="card__date is-pending">Date pending</p>
+          <p class="card__excerpt is-pending">One-line excerpt, once Programmes confirms which projects appear here.</p>
+          <span class="card__more">Read more<span aria-hidden="true"> &rarr;</span></span>
+        </div>
+      </li>
+
+      <li class="card" data-reveal data-reveal-delay="120">
+        <div class="card__media is-placeholder" role="img" aria-label="Placeholder — project image needed">
+          <span class="placeholder__tag">IMAGE NEEDED</span>
+          <span class="placeholder__note">02_Homepage</span>
+        </div>
+        <div class="card__body">
+          <span class="card__cat">Category</span>
+          <h3 class="card__title is-pending">Project title &mdash; content needed</h3>
+          <p class="card__date is-pending">Date pending</p>
+          <p class="card__excerpt is-pending">One-line excerpt, once Programmes confirms which projects appear here.</p>
+          <span class="card__more">Read more<span aria-hidden="true"> &rarr;</span></span>
+        </div>
+      </li>
+
+      <li class="card" data-reveal data-reveal-delay="240">
+        <div class="card__media is-placeholder" role="img" aria-label="Placeholder — project image needed">
+          <span class="placeholder__tag">IMAGE NEEDED</span>
+          <span class="placeholder__note">02_Homepage</span>
+        </div>
+        <div class="card__body">
+          <span class="card__cat">Category</span>
+          <h3 class="card__title is-pending">Project title &mdash; content needed</h3>
+          <p class="card__date is-pending">Date pending</p>
+          <p class="card__excerpt is-pending">One-line excerpt, once Programmes confirms which projects appear here.</p>
+          <span class="card__more">Read more<span aria-hidden="true"> &rarr;</span></span>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== 9. SHOP STRIP  (§7.3 item 9 — NEW) ===================== -->
+<!-- Deliberately light: a signpost, not the shop.
+     IMAGES NEEDED — 09_Shop (Google Drive, access pending, brief §2.1).
+     Brief §8 decision #8 (WhatsApp / form / Instagram ordering route) is also
+     open, so the button points at a shop page that does not exist yet. -->
+<section class="shop band band--white">
+  <div class="container shop__inner">
+
+    <ul class="shop__products" data-reveal>
+      <li class="shop__product is-placeholder">
+        <span class="placeholder__tag">IMAGE NEEDED</span><span class="placeholder__note">09_Shop</span>
+      </li>
+      <li class="shop__product is-placeholder">
+        <span class="placeholder__tag">IMAGE NEEDED</span><span class="placeholder__note">09_Shop</span>
+      </li>
+      <li class="shop__product is-placeholder">
+        <span class="placeholder__tag">IMAGE NEEDED</span><span class="placeholder__note">09_Shop</span>
+      </li>
+    </ul>
+
+    <div class="shop__text" data-reveal data-reveal-delay="120">
+      <h2 class="shop__title">Every purchase supports the work.</h2>
+      <a class="btn btn--primary" href="shop.html">Visit the Shop</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== 10. TESTIMONIALS  (§7.3 item 10 — slider) ===================== -->
+<!-- One card at a time with navigation dots, built by script.js.
+     Quotes cut to two sentences each. Every sentence here is VERBATIM and
+     CONSECUTIVE from the original testimonial — trimmed, never paraphrased,
+     since these are attributed to named real people. The full-length
+     versions move to the SMILS or About page, per brief §7.3 item 10.
+
+     NOTE: brief §7.3 says "3-card slider" in its table but "currently four
+     long quotes" in the checklist. All four are kept here pending that
+     clarification — dropping one is a matter of deleting a slide.
+
+     PHOTOS NEEDED — the brief asks for a small round photo per card. None
+     exist for these four people, so each falls back to a monogram. -->
+<section class="voices band band--light">
+  <div class="container">
+    <h2 class="section-title section-title--center" data-reveal>What our community says</h2>
+
+    <div class="voices__slider" id="voicesSlider" data-reveal data-reveal-delay="100"
+         aria-roledescription="carousel" aria-label="Community testimonials">
+
+      <div class="voices__viewport">
+
+        <blockquote class="voice is-active" role="group" aria-roledescription="slide" aria-label="1 of 4">
+          <p>I chose MAYEIN because the organization&rsquo;s goals align with my interests.
+             I can recall vividly the difficulties my siblings and I had in getting access
+             to good education.</p>
+          <footer>
+            <span class="voice__avatar" aria-hidden="true">MB</span>
+            <span class="voice__who"><cite>Michael Bakare</cite><span>MSc Intern</span></span>
+          </footer>
+        </blockquote>
+
+        <blockquote class="voice" role="group" aria-roledescription="slide" aria-label="2 of 4">
+          <p>I am the first child in my family and the first to be computer literate through
+             the MAYEIN Oyo E-Literacy project at the MAYEIN Youth Centre in my community.
+             Afterward, I introduced my immediate younger brother to the training.</p>
+          <footer>
+            <span class="voice__avatar" aria-hidden="true">SW</span>
+            <span class="voice__who"><cite>Samad Wahab</cite><span>Ojoo High School, SSS 2</span></span>
+          </footer>
+        </blockquote>
+
+        <blockquote class="voice" role="group" aria-roledescription="slide" aria-label="3 of 4">
+          <p>Before MAYEIN came to our school, I knew nothing about the computer.
+             But now, I have a better knowledge of it.</p>
+          <footer>
+            <span class="voice__avatar" aria-hidden="true">CB</span>
+            <span class="voice__who"><cite>Christopher Blessing</cite><span>Methodist Secondary, SSS 2</span></span>
+          </footer>
+        </blockquote>
+
+        <blockquote class="voice" role="group" aria-roledescription="slide" aria-label="4 of 4">
+          <p>They took time and patience to explain things to us on the screen repeatedly,
+             yet some of us still asked the same questions over and over again. It was a
+             wonderful moment for someone like me.</p>
+          <footer>
+            <span class="voice__avatar" aria-hidden="true">TA</span>
+            <span class="voice__who"><cite>Mr. Tella Adetayo</cite><span>Kajoro Community Grammar School</span></span>
+          </footer>
+        </blockquote>
+
       </div>
 
-      <ul class="checklist">
-        <li data-reveal data-reveal-delay="80"><span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5l5.5 5.5L20 6"/></svg></span>Education</li>
-        <li data-reveal data-reveal-delay="160"><span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5l5.5 5.5L20 6"/></svg></span>Entrepreneurship</li>
-        <li data-reveal data-reveal-delay="240"><span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5l5.5 5.5L20 6"/></svg></span>Gender Equity</li>
-        <li data-reveal data-reveal-delay="320"><span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5l5.5 5.5L20 6"/></svg></span>Civic Engagement</li>
-      </ul>
+      <div class="voices__dots" id="voicesDots" role="tablist" aria-label="Choose testimonial"></div>
     </div>
   </div>
 </section>
 
-<!-- ===================== SUPPORT US / IMPACT ===================== -->
-<section class="impact" id="impact">
-  <div class="container impact__grid">
-    <div class="impact__text" data-reveal>
-      <p class="eyebrow">Support Us</p>
-      <p class="impact__lead">Together, we can create a brighter future for our community. Your support through donations, volunteering, or participating in our programs helps us continue our work in education, entrepreneurship, gender equity, and civic engagement.</p>
-    </div>
+<!-- ===================== 11. SPONSORS & PARTNERS  (§7.3 item 11 — NEW) ===================== -->
+<!-- ============================================================
+     LOGOS NEEDED — 10_Sponsors_Partners (Drive access pending, §2.1) AND
+     brief §8 decision #5: the final list plus written permission to display
+     each logo. For an NGO that permission is not optional, so no real logo
+     is shown until it exists. Eight evenly-sized slots stand in.
 
-    <div class="impact__shapes" data-reveal data-reveal-delay="140">
-      <figure class="stat stat--square stat--blue">
-        <span class="stat__num" data-count-to="29000">0</span>
-        <figcaption class="stat__label">Beneficiaries</figcaption>
-      </figure>
-
-      <figure class="stat stat--circle stat--ring-navy">
-        <span class="stat__num" data-count-to="286">0</span>
-        <figcaption class="stat__label stat__label--out">Schools Impacted</figcaption>
-      </figure>
-
-      <figure class="stat stat--circle stat--ring-blue">
-        <span class="stat__num" data-count-to="127">0</span>
-        <figcaption class="stat__label stat__label--out">Communities<br>Impacted</figcaption>
-      </figure>
-
-      <figure class="stat stat--square stat--yellow">
-        <span class="stat__num" data-count-to="15">0</span>
-        <figcaption class="stat__label">States Reached</figcaption>
-      </figure>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== TESTIMONIALS ===================== -->
-<section class="voices">
+     Behaviour: slow continuous scroll, greyscale lifting to colour on hover,
+     one fixed logo height so the strip reads as a row. The track is
+     duplicated in script.js so the loop has no visible seam.
+     Split into "Partners" and "Donors" rows if the final list is long.
+     ============================================================ -->
+<section class="partners band band--white">
   <div class="container">
-    <h2 class="voices__title" data-reveal>What Our Community Says</h2>
+    <p class="partners__label" data-reveal>Partners &amp; donors</p>
+  </div>
 
-    <blockquote class="voices__featured" data-reveal data-reveal-delay="100">
-      <p>I chose MAYEIN because the organization&rsquo;s goals align with my interests. I can recall vividly the difficulties my siblings and I had in getting access to good education. Education, even till the tertiary level was something I had to struggle through. And so, I resonate with MAYEIN&rsquo;s effort in trying to prevent other children from going through similar challenges.</p>
-      <footer><cite>Michael Bakare</cite><span>MSc Intern</span></footer>
-    </blockquote>
-
-    <div class="voices__grid">
-      <blockquote class="voice" data-reveal>
-        <p>I am the first child in my family and the first to be computer literate through the MAYEIN Oyo E-Literacy project at the MAYEIN Youth Centre in my community. Afterward, I introduced my immediate younger brother to the training. The program was educative and fun because I had a laptop to myself during the training. I was excited to have also co-facilitated the Cohort 6 training during the long vacation with MAYEIN facilitators. I learned new things that I didn&rsquo;t give attention to during my cohort training and taught others what I had learned already. It was fun to be an ICT trainer. I would like MAYEIN to continue this programme so that other children in my community can benefit.</p>
-        <footer><cite>Samad Wahab</cite><span>Ojoo High School, SSS 2</span></footer>
-      </blockquote>
-
-      <blockquote class="voice voice--featured" data-reveal data-reveal-delay="120">
-        <p>Before MAYEIN came to our school, I knew nothing about the computer. But now, I have a better knowledge of it. I can now work with Word processor which allows me to type documents, print, use tables and smart art. I will like to say a very big thank you to the MAYEIN team for their digital literacy learning programme. MAYEIN has impacted me and many of my friends through this project and we are indeed grateful.</p>
-        <footer><cite>Christopher Blessing</cite><span>Methodist Secondary, SSS 2, Arts Class</span></footer>
-      </blockquote>
-
-      <blockquote class="voice" data-reveal data-reveal-delay="240">
-        <p>First of all, I want to appreciate God for the way this training started and ended. Qualitative but free of charge. In fact, if one would get such training like this, I never expected it would be in Nigeria. And to our facilitators, they took us for who we are i.e. teachers who still find it difficult to learn something simple quickly. They took time and patience to explain things to us on the screen repeatedly, yet some of us still asked the same questions over and over again. It was a wonderful moment for someone like me. Thank you so much.</p>
-        <footer><cite>Mr. Tella Adetayo</cite><span>Kajoro Community Grammar School</span></footer>
-      </blockquote>
-    </div>
+  <div class="partners__marquee" id="partnersMarquee" data-reveal data-reveal-delay="80">
+    <ul class="partners__track">
+      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
+      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
+      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
+      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
+      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
+      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
+      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
+      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
+    </ul>
   </div>
 </section>
 
-<!-- ===================== CTA ===================== -->
+<!-- ===================== 12. CALL TO ACTION  (§7.3 item 12 — simplified) ===================== -->
+<!-- Was three stacked headings. Now one heading, one line, two buttons. -->
 <section class="cta" id="cta">
   <div class="container">
-    <h2 class="cta__title" data-reveal>
-      Join our mission.<br>
-      Volunteer, Donate, Advocate.<br>
-      Get Started Today.
-    </h2>
+    <h2 class="cta__title" data-reveal>Join our mission</h2>
+    <p class="cta__lead" data-reveal data-reveal-delay="80">
+      Give young people across Nigeria a fairer start &mdash; with your money or your time.
+    </p>
     <div class="cta__actions" data-reveal data-reveal-delay="160">
-      <a class="btn btn--solid" href="#">Browse Campaigns</a>
-      <a class="btn btn--ghost" href="#contact">Get Involved</a>
+      <a class="btn btn--solid" href="donate.html">Donate</a>
+      <a class="btn btn--ghost" href="volunteer.html">Volunteer</a>
     </div>
   </div>
 </section>
@@ -369,7 +622,6 @@
       <ul class="footer__links">
         <li><a href="#">About Us</a></li>
         <li><a href="#">Our Team</a></li>
-        <li><a href="#">Projects</a></li>
         <li><a href="#">SMILS</a></li>
         <li><a href="#cta">Donate</a></li>
       </ul>
@@ -379,7 +631,6 @@
     <nav class="footer__col" aria-label="More" data-reveal data-reveal-delay="160">
       <h3 class="footer__heading">More</h3>
       <ul class="footer__links">
-        <li><a href="#">Shop</a></li>
         <li><a href="#">Latest Content</a></li>
         <li><a href="#">Blog</a></li>
         <li><a href="#">Gallery</a></li>
