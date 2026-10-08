@@ -935,20 +935,23 @@ p:last-child { margin-bottom: 0; }
    Dark surface, four columns, newsletter strip above, legal bar
    below. Keep identical on every page.
    ============================================================ */
-/* Photo background under a heavy blue tint, matching the footer on
-   mayein.org. The gradient is listed before the image so it paints on
-   top of it; it deepens toward the bottom so the contact column and
-   the legal bar keep their contrast. */
+/* Photo background under a near-black tint. The photo treatment follows
+   the footer on mayein.org, but the tint is black rather than navy: a
+   blue wash sits too close to the social icons' own brand colours
+   (Facebook #1877F2, LinkedIn #0A66C2) for their hover states to read.
+   The gradient is listed before the image so it paints on top of it,
+   and deepens toward the bottom so the contact column and the legal
+   bar keep their contrast. */
 .site-footer {
   position: relative;
   padding: 100px 0 0;
-  background-color: var(--dark-blue);   /* fallback before the photo loads */
+  background-color: var(--dark-gray-5);   /* fallback before the photo loads */
   background-image:
     linear-gradient(
       to bottom,
-      rgba(0, 0, 102, .80) 0%,
-      rgba(0, 0, 102, .90) 42%,
-      rgba(0, 0, 102, .95) 100%),
+      rgba(14, 12, 25, .82) 0%,
+      rgba(14, 12, 25, .91) 42%,
+      rgba(14, 12, 25, .96) 100%),
     url("assets_1791032993965/asset_010.jpg");
   background-size: cover;
   background-position: center;
