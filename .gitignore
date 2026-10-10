@@ -5,3 +5,6 @@ MAYEIN Website Rebuild Brief.docx
 # Reference screenshots of the old design (~11 MB of PNGs).
 # Useful while building, too heavy to carry in git history forever.
 screenshots/
+
+# Word lock files, created while the brief is open.
+~$*

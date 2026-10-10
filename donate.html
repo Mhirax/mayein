@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Donate — MAYEIN</title>
+<meta name="description" content="Give to MAYEIN by bank transfer, or tell us how you would like to give from outside Nigeria. Every gift supports education, entrepreneurship, gender equity and civic engagement for young Nigerians.">
+<link rel="icon" href="assets/asset_012.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/asset_014.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="page-donate">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ===================== HEADER ===================== -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+
+    <a class="logo" href="index.html" aria-label="MAYEIN — back to homepage">
+      <img src="assets/asset_001.png" alt="MAYEIN — Mentors Assistance for Youth and Entrepreneurs Initiative">
+    </a>
+
+    <nav class="nav" id="primaryNav" aria-label="Primary">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="index.html">Home</a></li>
+
+        <li class="nav__item has-dropdown">
+          <button class="nav__link nav__link--toggle" aria-expanded="false">
+            About Us
+            <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <ul class="dropdown">
+            <li><a href="#">Our Team</a></li>
+            <li><a href="#">Volunteer</a></li>
+          </ul>
+        </li>
+
+        <li class="nav__item has-dropdown">
+          <button class="nav__link nav__link--toggle" aria-expanded="false">
+            Programs
+            <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <ul class="dropdown">
+            <li><a href="#">SMILS</a></li>
+            <li><a href="#pillars">Education</a></li>
+            <li><a href="#pillars">Entrepreneurship</a></li>
+            <li><a href="#pillars">Gender Equity</a></li>
+            <li><a href="#pillars">Civic Engagement</a></li>
+          </ul>
+        </li>
+
+        <li><a class="nav__link" href="#">Latest Content</a></li>
+        <li><a class="nav__link" href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- stays outside .nav so it remains visible beside the burger on mobile -->
+    <a class="btn-donate" href="#bank">Donate</a>
+
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============================================================
+     DONATE PAGE — brief §7.4, build order #5.
+
+     Purpose (§7.4): turn intent into money with as little friction as
+     possible. MAYEIN takes no card payments online, so the page has
+     exactly two routes — a Naira bank transfer, and an enquiry form
+     for anyone who cannot transfer in Naira. The brief is explicit
+     that this is fine: "a bank transfer page done well converts
+     perfectly fine." The job is legitimacy and friction removal.
+
+     Section order is the brief's, unchanged:
+       hero · choose your cause · bank transfer · enquiry form ·
+       other ways to give · where your money goes · trust · FAQ
+
+     ONE NOTE ON THAT ORDER: the brief's own reasoning for the
+     suggested amounts is that they "anchor what people give" — which
+     works best BEFORE the ask, not two sections after it. The order
+     below is the brief's as written; moving "Where your money goes"
+     above the bank details is a one-block cut-and-paste if MAYEIN
+     agrees. Flagged rather than silently rearranged.
+
+     STYLE RULE (§7.4): "No competing buttons anywhere on this page —
+     the only action is to give." So the only .btn on this page is the
+     transfer copy button and the form submit. Everything else that
+     navigates — volunteering, corporate partnership, the SMILS page —
+     is a text link. The global header and footer stay as §7.1/§7.2
+     require them to.
+
+     CONTENT STILL NEEDED — every placeholder below is a real open
+     decision, not a styling gap. Rule 2 forbids inventing any of it:
+       · bank details ....... §8 decision #1, Finance, IN WRITING
+       · form recipient ..... §8 decision #2, Project lead
+       · reference format ... Finance
+       · receipt address .... Finance
+       · amounts + tiers .... Programmes
+       · FAQ ................ Comms
+       · partner logos ...... §8 decision #5, Partnerships
+     ============================================================ -->
+
+<!-- ===================== 1. HERO (§7.4 — one image, one line) ===================== -->
+<!-- Image: assets/07_Donate.jpeg, cropped to asset_019.jpg. Children
+     outside the Eleyele SMART Library at its opening, one holding a
+     book. Consent/safeguarding (§4.4) is the client's to confirm —
+     this photograph came from MAYEIN. -->
+<section class="dhero">
+  <div class="dhero__media" aria-hidden="true">
+    <img src="assets/asset_019.jpg"
+         alt=""
+         width="1600" height="900" fetchpriority="high">
+  </div>
+
+  <div class="container dhero__inner">
+    <p class="eyebrow dhero__eyebrow">Donate</p>
+    <!-- TODO(copy): one line, 8 words max per Rule 4. This reuses the
+         CTA wording already approved on the homepage rather than
+         inventing a new appeal. -->
+    <h1 class="dhero__title">Give young Nigerians a fairer start</h1>
+    <p class="dhero__lead">
+      MAYEIN does not take card payments online. A bank transfer takes two minutes
+      &mdash; the details are below.
+    </p>
+    <a class="dhero__jump" href="#bank">Jump to the account details</a>
+  </div>
+</section>
+
+<!-- ===================== 2. CHOOSE YOUR CAUSE (§7.4) ===================== -->
+<!-- Two cards. MAYEIN confirmed ONE bank account, so the choice does not
+     swap the account — it sets the transfer reference, which is how
+     Finance tells the gifts apart, and preselects "Donating to" on the
+     enquiry form further down. Built so a second account can be added
+     later without restructuring: give the chosen card a data-account
+     and the bank block reads from it. -->
+<section class="band band--light" id="cause">
+  <div class="container">
+    <div class="dsection__head" data-reveal>
+      <p class="eyebrow">Step one</p>
+      <h2 class="section-title">Choose what your gift supports</h2>
+      <p class="dsection__lead">
+        Both go to MAYEIN. The choice tells our finance team what your transfer is for.
+      </p>
+    </div>
+
+    <div class="causes" role="radiogroup" aria-label="Choose what your gift supports" data-reveal data-reveal-delay="80">
+
+      <button type="button" class="cause is-active" role="radio" aria-checked="true"
+              data-cause="MAYEIN" data-ref="MAYEIN">
+        <span class="cause__tick" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+        </span>
+        <span class="cause__name">MAYEIN &mdash; where it&rsquo;s needed most</span>
+        <span class="cause__desc">
+          Goes wherever the need is greatest across education, entrepreneurship,
+          gender equity and civic engagement.
+        </span>
+      </button>
+
+      <button type="button" class="cause" role="radio" aria-checked="false"
+              data-cause="SMILS" data-ref="SMILS">
+        <span class="cause__tick" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+        </span>
+        <span class="cause__name">SMILS &mdash; the SMART Libraries</span>
+        <span class="cause__desc">
+          Community libraries and the mobile library van: ICT training, CBT
+          preparation, reading and mentoring. <a href="smils.html">What SMILS is</a>.
+        </span>
+      </button>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 3. BANK TRANSFER (§7.4 — the main route) ===================== -->
+<!-- ============================================================
+     DETAILS NEEDED — §8 decision #1, owner: Finance, status open.
+     The brief requires these to be "double-checked by Finance before
+     publishing. Get this signed off in writing." Until that exists,
+     the three values below stay as flagged placeholders. They are the
+     only thing on this site that moves money; a wrong digit here
+     sends a donor's gift to a stranger, so Rule 2 is not negotiable.
+
+     To publish: replace the three data-pending spans with the real
+     values and delete the notice. Nothing else needs to change —
+     the copy button reads whatever is in #acctNumber.
+     ============================================================ -->
+<section class="band band--white" id="bank">
+  <div class="container">
+    <div class="dsection__head" data-reveal>
+      <p class="eyebrow">Step two</p>
+      <h2 class="section-title">Transfer to this account</h2>
+    </div>
+
+    <div class="bank" data-reveal data-reveal-delay="80">
+
+      <p class="bank__notice" role="note">
+        <strong>Not live yet.</strong> These details are awaiting written confirmation
+        from MAYEIN&rsquo;s finance team. Please don&rsquo;t transfer against them.
+      </p>
+
+      <dl class="bank__rows">
+        <div class="bank__row">
+          <dt>Account name</dt>
+          <dd><span class="bank__value is-pending" data-pending>Awaiting Finance</span></dd>
+        </div>
+
+        <div class="bank__row">
+          <dt>Bank</dt>
+          <dd><span class="bank__value is-pending" data-pending>Awaiting Finance</span></dd>
+        </div>
+
+        <div class="bank__row bank__row--number">
+          <dt>Account number</dt>
+          <dd>
+            <span class="bank__value bank__value--big is-pending" id="acctNumber" data-pending>0000000000</span>
+            <button type="button" class="copy" id="copyAcct" data-copy-target="#acctNumber"
+                    aria-label="Copy the account number">
+              <svg class="copy__icon" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="9" y="9" width="11" height="11" rx="2"/>
+                <path d="M5 15V5a2 2 0 0 1 2-2h10"/>
+              </svg>
+              <span class="copy__label">Copy</span>
+            </button>
+          </dd>
+        </div>
+
+        <div class="bank__row">
+          <dt>Use this reference</dt>
+          <dd>
+            <span class="bank__value bank__value--ref"><span id="refPrefix">MAYEIN</span> &ndash; your name</span>
+            <span class="bank__hint">
+              <!-- TODO(finance): confirm the format Finance actually needs to
+                   identify a gift. The brief suggests cause + donor name. -->
+              It&rsquo;s how we know the gift is yours, and what it&rsquo;s for.
+            </span>
+          </dd>
+        </div>
+      </dl>
+
+      <p class="bank__receipt">
+        <strong>Send us your receipt</strong> at
+        <!-- TODO(finance): is this the right inbox for donations, or does
+             Finance want a dedicated address? info@mayein.org is the one
+             already published in the footer. -->
+        <a href="mailto:info@mayein.org">info@mayein.org</a>
+        and we&rsquo;ll acknowledge it. It also means we can thank you properly.
+      </p>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 4. FROM OUTSIDE NIGERIA (§7.4 — enquiry form) ===================== -->
+<!-- ============================================================
+     The explanatory line is the brief's own suggested wording, used
+     verbatim rather than rewritten.
+
+     TODO(backend): this form has no endpoint yet. §7.4 requires it to
+       1. email a NAMED person at MAYEIN — §8 decision #2, still open
+       2. send the donor an automatic confirmation
+       3. show a thank-you message
+       4. be tested end to end before going live
+     A static page cannot do 1 or 2. In the real Divi build this becomes
+     a form module; here the markup, labels and validation are finished
+     and submission is blocked until an action URL exists, so nothing a
+     donor types is silently lost. Same convention as the Mailchimp
+     placeholder the footer used to carry.
+     ============================================================ -->
+<section class="band band--light" id="international">
+  <div class="container">
+    <div class="dsection__head" data-reveal>
+      <p class="eyebrow">Giving from abroad</p>
+      <h2 class="section-title">Outside Nigeria, or giving in another currency?</h2>
+      <p class="dsection__lead">
+        We can&rsquo;t yet accept card or foreign-currency donations directly, but we&rsquo;d
+        love to make it work. Tell us what you&rsquo;d like to give and we&rsquo;ll come back
+        to you within 2 working days.
+      </p>
+    </div>
+
+    <form class="dform" id="donateForm" action="DONATION_FORM_ACTION_URL" method="post" novalidate
+          data-reveal data-reveal-delay="80">
+
+      <div class="dform__grid">
+        <p class="dform__field">
+          <label for="dfName">Your name</label>
+          <input id="dfName" name="name" type="text" autocomplete="name" required>
+        </p>
+
+        <p class="dform__field">
+          <label for="dfEmail">Email</label>
+          <input id="dfEmail" name="email" type="email" autocomplete="email" required>
+        </p>
+
+        <p class="dform__field">
+          <label for="dfCountry">Country</label>
+          <input id="dfCountry" name="country" type="text" autocomplete="country-name" required>
+        </p>
+
+        <p class="dform__field">
+          <label for="dfAmount">Amount and currency</label>
+          <input id="dfAmount" name="amount" type="text" placeholder="e.g. 100 GBP" required>
+        </p>
+
+        <p class="dform__field">
+          <label for="dfCause">Donating to</label>
+          <select id="dfCause" name="cause">
+            <option value="MAYEIN">MAYEIN &mdash; where it&rsquo;s needed most</option>
+            <option value="SMILS">SMILS &mdash; the SMART Libraries</option>
+            <option value="Not sure">Not sure yet</option>
+          </select>
+        </p>
+
+        <p class="dform__field dform__field--wide">
+          <label for="dfMessage">Message <span class="dform__optional">(optional)</span></label>
+          <textarea id="dfMessage" name="message" rows="4"></textarea>
+        </p>
+      </div>
+
+      <button class="btn btn--primary dform__submit" type="submit">Send enquiry</button>
+      <p class="dform__msg" id="donateFormMsg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<!-- ===================== 5. OTHER WAYS TO GIVE (§7.4) ===================== -->
+<!-- Rendered as text links, not buttons: §7.4 allows only one action on
+     this page. The four routes are the brief's own list.
+     TODO(ops): books and devices need a destination — one of the three
+     offices in the footer, or a contact first? And corporate
+     partnership needs a named route, not info@. Both unresolved. -->
+<section class="band band--white" id="other-ways">
+  <div class="container">
+    <div class="dsection__head" data-reveal>
+      <p class="eyebrow">Not cash</p>
+      <h2 class="section-title">Other ways to give</h2>
+    </div>
+
+    <ul class="ways" data-reveal data-reveal-delay="80">
+
+      <li class="way">
+        <h3 class="way__title">Books</h3>
+        <p>Children&rsquo;s and secondary-level titles stock the SMART Libraries directly.</p>
+        <p class="way__route is-pending" data-pending>Drop-off point to be confirmed</p>
+      </li>
+
+      <li class="way">
+        <h3 class="way__title">Laptops and tablets</h3>
+        <p>Working devices go into ICT training and CBT preparation.</p>
+        <p class="way__route is-pending" data-pending>Drop-off point to be confirmed</p>
+      </li>
+
+      <li class="way">
+        <h3 class="way__title">Your time</h3>
+        <p>Mentoring, reading sessions, ICT tutoring and events support.</p>
+        <p class="way__route"><a href="volunteer.html">Volunteer with us</a></p>
+      </li>
+
+      <li class="way">
+        <h3 class="way__title">Corporate partnership</h3>
+        <p>Fund a library, sponsor a cohort, or match your staff&rsquo;s giving.</p>
+        <p class="way__route is-pending" data-pending>Named contact to be confirmed</p>
+      </li>
+
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== 6. WHERE YOUR MONEY GOES (§7.4 — 3 impact tiers) ===================== -->
+<!-- ============================================================
+     FIGURES NEEDED — owner: Programmes.
+     The brief asks for "3-4 example amounts with what each one buys"
+     and gives the 5,000 naira book line as an illustration of the
+     FORM, not as a real unit cost. Publishing an invented
+     cost-per-child would be a false claim about what a donor's money
+     does, so the amounts and their descriptions are placeholders
+     until Programmes supplies verified figures.
+
+     To fill in: replace the amount and the line under it. The tier
+     count is driven by the markup — three or four both lay out.
+     ============================================================ -->
+<section class="band band--light" id="impact-tiers">
+  <div class="container">
+    <div class="dsection__head" data-reveal>
+      <p class="eyebrow">Where it goes</p>
+      <h2 class="section-title">What your gift pays for</h2>
+      <p class="dsection__lead">
+        Example amounts, so you can see the shape of what a gift does.
+      </p>
+    </div>
+
+    <ul class="tiers" data-reveal data-reveal-delay="80">
+      <li class="tier">
+        <p class="tier__amount is-pending" data-pending>&#8358;&mdash;</p>
+        <p class="tier__buys is-pending" data-pending>Amount and what it buys &mdash; awaiting Programmes</p>
+      </li>
+      <li class="tier">
+        <p class="tier__amount is-pending" data-pending>&#8358;&mdash;</p>
+        <p class="tier__buys is-pending" data-pending>Amount and what it buys &mdash; awaiting Programmes</p>
+      </li>
+      <li class="tier">
+        <p class="tier__amount is-pending" data-pending>&#8358;&mdash;</p>
+        <p class="tier__buys is-pending" data-pending>Amount and what it buys &mdash; awaiting Programmes</p>
+      </li>
+    </ul>
+
+    <p class="tiers__note">
+      Give any amount you like &mdash; these are examples, not minimums.
+    </p>
+  </div>
+</section>
+
+<!-- ===================== 7. TRUST SIGNALS (§7.4) ===================== -->
+<!-- The two registrations are real and already published in the footer,
+     so they are stated plainly here rather than flagged.
+     LOGOS NEEDED — §8 decision #5: the final partner list AND written
+     permission to display each logo. Same placeholder strip as the
+     homepage; for an NGO that permission is not optional. -->
+<section class="band band--white" id="trust">
+  <div class="container">
+    <div class="dsection__head" data-reveal>
+      <p class="eyebrow">Who you&rsquo;re giving to</p>
+      <h2 class="section-title">Registered, and accountable</h2>
+    </div>
+
+    <ul class="trust" data-reveal data-reveal-delay="80">
+      <li class="trust__item">
+        <p class="trust__label">Registered in Nigeria</p>
+        <p class="trust__value">CAC/IT/NO 52811</p>
+      </li>
+      <li class="trust__item">
+        <p class="trust__label">United Nations</p>
+        <p class="trust__value">Special Consultative Status with ECOSOC (2021)</p>
+      </li>
+      <li class="trust__item">
+        <p class="trust__label">Working since</p>
+        <p class="trust__value">2012, from Ibadan, across 15 states</p>
+      </li>
+    </ul>
+  </div>
+
+  <p class="container partners__label" data-reveal>Partners &amp; donors</p>
+  <div class="partners__marquee" id="partnersMarquee" data-reveal data-reveal-delay="80">
+    <ul class="partners__track">
+      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
+      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
+      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
+      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
+      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
+      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
+      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
+      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== 8. FAQ (§7.4 — short) ===================== -->
+<!-- ============================================================
+     ANSWERS NEEDED — owner: Comms. The brief asks for "a short FAQ"
+     without saying what goes in it. The four questions below are the
+     ones this page actually raises in a donor's mind — no card
+     payment, no receipt yet, where the money goes, tax relief. The
+     questions are structural, so they are written; every ANSWER is a
+     factual claim about MAYEIN's finances and status, so none is
+     invented.
+     ============================================================ -->
+<section class="band band--light" id="faq">
+  <div class="container">
+    <div class="dsection__head" data-reveal>
+      <p class="eyebrow">Questions</p>
+      <h2 class="section-title">Before you give</h2>
+    </div>
+
+    <div class="faq" data-reveal data-reveal-delay="80">
+
+      <details class="faq__item">
+        <summary>Why can&rsquo;t I pay by card?</summary>
+        <div class="faq__answer is-pending" data-pending>Answer awaiting Comms.</div>
+      </details>
+
+      <details class="faq__item">
+        <summary>Will I get a receipt?</summary>
+        <div class="faq__answer is-pending" data-pending>Answer awaiting Comms.</div>
+      </details>
+
+      <details class="faq__item">
+        <summary>How much of my gift reaches the programmes?</summary>
+        <div class="faq__answer is-pending" data-pending>Answer awaiting Finance.</div>
+      </details>
+
+      <details class="faq__item">
+        <summary>Is my donation tax deductible?</summary>
+        <div class="faq__answer is-pending" data-pending>Answer awaiting Finance.</div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== GLOBAL FOOTER =====================
+     Keep this block identical on every page. Once there is more than
+     one page, move it to a shared include rather than copying it.
+     ========================================================== -->
+<footer class="site-footer" id="contact">
+
+  <!-- asset_011 / asset_11_...svg — navy curve carrying the CTA band
+       down into the footer -->
+  <div class="site-footer__wave" aria-hidden="true">
+    <svg width="100%" height="100" viewBox="0 0 1280 140" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <g fill="#000066"><path d="M320 28C160 28 80 49 0 70V0h1280v70c-80 21-160 42-320 42-320 0-320-84-640-84z"/></g>
+    </svg>
+  </div>
+
+  <!-- ---------- four columns ---------- -->
+  <div class="container footer__cols">
+
+    <!-- 1. brand -->
+    <div class="footer__col footer__col--brand" data-reveal>
+      <a class="footer__logo" href="index.html" aria-label="MAYEIN — back to homepage">
+        <img src="assets/asset_001.png" alt="MAYEIN — Mentors Assistance for Youth and Entrepreneurs Initiative">
+      </a>
+      <p class="footer__about">
+        A Nigerian nonprofit advancing positive youth development through education,
+        entrepreneurship, gender equity and civic engagement.<br>
+        Headquartered in Ibadan, reaching young people across 15 states.
+      </p>
+
+      <ul class="socials">
+        <li><a href="https://www.facebook.com/map2mayein" target="_blank" rel="noopener noreferrer" aria-label="MAYEIN on Facebook" class="social social--fb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 9V7.5c0-.9.3-1.5 1.7-1.5H17V3.1A22 22 0 0 0 14.8 3C12.3 3 10.6 4.5 10.6 7.2V9H8v3.3h2.6V21H14v-8.7h2.6l.4-3.3z"/></svg></a></li>
+        <li><a href="https://x.com/mayeinorg" target="_blank" rel="noopener noreferrer" aria-label="MAYEIN on X" class="social social--x"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h4.2l4.6 6.2L17.2 3H21l-7.1 8 7.4 10h-4.2l-5-6.7L6.4 21H3l7.5-8.5z"/></svg></a></li>
+        <li><a href="https://www.instagram.com/mayeinorg" target="_blank" rel="noopener noreferrer" aria-label="MAYEIN on Instagram" class="social social--ig"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.8" y="3.8" width="16.4" height="16.4" rx="4.6" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3.9" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.1" cy="6.9" r="1.2"/></svg></a></li>
+        <li><a href="https://www.linkedin.com/company/mayein-organisation/" target="_blank" rel="noopener noreferrer" aria-label="MAYEIN on LinkedIn" class="social social--li"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.9 20H3.6V9.2h3.3zM5.2 7.7a1.9 1.9 0 1 1 0-3.8 1.9 1.9 0 0 1 0 3.8zM20.4 20h-3.3v-5.3c0-1.3 0-2.9-1.8-2.9s-2 1.4-2 2.8V20H10V9.2h3.1v1.5h.1a3.5 3.5 0 0 1 3.1-1.7c3.3 0 3.9 2.2 3.9 5z"/></svg></a></li>
+        <!-- YouTube icon intentionally omitted: MAYEIN has no channel yet.
+             Add it back here once a real URL exists. -->
+      </ul>
+    </div>
+
+    <!-- 2. quick links -->
+    <nav class="footer__col" aria-label="Quick links" data-reveal data-reveal-delay="80">
+      <h3 class="footer__heading">Quick Links</h3>
+      <ul class="footer__links">
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Our Team</a></li>
+        <li><a href="#">SMILS</a></li>
+        <li><a href="donate.html">Donate</a></li>
+      </ul>
+    </nav>
+
+    <!-- 3. more -->
+    <nav class="footer__col" aria-label="More" data-reveal data-reveal-delay="160">
+      <h3 class="footer__heading">More</h3>
+      <ul class="footer__links">
+        <li><a href="#">Latest Content</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="#">Volunteer</a></li>
+      </ul>
+    </nav>
+
+    <!-- 4. contact — all three locations -->
+    <div class="footer__col footer__col--contact" data-reveal data-reveal-delay="240">
+      <h3 class="footer__heading">Contact</h3>
+
+      <ul class="footer__contact">
+        <li>
+          <span class="footer__label">Headquarters</span>
+          <address>48, Adeyi Avenue, Old Bodija, Ibadan, Nigeria</address>
+        </li>
+        <li>
+          <span class="footer__label">MAYEIN Youth Centre</span>
+          <address>18, Zone 7, Alafia Estate, Alaka, Ojoo, Ibadan</address>
+        </li>
+        <li>
+          <span class="footer__label">MAYEIN H.E.E.D</span>
+          <address>SW9//844B Mko Abiola Way, Ring Road, Ibadan</address>
+        </li>
+      </ul>
+
+      <ul class="footer__contact footer__contact--direct">
+        <li><a href="tel:+2348110198698">+234 811 019 8698</a></li>
+        <li><a href="mailto:info@mayein.org">info@mayein.org</a></li>
+        <li><span class="footer__hours">Mon &ndash; Fri, 9AM &ndash; 5PM</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ---------- bottom bar ---------- -->
+  <div class="footer__bar">
+    <div class="container footer__bar-inner">
+      <p>&copy; <span id="year">2026</span> MAYEIN. All rights reserved.</p>
+      <p class="footer__legal">
+        Registered in Nigeria &middot; CAC/IT/NO 52811 &middot;
+        Special Consultative Status with the UN Economic and Social Council (2021)
+      </p>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script src="script.js"></script>
+</body>
+</html>

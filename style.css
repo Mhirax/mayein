@@ -964,7 +964,7 @@ p:last-child { margin-bottom: 0; }
       rgba(14, 12, 25, .62) 0%,
       rgba(14, 12, 25, .74) 42%,
       rgba(14, 12, 25, .88) 100%),
-    url("assets_1791032993965/asset_015.jpg");
+    url("assets/asset_015.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1375,4 +1375,435 @@ p:last-child { margin-bottom: 0; }
   .btn { width: 100%; }
   .cta__actions { flex-direction: column; }
   .news__viewall { width: auto; }
+}
+
+/* ============================================================
+   DONATE PAGE — brief §7.4
+   Only the components this page adds. Everything shared (bands,
+   container, section titles, buttons, the partner strip, the
+   placeholder hatching) is reused from above, per Rule 5.
+
+   The page's own rule is §7.4's "no competing buttons — the only
+   action is to give", so there is exactly one .btn here (the form
+   submit) plus the copy control. Every other route out of the page
+   is a text link.
+   ============================================================ */
+
+/* ---------- shared section header ---------- */
+.dsection__head { max-width: 620px; margin-bottom: 36px; }
+.dsection__lead {
+  font-size: 16.5px;
+  line-height: 1.7;
+  color: var(--dark-gray-2);
+  margin-bottom: 0;
+}
+
+/* a value we are waiting on someone for. Deliberately legible rather
+   than hidden — these are the holes the client has to go and fill,
+   and a reviewer should be able to count them at a glance. */
+.is-pending[data-pending] {
+  display: inline-block;
+  padding: 2px 10px;
+  border: 1px dashed rgba(0, 0, 102, .34);
+  border-radius: var(--r-md);
+  background: rgba(0, 0, 102, .035);
+  color: rgba(0, 0, 102, .62);
+  font-style: normal;
+  opacity: 1;
+}
+
+/* ============================================================
+   1. HERO
+   ============================================================ */
+.dhero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: flex-end;
+  min-height: clamp(380px, 54vh, 540px);
+  padding: 120px 0 56px;
+  overflow: hidden;
+  background: var(--dark-gray-5);
+  color: var(--white);
+}
+.dhero__media { position: absolute; inset: 0; z-index: -2; }
+.dhero__media img { width: 100%; height: 100%; object-fit: cover; object-position: center 38%; }
+/* the photograph is a crowd of faces, so the text needs its own field:
+   a left-weighted scrim rather than a flat wash, which would grey out
+   the whole picture to protect six lines of type */
+.dhero::after {
+  content: "";
+  position: absolute; inset: 0; z-index: -1;
+  background:
+    linear-gradient(to right,
+      rgba(14, 12, 25, .90) 0%,
+      rgba(14, 12, 25, .78) 38%,
+      rgba(14, 12, 25, .40) 72%,
+      rgba(14, 12, 25, .30) 100%),
+    linear-gradient(to top, rgba(14, 12, 25, .72) 0%, transparent 55%);
+}
+/* .dhero__inner IS the .container, so it keeps the container's width and
+   centring — the title and lead carry their own max-width instead. An
+   override here pins the block to the viewport edge and the hero stops
+   lining up with every section below it. */
+.dhero__inner { position: relative; }
+.dhero__eyebrow { color: var(--yellow); }
+.dhero__title {
+  font-size: clamp(32px, 5vw, 52px);
+  line-height: 1.08;
+  color: var(--white);
+  margin-bottom: 16px;
+  max-width: 14ch;
+}
+.dhero__lead {
+  font-size: clamp(16px, 1.5vw, 18px);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, .88);
+  max-width: 46ch;
+  margin-bottom: 18px;
+}
+.dhero__jump {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--yellow);
+  border-bottom: 1.5px solid rgba(255, 204, 0, .45);
+  padding-bottom: 2px;
+  transition: border-color var(--t-fast) var(--ease-out);
+}
+.dhero__jump::after { content: "\2193"; }
+.dhero__jump:hover { border-bottom-color: var(--yellow); }
+
+/* ============================================================
+   2. CHOOSE YOUR CAUSE
+   Two cards behaving as one radio group. Buttons rather than real
+   radios because the whole card is the hit area — the group keeps
+   role="radiogroup" and aria-checked so it still reads as a choice.
+   ============================================================ */
+.causes { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.cause {
+  position: relative;
+  display: block;
+  padding: 26px 26px 26px 60px;
+  text-align: left;
+  background: var(--white);
+  border: 1.5px solid var(--light-gray);
+  border-radius: var(--r-xl);
+  cursor: pointer;
+  transition:
+    border-color var(--t-fast) var(--ease-out),
+    box-shadow var(--t-med) var(--ease-out),
+    transform var(--t-med) var(--ease-out);
+}
+.cause:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
+.cause.is-active { border-color: var(--dark-blue); box-shadow: 0 0 0 1.5px var(--dark-blue); }
+.cause__tick {
+  position: absolute;
+  top: 27px; left: 24px;
+  display: grid; place-content: center;
+  width: 22px; height: 22px;
+  border: 1.5px solid var(--light-gray);
+  border-radius: var(--r-full);
+  transition: background var(--t-fast) var(--ease-out), border-color var(--t-fast) var(--ease-out);
+}
+.cause__tick svg { width: 13px; height: 13px; fill: none; stroke: var(--white); stroke-width: 3; opacity: 0; }
+.cause.is-active .cause__tick { background: var(--dark-blue); border-color: var(--dark-blue); }
+.cause.is-active .cause__tick svg { opacity: 1; }
+.cause__name {
+  display: block;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--dark-blue);
+  margin-bottom: 8px;
+}
+.cause__desc { display: block; font-size: 15px; line-height: 1.65; color: var(--dark-gray-2); }
+.cause__desc a { color: var(--blue-4); text-decoration: underline; text-underline-offset: 2px; }
+
+/* ============================================================
+   3. BANK TRANSFER
+   The one block on the site that moves money. Big, calm, high
+   contrast, and the account number is the largest thing on the page.
+   ============================================================ */
+.bank {
+  max-width: 680px;
+  padding: 8px 34px 34px;
+  background: var(--white);
+  border: 1.5px solid var(--light-gray);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-lift);
+}
+.bank__notice {
+  margin: 0 -34px 26px;
+  padding: 14px 34px;
+  background: rgba(239, 132, 81, .12);
+  border-bottom: 1px solid rgba(239, 132, 81, .34);
+  border-radius: var(--r-xl) var(--r-xl) 0 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #8a4420;
+}
+.bank__notice strong { color: #7a3a18; }
+
+.bank__rows { margin: 0; }
+.bank__row { padding: 18px 0; border-bottom: 1px solid var(--light-gray); }
+.bank__row:last-child { border-bottom: 0; padding-bottom: 0; }
+.bank__row dt {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 11.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--dark-gray-2);
+  margin-bottom: 8px;
+}
+.bank__row dd { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.bank__value {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 19px;
+  color: var(--dark-blue);
+}
+/* the number itself: tabular figures and open letter-spacing so a
+   donor can read it off the screen into a banking app without
+   losing their place */
+.bank__value--big {
+  font-size: clamp(26px, 4vw, 34px);
+  letter-spacing: .06em;
+  font-variant-numeric: tabular-nums;
+}
+.bank__value--ref { font-size: 17px; }
+.bank__hint {
+  flex: 1 1 100%;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--dark-gray-2);
+}
+
+.copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 16px;
+  border: 1.5px solid var(--dark-blue);
+  border-radius: var(--r-full);
+  background: transparent;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 12.5px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--dark-blue);
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease-out), color var(--t-fast) var(--ease-out);
+}
+.copy:hover { background: var(--dark-blue); color: var(--white); }
+.copy__icon { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; }
+.copy.is-done { background: var(--dark-blue); color: var(--white); border-color: var(--dark-blue); }
+.copy.is-failed { border-color: var(--orange); color: #8a4420; }
+
+.bank__receipt {
+  margin: 26px 0 0;
+  padding-top: 22px;
+  border-top: 1px solid var(--light-gray);
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--dark-gray-2);
+}
+.bank__receipt strong { color: var(--dark-blue); }
+.bank__receipt a { color: var(--blue-4); text-decoration: underline; text-underline-offset: 2px; }
+
+/* ============================================================
+   4. ENQUIRY FORM
+   ============================================================ */
+.dform { max-width: 680px; }
+.dform__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.dform__field { margin: 0; display: flex; flex-direction: column; gap: 7px; }
+.dform__field--wide { grid-column: 1 / -1; }
+.dform__field label {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 12.5px;
+  letter-spacing: .06em;
+  color: var(--dark-blue);
+}
+.dform__optional { font-weight: 400; letter-spacing: 0; color: var(--dark-gray-2); text-transform: none; }
+.dform__field input,
+.dform__field select,
+.dform__field textarea {
+  width: 100%;
+  padding: 13px 15px;
+  border: 1.5px solid var(--light-gray);
+  border-radius: var(--r-lg);
+  background: var(--white);
+  font-family: var(--font-body);
+  font-size: 15.5px;
+  color: var(--neutral);
+  transition: border-color var(--t-fast) var(--ease-out), box-shadow var(--t-fast) var(--ease-out);
+}
+.dform__field textarea { resize: vertical; min-height: 104px; }
+.dform__field input:focus,
+.dform__field select:focus,
+.dform__field textarea:focus {
+  outline: none;
+  border-color: var(--blue-2);
+  box-shadow: 0 0 0 3px rgba(34, 146, 241, .18);
+}
+.dform__field input.is-invalid,
+.dform__field select.is-invalid,
+.dform__field textarea.is-invalid { border-color: var(--orange); }
+.dform__submit { margin-top: 24px; }
+.dform__msg {
+  margin: 16px 0 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+.dform__msg:empty { display: none; }
+.dform__msg.is-error { color: #a3302f; }
+.dform__msg.is-ok    { color: #1d6b33; }
+.dform__msg.is-note  { color: var(--dark-gray-2); }
+
+/* ============================================================
+   5. OTHER WAYS TO GIVE
+   ============================================================ */
+.ways { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.way {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  border-top: 2px solid var(--dark-blue);
+}
+.way__title {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--dark-blue);
+  margin-bottom: 10px;
+}
+.way p { font-size: 15px; line-height: 1.65; color: var(--dark-gray-2); margin-bottom: 10px; }
+/* descriptions differ in length, so push every route to the bottom and
+   the row reads as a row rather than four ragged columns */
+.way__route { margin: auto 0 0 !important; padding-top: 12px; font-size: 14.5px !important; }
+.way__route a {
+  font-family: var(--font-head);
+  font-weight: 600;
+  color: var(--blue-4);
+  border-bottom: 1.5px solid rgba(26, 115, 232, .4);
+  padding-bottom: 1px;
+  transition: border-color var(--t-fast) var(--ease-out);
+}
+.way__route a:hover { border-bottom-color: var(--blue-4); }
+
+/* ============================================================
+   6. IMPACT TIERS
+   ============================================================ */
+.tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.tier {
+  padding: 28px 24px;
+  background: var(--white);
+  border-radius: var(--r-xl);
+  border: 1.5px solid var(--light-gray);
+  text-align: center;
+}
+.tier__amount {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: clamp(26px, 3.4vw, 34px);
+  line-height: 1;
+  color: var(--dark-blue);
+  margin-bottom: 12px;
+}
+.tier__buys { font-size: 15px; line-height: 1.6; color: var(--dark-gray-2); margin-bottom: 0; }
+.tiers__note {
+  margin: 22px 0 0;
+  font-size: 14.5px;
+  color: var(--dark-gray-2);
+  text-align: center;
+}
+
+/* ============================================================
+   7. TRUST SIGNALS
+   ============================================================ */
+.trust { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 56px; }
+.trust__item { padding-left: 18px; border-left: 2px solid var(--yellow); }
+.trust__label {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 11.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--dark-gray-2);
+  margin-bottom: 7px;
+}
+.trust__value { font-size: 16px; line-height: 1.55; color: var(--dark-blue); margin-bottom: 0; }
+
+/* ============================================================
+   8. FAQ
+   <details> rather than scripted accordions: it opens with JS off,
+   it is keyboard and screen-reader correct for free, and Ctrl+F
+   finds the answers inside it in current browsers.
+   ============================================================ */
+.faq { max-width: 720px; }
+.faq__item { border-bottom: 1px solid var(--light-gray); }
+.faq__item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 0;
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 16.5px;
+  color: var(--dark-blue);
+}
+.faq__item summary::-webkit-details-marker { display: none; }
+.faq__item summary::after {
+  content: "+";
+  flex: 0 0 auto;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--blue-2);
+  transition: transform var(--t-fast) var(--ease-out);
+}
+.faq__item[open] summary::after { content: "\2212"; }
+.faq__answer { padding: 0 0 22px; font-size: 15.5px; line-height: 1.7; color: var(--dark-gray-2); }
+
+/* ============================================================
+   DONATE — MOBILE
+   Rule 1 is mobile first: this page is read on a phone with a
+   banking app open in the other hand.
+   ============================================================ */
+@media (max-width: 860px) {
+  .causes { grid-template-columns: 1fr; }
+  .ways   { grid-template-columns: 1fr 1fr; }
+  .trust  { grid-template-columns: 1fr; gap: 20px; }
+  .tiers  { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .dhero { min-height: 0; padding: 104px 0 40px; }
+  .dhero::after {
+    background:
+      linear-gradient(to bottom, rgba(14, 12, 25, .62) 0%, rgba(14, 12, 25, .88) 70%);
+  }
+  .dhero__title { max-width: none; }
+  .dsection__head { margin-bottom: 28px; }
+
+  .bank { padding: 8px 20px 24px; border-radius: var(--r-lg); }
+  .bank__notice { margin: 0 -20px 22px; padding: 13px 20px; border-radius: var(--r-lg) var(--r-lg) 0 0; }
+  /* the number and its copy button stack rather than squeeze */
+  .bank__row--number dd { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .copy { width: 100%; justify-content: center; padding: 13px 16px; }
+
+  .dform__grid { grid-template-columns: 1fr; }
+  .dform__submit { width: 100%; }
+
+  .ways { grid-template-columns: 1fr; gap: 20px; }
 }

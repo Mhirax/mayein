@@ -541,6 +541,223 @@
   }
 
   /* ==========================================================
+     11. DONATE — CHOOSE YOUR CAUSE  (brief §7.4)
+     Two cards acting as one radio group. MAYEIN runs a single
+     account, so the choice does not swap the bank details — it
+     sets the transfer reference, which is how Finance tells gifts
+     apart, and preselects the same cause on the enquiry form.
+
+     Built so a second account can arrive later without a rewrite:
+     give a card data-account="..." and set it here alongside the
+     reference.
+     ========================================================== */
+  function initCauses() {
+    var group = $('.causes');
+    if (!group) return;
+
+    var cards = $$('.cause', group);
+    if (!cards.length) return;
+
+    var refOut   = $('#refPrefix');
+    var formCause = $('#dfCause');
+
+    function select(card) {
+      cards.forEach(function (c) {
+        var on = c === card;
+        c.classList.toggle('is-active', on);
+        c.setAttribute('aria-checked', on ? 'true' : 'false');
+        c.tabIndex = on ? 0 : -1;
+      });
+
+      var ref = card.getAttribute('data-ref') || '';
+      if (refOut) refOut.textContent = ref;
+
+      /* keep the form in step, but never overwrite a donor who has
+         already chosen something there themselves */
+      if (formCause && !formCause.dataset.touched) {
+        var cause = card.getAttribute('data-cause');
+        for (var i = 0; i < formCause.options.length; i++) {
+          if (formCause.options[i].value === cause) { formCause.selectedIndex = i; break; }
+        }
+      }
+    }
+
+    cards.forEach(function (card, i) {
+      card.tabIndex = card.classList.contains('is-active') ? 0 : -1;
+      card.addEventListener('click', function () { select(card); });
+
+      /* arrow keys move within a radio group, which is what this is */
+      card.addEventListener('keydown', function (e) {
+        var step = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1
+                 : e.key === 'ArrowLeft'  || e.key === 'ArrowUp'   ? -1 : 0;
+        if (!step) return;
+        e.preventDefault();
+        var next = cards[(i + step + cards.length) % cards.length];
+        select(next);
+        next.focus();
+      });
+    });
+
+    if (formCause) {
+      formCause.addEventListener('change', function () { formCause.dataset.touched = '1'; });
+    }
+  }
+
+  /* ==========================================================
+     12. DONATE — COPY THE ACCOUNT NUMBER  (brief §7.4)
+     The brief calls this "the biggest friction point on mobile".
+
+     navigator.clipboard is unavailable in any non-secure context —
+     which includes opening this file straight off disk, and any
+     plain-http staging host — so there is a execCommand fallback
+     and, if both fail, the number is selected so the donor can copy
+     it by hand. The control always tells them which happened.
+     ========================================================== */
+  function initCopy() {
+    var btns = $$('[data-copy-target]');
+    if (!btns.length) return;
+
+    function legacyCopy(text) {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:absolute;left:-9999px;top:0;';
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (err) { ok = false; }
+      document.body.removeChild(ta);
+      return ok;
+    }
+
+    function selectNode(el) {
+      try {
+        var range = document.createRange();
+        range.selectNodeContents(el);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+      } catch (err) { /* nothing useful left to try */ }
+    }
+
+    btns.forEach(function (btn) {
+      var target = $(btn.getAttribute('data-copy-target'));
+      if (!target) return;
+
+      var label = $('.copy__label', btn);
+      var original = label ? label.textContent : '';
+      var revert;
+
+      function feedback(text, cls) {
+        btn.classList.remove('is-done', 'is-failed');
+        if (cls) btn.classList.add(cls);
+        if (label) label.textContent = text;
+        clearTimeout(revert);
+        revert = setTimeout(function () {
+          btn.classList.remove('is-done', 'is-failed');
+          if (label) label.textContent = original;
+        }, 2600);
+      }
+
+      function done(ok) {
+        if (ok) {
+          feedback('Copied', 'is-done');
+        } else {
+          selectNode(target);
+          feedback('Press Ctrl+C', 'is-failed');
+        }
+      }
+
+      btn.addEventListener('click', function () {
+        var text = (target.textContent || '').trim();
+        if (!text) return;
+
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(text).then(function () {
+            done(true);
+          }, function () {
+            done(legacyCopy(text));
+          });
+        } else {
+          done(legacyCopy(text));
+        }
+      });
+    });
+  }
+
+  /* ==========================================================
+     13. DONATE — ENQUIRY FORM  (brief §7.4)
+     Validates on the client, then stops: the form has no endpoint
+     yet (§8 decision #2 — who receives it — is still open), so
+     rather than appear to send and lose what a donor typed, it
+     refuses and says so. Mirrors the newsletter convention.
+
+     When the endpoint exists, replace the action in donate.html
+     and this guard steps out of the way on its own.
+     ========================================================== */
+  var DONATE_PLACEHOLDER = 'DONATION_FORM_ACTION_URL';
+
+  function initDonateForm() {
+    var form = $('#donateForm');
+    if (!form) return;
+
+    var msg = $('#donateFormMsg');
+    var required = $$('[required]', form);
+
+    function say(text, kind) {
+      if (!msg) return;
+      msg.textContent = text;
+      msg.className = 'dform__msg is-' + kind;
+    }
+
+    function invalid(field) {
+      if (field.type === 'email') {
+        return !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(field.value.trim());
+      }
+      return field.value.trim() === '';
+    }
+
+    form.addEventListener('submit', function (e) {
+      var firstBad = null;
+
+      required.forEach(function (field) {
+        var bad = invalid(field);
+        field.classList.toggle('is-invalid', bad);
+        if (bad && !firstBad) firstBad = field;
+      });
+
+      if (firstBad) {
+        e.preventDefault();
+        say('Please check the highlighted fields.', 'error');
+        firstBad.focus();
+        return;
+      }
+
+      if (form.getAttribute('action').indexOf(DONATE_PLACEHOLDER) !== -1) {
+        e.preventDefault();
+        say('This form is not connected yet, so nothing was sent — please email ' +
+            'info@mayein.org in the meantime. (Builder: add the form endpoint in donate.html.)', 'note');
+        if (window.console) {
+          console.warn('[donate] form action is still ' + DONATE_PLACEHOLDER + '; nothing was submitted.');
+        }
+        return;
+      }
+
+      say('Thank you — we have your enquiry and will reply within 2 working days.', 'ok');
+    });
+
+    required.forEach(function (field) {
+      field.addEventListener('input', function () {
+        field.classList.remove('is-invalid');
+        if (msg && msg.classList.contains('is-error')) {
+          msg.textContent = '';
+          msg.className = 'dform__msg';
+        }
+      });
+    });
+  }
+
+  /* ==========================================================
      10. BOOT
      ========================================================== */
   function init() {
@@ -554,6 +771,12 @@
     initVoices();
     initPartners();
     initNewsletter();
+
+    /* donate page — each returns immediately when its markup is absent */
+    initCauses();
+    initCopy();
+    initDonateForm();
+
     initSmoothScroll(headerApi);
   }
 
