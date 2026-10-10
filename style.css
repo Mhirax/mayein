@@ -614,8 +614,6 @@ p:last-child { margin-bottom: 0; }
   padding: 0 10px;
 }
 .stat + .stat { border-left: 1px solid rgba(255, 255, 255, .16); }
-/* keeps the "+" on the same line as the figure */
-.stat__value { display: flex; align-items: baseline; }
 .stat__num {
   font-family: var(--font-head);
   font-weight: 700;
@@ -623,28 +621,11 @@ p:last-child { margin-bottom: 0; }
   line-height: 1;
   color: var(--white);
 }
-.stat__plus {
-  font-family: var(--font-head);
-  font-weight: 700;
-  font-size: clamp(22px, 2.6vw, 32px);
-  line-height: 1;
-  color: var(--yellow);
-}
 .stat__label {
   margin-top: 14px;
   font-size: 14px;
   letter-spacing: .04em;
   color: rgba(255, 255, 255, .86);
-}
-/* a counter with no verified figure yet — see the note in index.html */
-.stat__num[data-count-pending] { color: rgba(255, 255, 255, .42); }
-.stat__pending {
-  margin-top: 6px;
-  font-size: 10.5px;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--yellow);
-  opacity: .75;
 }
 
 /* ============================================================
@@ -843,6 +824,11 @@ p:last-child { margin-bottom: 0; }
 /* ============================================================
    11. SPONSORS & PARTNERS  (logo marquee)
    ============================================================ */
+/* Partners & donors sits directly under the SMILS feature on the same
+   white surface, so the two read as one block rather than two bands.
+   SMILS' own bottom padding is the gap; a second one would double it. */
+.smils + .partners { padding-top: 0; }
+
 .partners__label {
   text-align: center;
   font-family: var(--font-head);
@@ -941,23 +927,48 @@ p:last-child { margin-bottom: 0; }
    (Facebook #1877F2, LinkedIn #0A66C2) for their hover states to read.
    The gradient is listed before the image so it paints on top of it,
    and deepens toward the bottom so the contact column and the legal
-   bar keep their contrast. */
+   bar keep their contrast.
+
+   The tint was lifted from .82/.91/.96 so the photo actually reads —
+   the SMART Library opening in Eleyele, the programme the page now
+   leads with. A lighter tint alone put the footer text straight on top
+   of a sharp group photo and its banner lettering, which is why the
+   photo is also blurred: blurred, it carries colour and shape at a
+   tint this low, and the headings keep a flat field behind them. The
+   radius is set by the banner lettering in the photo — anything under
+   ~8px leaves it legible as ghost text behind the column headings.
+
+   The photo and tint sit on a ::before rather than on .site-footer so
+   the blur reaches the photo and not the text. inset: -24px overscans
+   it, because blur() feathers an element's own edges and would
+   otherwise leave a pale seam down each side. The negative z-index
+   keeps it behind the columns but still above the footer's own
+   background-color, which stays as the pre-load fallback; isolate
+   confines it to the footer. */
 .site-footer {
   position: relative;
-  padding: 100px 0 0;
+  isolation: isolate;
+  padding: 150px 0 0;
   background-color: var(--dark-gray-5);   /* fallback before the photo loads */
+  color: var(--white);
+  overflow: hidden;
+}
+.site-footer::before {
+  content: "";
+  position: absolute;
+  inset: -36px;
+  z-index: -1;
   background-image:
     linear-gradient(
       to bottom,
-      rgba(14, 12, 25, .82) 0%,
-      rgba(14, 12, 25, .91) 42%,
-      rgba(14, 12, 25, .96) 100%),
-    url("assets_1791032993965/asset_010.jpg");
+      rgba(14, 12, 25, .62) 0%,
+      rgba(14, 12, 25, .74) 42%,
+      rgba(14, 12, 25, .88) 100%),
+    url("assets_1791032993965/asset_015.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  color: var(--white);
-  overflow: hidden;
+  filter: blur(9px);
 }
 
 /* ---------- newsletter strip ---------- */
@@ -1333,7 +1344,7 @@ p:last-child { margin-bottom: 0; }
   .site-footer__wave svg { height: 58px; }
   .cta__actions { gap: 14px; }
 
-  .site-footer { padding-top: 110px; }
+  .site-footer { padding-top: 132px; }
   .footer__cols { grid-template-columns: 1fr 1fr; gap: 36px 28px; padding-bottom: 48px; }
   .footer__col--brand { grid-column: 1 / -1; }
 

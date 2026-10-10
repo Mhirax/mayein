@@ -53,8 +53,6 @@
           </ul>
         </li>
 
-        <li><a class="nav__link" href="#">Projects</a></li>
-        <li><a class="nav__link" href="#">Shop</a></li>
         <li><a class="nav__link" href="#">Latest Content</a></li>
         <li><a class="nav__link" href="#contact">Contact</a></li>
       </ul>
@@ -117,18 +115,26 @@
 </section>
 
 <!-- ============================================================
-     HOMEPAGE SECTIONS — order fixed by the Rebuild Brief §7.3
+     HOMEPAGE SECTIONS — order follows the Rebuild Brief §7.3, with the
+     client's trims applied:
        2 About · 3 Mission & Vision · 4 Pillars · 6 Impact ·
-       7 SMILS · 8 Latest News · 9 Shop · 10 Testimonials ·
-       11 Partners · 12 CTA
+       7 SMILS · 11 Partners · 8 Latest News · 12 CTA
      ("What We Do" was §7.3 item 5 — deleted, it repeated the pillars.)
+
+     CLIENT CUTS — 9 Shop, 10 Testimonials and the footer's newsletter
+     strip are off the homepage; "Projects" and "Shop" are out of the
+     nav. Their CSS (.shop, .voices, .newsletter) and the initVoices /
+     initNewsletter handlers in script.js are left in place for the
+     shop and SMILS pages the brief still plans. Both handlers no-op
+     when their markup is absent, so nothing runs here.
+     11 Partners was moved up to sit directly under SMILS.
 
      FORWARD LINKS — these pages do not exist yet. Brief §2.2 requires
      every button to point at the new pages rather than the old ones,
      so they are written out in full here. Until the pages are built
      they 404. One find-and-replace changes them all:
        about.html · programs.html · smils.html
-       news.html  · shop.html     · donate.html · volunteer.html
+       news.html  · donate.html   · volunteer.html
      ============================================================ -->
 
 <!-- ===================== 2. ABOUT  (§7.3 item 2 — cut to 40 words) ===================== -->
@@ -250,16 +256,17 @@
 
 <!-- ===================== 6. IMPACT NUMBERS  (§7.3 item 6) ===================== -->
 <!-- ============================================================
-     FIGURES NEEDED — brief §8 decision #4, owner: Programmes.
-     Three of these four counters have no verified figure. The brief's
-     Rule 2 ("never invent content") rules out guessing, so they render
-     as a dash with a "figure pending" note until Programmes supplies them.
+     FIGURES — the four counters carry the numbers MAYEIN publishes on
+     the current mayein.org, restored at the client's instruction after
+     they were pulled back to "figure pending" here. They are the
+     client's own published figures, so they are theirs to stand behind.
 
-     The beneficiaries count is the ONE sourced number: "over 23,000"
-     appears in MAYEIN's own live About copy. The 29,000 / 286 / 127 / 15
-     that previously sat here had no source and have been removed.
+     Note the one discrepancy to settle with Programmes (brief §8
+     decision #4): the live site's counter says 29,000 beneficiaries
+     while the live About copy says "over 23,000". Both are MAYEIN's,
+     and the counter is the one shown here.
 
-     To fill one in: replace data-count-pending with data-count-to="<number>".
+     To revise one: change data-count-to="<number>".
      ============================================================ -->
 <section class="impact band band--navy" id="impact">
   <div class="container">
@@ -270,28 +277,23 @@
 
     <ul class="impact__grid">
       <li class="stat" data-reveal>
-        <span class="stat__value">
-          <span class="stat__num" data-count-to="23000">0</span><span class="stat__plus">+</span>
-        </span>
+        <span class="stat__num" data-count-to="29000">0</span>
         <span class="stat__label">Beneficiaries</span>
       </li>
 
       <li class="stat" data-reveal data-reveal-delay="100">
-        <span class="stat__num" data-count-pending>&mdash;</span>
+        <span class="stat__num" data-count-to="286">0</span>
         <span class="stat__label">Schools Impacted</span>
-        <span class="stat__pending">figure pending</span>
       </li>
 
       <li class="stat" data-reveal data-reveal-delay="200">
-        <span class="stat__num" data-count-pending>&mdash;</span>
+        <span class="stat__num" data-count-to="127">0</span>
         <span class="stat__label">Communities Impacted</span>
-        <span class="stat__pending">figure pending</span>
       </li>
 
       <li class="stat" data-reveal data-reveal-delay="300">
-        <span class="stat__num" data-count-pending>&mdash;</span>
+        <span class="stat__num" data-count-to="15">0</span>
         <span class="stat__label">States Reached</span>
-        <span class="stat__pending">figure pending</span>
       </li>
     </ul>
   </div>
@@ -324,6 +326,37 @@
       <a class="btn btn--primary" href="smils.html">Explore SMILS</a>
     </div>
 
+  </div>
+</section>
+
+<!-- ===================== 11. SPONSORS & PARTNERS  (§7.3 item 11 — NEW) ===================== -->
+<!-- ============================================================
+     LOGOS NEEDED — 10_Sponsors_Partners (Drive access pending, §2.1) AND
+     brief §8 decision #5: the final list plus written permission to display
+     each logo. For an NGO that permission is not optional, so no real logo
+     is shown until it exists. Eight evenly-sized slots stand in.
+
+     Behaviour: slow continuous scroll, greyscale lifting to colour on hover,
+     one fixed logo height so the strip reads as a row. The track is
+     duplicated in script.js so the loop has no visible seam.
+     Split into "Partners" and "Donors" rows if the final list is long.
+     ============================================================ -->
+<section class="partners band band--white">
+  <div class="container">
+    <p class="partners__label" data-reveal>Partners &amp; donors</p>
+  </div>
+
+  <div class="partners__marquee" id="partnersMarquee" data-reveal data-reveal-delay="80">
+    <ul class="partners__track">
+      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
+      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
+      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
+      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
+      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
+      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
+      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
+      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
+    </ul>
   </div>
 </section>
 
@@ -399,133 +432,6 @@
   </div>
 </section>
 
-<!-- ===================== 9. SHOP STRIP  (§7.3 item 9 — NEW) ===================== -->
-<!-- Deliberately light: a signpost, not the shop.
-     IMAGES NEEDED — 09_Shop (Google Drive, access pending, brief §2.1).
-     Brief §8 decision #8 (WhatsApp / form / Instagram ordering route) is also
-     open, so the button points at a shop page that does not exist yet. -->
-<section class="shop band band--white">
-  <div class="container shop__inner">
-
-    <ul class="shop__products" data-reveal>
-      <li class="shop__product is-placeholder">
-        <span class="placeholder__tag">IMAGE NEEDED</span><span class="placeholder__note">09_Shop</span>
-      </li>
-      <li class="shop__product is-placeholder">
-        <span class="placeholder__tag">IMAGE NEEDED</span><span class="placeholder__note">09_Shop</span>
-      </li>
-      <li class="shop__product is-placeholder">
-        <span class="placeholder__tag">IMAGE NEEDED</span><span class="placeholder__note">09_Shop</span>
-      </li>
-    </ul>
-
-    <div class="shop__text" data-reveal data-reveal-delay="120">
-      <h2 class="shop__title">Every purchase supports the work.</h2>
-      <a class="btn btn--primary" href="shop.html">Visit the Shop</a>
-    </div>
-
-  </div>
-</section>
-
-<!-- ===================== 10. TESTIMONIALS  (§7.3 item 10 — slider) ===================== -->
-<!-- One card at a time with navigation dots, built by script.js.
-     Quotes cut to two sentences each. Every sentence here is VERBATIM and
-     CONSECUTIVE from the original testimonial — trimmed, never paraphrased,
-     since these are attributed to named real people. The full-length
-     versions move to the SMILS or About page, per brief §7.3 item 10.
-
-     NOTE: brief §7.3 says "3-card slider" in its table but "currently four
-     long quotes" in the checklist. All four are kept here pending that
-     clarification — dropping one is a matter of deleting a slide.
-
-     PHOTOS NEEDED — the brief asks for a small round photo per card. None
-     exist for these four people, so each falls back to a monogram. -->
-<section class="voices band band--light">
-  <div class="container">
-    <h2 class="section-title section-title--center" data-reveal>What our community says</h2>
-
-    <div class="voices__slider" id="voicesSlider" data-reveal data-reveal-delay="100"
-         aria-roledescription="carousel" aria-label="Community testimonials">
-
-      <div class="voices__viewport">
-
-        <blockquote class="voice is-active" role="group" aria-roledescription="slide" aria-label="1 of 4">
-          <p>I chose MAYEIN because the organization&rsquo;s goals align with my interests.
-             I can recall vividly the difficulties my siblings and I had in getting access
-             to good education.</p>
-          <footer>
-            <span class="voice__avatar" aria-hidden="true">MB</span>
-            <span class="voice__who"><cite>Michael Bakare</cite><span>MSc Intern</span></span>
-          </footer>
-        </blockquote>
-
-        <blockquote class="voice" role="group" aria-roledescription="slide" aria-label="2 of 4">
-          <p>I am the first child in my family and the first to be computer literate through
-             the MAYEIN Oyo E-Literacy project at the MAYEIN Youth Centre in my community.
-             Afterward, I introduced my immediate younger brother to the training.</p>
-          <footer>
-            <span class="voice__avatar" aria-hidden="true">SW</span>
-            <span class="voice__who"><cite>Samad Wahab</cite><span>Ojoo High School, SSS 2</span></span>
-          </footer>
-        </blockquote>
-
-        <blockquote class="voice" role="group" aria-roledescription="slide" aria-label="3 of 4">
-          <p>Before MAYEIN came to our school, I knew nothing about the computer.
-             But now, I have a better knowledge of it.</p>
-          <footer>
-            <span class="voice__avatar" aria-hidden="true">CB</span>
-            <span class="voice__who"><cite>Christopher Blessing</cite><span>Methodist Secondary, SSS 2</span></span>
-          </footer>
-        </blockquote>
-
-        <blockquote class="voice" role="group" aria-roledescription="slide" aria-label="4 of 4">
-          <p>They took time and patience to explain things to us on the screen repeatedly,
-             yet some of us still asked the same questions over and over again. It was a
-             wonderful moment for someone like me.</p>
-          <footer>
-            <span class="voice__avatar" aria-hidden="true">TA</span>
-            <span class="voice__who"><cite>Mr. Tella Adetayo</cite><span>Kajoro Community Grammar School</span></span>
-          </footer>
-        </blockquote>
-
-      </div>
-
-      <div class="voices__dots" id="voicesDots" role="tablist" aria-label="Choose testimonial"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== 11. SPONSORS & PARTNERS  (§7.3 item 11 — NEW) ===================== -->
-<!-- ============================================================
-     LOGOS NEEDED — 10_Sponsors_Partners (Drive access pending, §2.1) AND
-     brief §8 decision #5: the final list plus written permission to display
-     each logo. For an NGO that permission is not optional, so no real logo
-     is shown until it exists. Eight evenly-sized slots stand in.
-
-     Behaviour: slow continuous scroll, greyscale lifting to colour on hover,
-     one fixed logo height so the strip reads as a row. The track is
-     duplicated in script.js so the loop has no visible seam.
-     Split into "Partners" and "Donors" rows if the final list is long.
-     ============================================================ -->
-<section class="partners band band--white">
-  <div class="container">
-    <p class="partners__label" data-reveal>Partners &amp; donors</p>
-  </div>
-
-  <div class="partners__marquee" id="partnersMarquee" data-reveal data-reveal-delay="80">
-    <ul class="partners__track">
-      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
-      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
-      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
-      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
-      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
-      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
-      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
-      <li class="partners__logo is-placeholder"><span class="placeholder__tag">LOGO</span></li>
-    </ul>
-  </div>
-</section>
-
 <!-- ===================== 12. CALL TO ACTION  (§7.3 item 12 — simplified) ===================== -->
 <!-- Was three stacked headings. Now one heading, one line, two buttons. -->
 <section class="cta" id="cta">
@@ -555,41 +461,6 @@
     <svg width="100%" height="100" viewBox="0 0 1280 140" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <g fill="#000066"><path d="M320 28C160 28 80 49 0 70V0h1280v70c-80 21-160 42-320 42-320 0-320-84-640-84z"/></g>
     </svg>
-  </div>
-
-  <!-- ---------- newsletter strip ---------- -->
-  <div class="newsletter">
-    <div class="container newsletter__inner">
-
-      <div class="newsletter__copy">
-        <h2>Stay in the loop</h2>
-        <p>Programme news, impact stories and ways to get involved — straight to your inbox.</p>
-      </div>
-
-      <!-- TODO(mailchimp): replace BOTH placeholders below with the values from
-           Mailchimp › Audience › Signup forms › Embedded forms:
-             1. action="..."              the full .list-manage.com/subscribe/post URL
-             2. name="b_<u>_<id>"         the hidden bot-trap field at the end of that form
-           Until the action is replaced, script.js blocks submission and shows a notice. -->
-      <form class="newsletter__form"
-            id="newsletterForm"
-            action="MAILCHIMP_FORM_ACTION_URL"
-            method="post"
-            target="_blank"
-            novalidate>
-        <label class="sr-only" for="nlEmail">Email address</label>
-        <input id="nlEmail" type="email" name="EMAIL" placeholder="Enter your email address" autocomplete="email" required>
-
-        <!-- Mailchimp bot trap: must stay off-screen and empty -->
-        <div class="newsletter__bot" aria-hidden="true">
-          <input type="text" name="b_REPLACE_U_REPLACE_ID" tabindex="-1" value="">
-        </div>
-
-        <button type="submit" name="subscribe">Subscribe</button>
-      </form>
-
-      <p class="newsletter__msg" id="newsletterMsg" role="status" aria-live="polite"></p>
-    </div>
   </div>
 
   <!-- ---------- four columns ---------- -->
